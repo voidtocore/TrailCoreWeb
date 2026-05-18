@@ -14,8 +14,8 @@ export default function HeroSection() {
         priority
         quality={90}
       />
-      <div className="hero-overlay absolute inset-0 z-10" />
-      <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-6 text-center overflow-hidden">
+      <div className="hero-overlay absolute inset-0 z-10 overflow-hidden" />
+      <div className="relative z-20 w-full max-w-5xl mx-auto px-5 sm:px-6 text-center overflow-hidden">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full max-w-full"
         >
           <Link
             href="/packages"

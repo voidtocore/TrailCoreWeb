@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${outfit.variable} ${playfair.variable} h-full antialiased`}
+      className={`${outfit.variable} ${playfair.variable} h-full antialiased overflow-x-hidden`}
     >
       <body className="min-h-full flex flex-col bg-mountain-black text-foreground">
         <Navbar />
