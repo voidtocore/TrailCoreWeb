@@ -38,8 +38,8 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-mountain-black/90 backdrop-blur-xl border-b border-white/5 py-3"
-            : "bg-transparent py-5"
+            ? "bg-mountain-black/90 backdrop-blur-xl border-b border-white/5 py-2 sm:py-3"
+            : "bg-transparent py-3 sm:py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -90,7 +90,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+              className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl active:bg-white/10"
               aria-label="Toggle menu"
             >
               <div className="w-6 flex flex-col gap-1.5">
@@ -133,7 +133,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="absolute right-0 top-0 bottom-0 w-80 max-w-full bg-mountain-900 border-l border-white/5 pt-20 px-6"
+              className="absolute right-0 top-0 bottom-0 w-[85%] sm:w-80 max-w-full bg-mountain-900 border-l border-white/5 pt-20 px-6"
             >
               <div className="flex flex-col gap-1">
                 {navLinks.map((link, i) => (

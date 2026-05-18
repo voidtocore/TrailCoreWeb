@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[85vh] md:h-screen md:min-h-[700px] flex items-center justify-center overflow-hidden py-24">
       <Image
         src="/images/hero-mountains.png"
         alt="Himachal Pradesh mountains"
@@ -15,7 +15,7 @@ export default function HeroSection() {
         quality={90}
       />
       <div className="hero-overlay absolute inset-0 z-10" />
-      <div className="relative z-20 max-w-5xl mx-auto px-4 text-center">
+      <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-6 text-center">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-snow leading-[1.1] mb-6"
+          className="text-3xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-bold text-snow mb-5"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
           Where Mountains{" "}
@@ -38,7 +38,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-sm sm:text-lg text-slate-300 max-w-xl mx-auto mb-8 leading-relaxed px-1"
         >
           Curated road trips, Spiti Valley circuits, adventure treks, and
           honeymoon escapes — handcrafted by local experts who call these
@@ -48,11 +48,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto"
         >
           <Link
             href="/packages"
-            className="px-8 py-3.5 bg-forest hover:bg-forest-light text-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-forest/25 flex items-center gap-2"
+            className="w-full sm:w-auto justify-center px-8 py-3.5 bg-forest hover:bg-forest-light text-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-forest/25 flex items-center gap-2"
           >
             Explore Packages
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -61,7 +61,7 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/custom-trip"
-            className="px-8 py-3.5 border border-white/20 hover:bg-white/10 text-snow font-medium rounded-full transition-all duration-300 backdrop-blur-sm"
+            className="w-full sm:w-auto justify-center px-8 py-3.5 border border-white/20 hover:bg-white/10 text-snow font-medium rounded-full transition-all duration-300 backdrop-blur-sm flex items-center"
           >
             Plan Custom Trip
           </Link>
