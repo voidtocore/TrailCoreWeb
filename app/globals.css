@@ -144,3 +144,11 @@ img {
     transparent
   );
 }
+.mobile-menu-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-menu-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

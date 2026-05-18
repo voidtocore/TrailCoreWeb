@@ -122,20 +122,20 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-[999] lg:hidden"
           >
             <div
-              className="absolute inset-0 bg-mountain-black/95 backdrop-blur-2xl"
+              className="absolute inset-0 bg-black/80 backdrop-blur-2xl"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: 320 }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              exit={{ x: 320 }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="absolute right-0 top-0 bottom-0 w-[85%] sm:w-80 max-w-full bg-mountain-900 border-l border-white/5 pt-20 px-6"
+              className="mobile-menu-scroll fixed inset-y-0 right-0 w-full max-w-[320px] h-screen overflow-y-auto bg-mountain-900 border-l border-white/5 pt-16 px-5"
             >
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-0.5">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
@@ -146,7 +146,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block px-4 py-3 text-lg text-slate-300 hover:text-snow hover:bg-white/5 rounded-lg transition-all"
+                      className="block px-4 py-2.5 text-lg text-slate-300 hover:text-snow hover:bg-white/5 rounded-lg transition-all"
                     >
                       {link.label}
                     </Link>
