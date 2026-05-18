@@ -15,7 +15,7 @@ export default function HeroSection() {
         quality={90}
       />
       <div className="hero-overlay absolute inset-0 z-10" />
-      <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-6 text-center">
+      <div className="relative z-20 max-w-5xl mx-auto px-5 sm:px-6 text-center overflow-hidden">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
