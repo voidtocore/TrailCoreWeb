@@ -20,7 +20,9 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -30,7 +32,10 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   return (
@@ -57,6 +62,7 @@ export default function Navbar() {
                 <path d="M12 2L8 12h8L12 2z" opacity="0.5" />
               </svg>
             </div>
+
             <span className="text-xl font-bold tracking-tight text-snow group-hover:text-forest-glow transition-colors">
               Core<span className="text-forest-light">Trail</span>
             </span>
@@ -71,6 +77,7 @@ export default function Navbar() {
                 className="px-4 py-2 text-sm text-slate-300 hover:text-snow transition-colors relative group"
               >
                 {link.label}
+
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-forest-light group-hover:w-4/5 transition-all duration-300" />
               </Link>
             ))}
@@ -83,14 +90,25 @@ export default function Navbar() {
               className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-forest hover:bg-forest-light text-white text-sm font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-forest/20"
             >
               Plan Your Trip
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </Link>
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl active:bg-white/10"
+              className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl active:bg-white/10 z-[1000]"
               aria-label="Toggle menu"
             >
               <div className="w-6 flex flex-col gap-1.5">
@@ -99,11 +117,13 @@ export default function Navbar() {
                     mobileOpen ? "rotate-45 translate-y-2" : ""
                   }`}
                 />
+
                 <span
                   className={`block h-0.5 bg-snow transition-all duration-300 ${
                     mobileOpen ? "opacity-0" : ""
                   }`}
                 />
+
                 <span
                   className={`block h-0.5 bg-snow transition-all duration-300 ${
                     mobileOpen ? "-rotate-45 -translate-y-2" : ""
@@ -124,17 +144,41 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[999] lg:hidden"
           >
+            {/* Overlay */}
             <div
               className="absolute inset-0 bg-black/80 backdrop-blur-2xl"
               onClick={() => setMobileOpen(false)}
             />
+
+            {/* Drawer */}
             <motion.div
               initial={{ x: 320 }}
               animate={{ x: 0 }}
               exit={{ x: 320 }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="mobile-menu-scroll fixed inset-y-0 right-0 w-full max-w-[320px] h-screen overflow-y-auto bg-mountain-900 border-l border-white/5 pt-16 px-5"
+              className="mobile-menu-scroll fixed inset-y-0 right-0 w-full max-w-[88vw] h-screen bg-mountain-black border-l border-white/5 pt-16 px-5"
             >
+              {/* Close Button */}
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="absolute top-5 right-5 text-snow z-50"
+                aria-label="Close menu"
+              >
+                <svg
+                  className="w-7 h-7"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
               <div className="flex flex-col gap-0.5">
                 {navLinks.map((link, i) => (
                   <motion.div
@@ -152,6 +196,8 @@ export default function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
+
+                {/* CTA */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -164,29 +210,69 @@ export default function Navbar() {
                     className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-forest hover:bg-forest-light text-white font-medium rounded-full transition-all"
                   >
                     Plan Your Trip
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </Link>
                 </motion.div>
 
-                {/* Contact info */}
+                {/* Contact */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
                   className="mt-8 space-y-3 text-sm text-slate-400"
                 >
-                  <a href="tel:+919876543210" className="flex items-center gap-3 hover:text-snow transition-colors">
-                    <svg className="w-4 h-4 text-forest-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  <a
+                    href="tel:+919876543210"
+                    className="flex items-center gap-3 hover:text-snow transition-colors"
+                  >
+                    <svg
+                      className="w-4 h-4 text-forest-light"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
                     </svg>
+
                     +91 98765 43210
                   </a>
-                  <a href="mailto:hello@coretrail.in" className="flex items-center gap-3 hover:text-snow transition-colors">
-                    <svg className="w-4 h-4 text-forest-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+
+                  <a
+                    href="mailto:hello@coretrail.in"
+                    className="flex items-center gap-3 hover:text-snow transition-colors"
+                  >
+                    <svg
+                      className="w-4 h-4 text-forest-light"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
                     </svg>
+
                     hello@coretrail.in
                   </a>
                 </motion.div>
