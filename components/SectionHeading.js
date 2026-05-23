@@ -7,30 +7,27 @@ export default function SectionHeading({
   title,
   description,
   align = "center",
-  light = false,
 }) {
   return (
-    <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} mb-12 md:mb-16`}>
+    <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} mb-16 md:mb-20`}>
       {label && (
         <FadeIn>
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-forest-glow mb-4">
+          <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone/50 mb-5">
             {label}
           </span>
         </FadeIn>
       )}
       <FadeIn delay={0.1}>
         <h2
-          className={`text-3xl md:text-4xl lg:text-5xl font-bold leading-tight ${
-            light ? "text-snow" : "text-gradient"
-          }`}
-          style={{ fontFamily: "var(--font-playfair)" }}
+          className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.15] text-gradient"
+          style={{ fontFamily: "var(--font-outfit)" }}
         >
           {title}
         </h2>
       </FadeIn>
       {description && (
         <FadeIn delay={0.2}>
-          <p className="mt-4 text-slate-400 text-base md:text-lg leading-relaxed">
+          <p className="mt-5 text-stone/50 text-base md:text-lg leading-relaxed font-light">
             {description}
           </p>
         </FadeIn>

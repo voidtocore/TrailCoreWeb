@@ -1,40 +1,96 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { FadeIn } from "../Animations";
+import { FadeIn, StaggerContainer, StaggerItem } from "../Animations";
+
+const experiences = [
+  {
+    title: "Authentic Homestays",
+    desc: "Sleep where the mountains live — traditional homes, warm blankets, and stories by the fireplace.",
+    img: "/images/honeymoon-cabin.png",
+  },
+  {
+    title: "Himalayan Meals",
+    desc: "Dal, rice, thukpa, momos — local kitchens serve food that warms the soul at 12,000 feet.",
+    img: "/images/shimla.png",
+  },
+  {
+    title: "Bonfire Evenings",
+    desc: "Under a canopy of stars, around a fire — the kind of evening that makes you forget the world exists.",
+    img: "/images/camping.png",
+  },
+];
 
 export default function HoneymoonSection() {
   return (
-    <section className="py-24 md:py-32 px-4">
+    <section className="section-cinematic px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <FadeIn direction="right" className="order-2 lg:order-1">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-warm">Romance in the Mountains</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-snow mt-3 leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>
-              Begin Your Story in Paradise
-            </h2>
-            <p className="text-slate-400 mt-4 leading-relaxed">
-              Intimate mountain retreats, cozy fireside evenings, scenic café mornings, and private snow experiences — your honeymoon, reimagined against the backdrop of the Himalayas.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-8">
-              {["Cozy Mountain Stays", "Snow Experiences", "Scenic Cafes", "Private Retreats"].map((a) => (
-                <div key={a} className="flex items-center gap-3 text-sm text-slate-300">
-                  <div className="w-2 h-2 rounded-full bg-accent-warm" />
-                  {a}
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Text */}
+          <div className="lg:col-span-5">
+            <FadeIn>
+              <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone/40 mb-6">
+                Food & Stay Experience
+              </span>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <h2
+                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-snow/90 leading-[1.15] mb-6"
+                style={{ fontFamily: "var(--font-outfit)" }}
+              >
+                Where comfort meets
+                <br />
+                <span className="text-stone/40">the mountains.</span>
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <p className="text-stone/45 text-base leading-relaxed font-light max-w-md mb-8">
+                Every stay is handpicked for warmth, every meal for authenticity.
+                We believe comfort in the mountains means local character, not
+                luxury chains — real fires, real food, real people.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <div className="space-y-3">
+                {["Curated homestays & heritage stays", "Traditional Himalayan cuisine", "Mountain café mornings", "Bonfire nights under the stars", "Slow evenings with chai"].map((item) => (
+                  <div key={item} className="flex items-center gap-3 text-sm text-stone/40 font-light">
+                    <div className="w-1 h-1 rounded-full bg-forest-glow/40" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Images */}
+          <div className="lg:col-span-7">
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {experiences.map((exp) => (
+                <StaggerItem key={exp.title}>
+                  <div className="relative rounded-xl overflow-hidden aspect-[3/4] group">
+                    <Image
+                      src={exp.img}
+                      alt={exp.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <h3
+                        className="text-sm font-semibold text-snow/90 mb-1"
+                        style={{ fontFamily: "var(--font-outfit)" }}
+                      >
+                        {exp.title}
+                      </h3>
+                      <p className="text-[11px] text-parchment/35 leading-relaxed font-light">
+                        {exp.desc}
+                      </p>
+                    </div>
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
-            <Link href="/honeymoon" className="inline-flex items-center gap-2 mt-8 px-7 py-3 bg-accent-warm/20 hover:bg-accent-warm/30 text-accent-warm border border-accent-warm/30 font-medium rounded-full transition-all duration-300">
-              View Honeymoon Trips
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </Link>
-          </FadeIn>
-          <FadeIn direction="left" className="order-1 lg:order-2">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-              <Image src="/images/honeymoon-cabin.png" alt="Honeymoon cabin" fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-l from-black/50 to-transparent" />
-            </div>
-          </FadeIn>
+            </StaggerContainer>
+          </div>
         </div>
       </div>
     </section>

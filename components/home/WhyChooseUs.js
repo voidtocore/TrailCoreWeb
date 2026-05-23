@@ -3,29 +3,87 @@ import SectionHeading from "../SectionHeading";
 import { StaggerContainer, StaggerItem } from "../Animations";
 
 const reasons = [
-  { icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z", title: "Local Expertise", desc: "Born and raised in Himachal — we know every hidden trail and secret viewpoint." },
-  { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "Verified Stays", desc: "Every hotel, homestay, and campsite personally vetted for quality and safety." },
-  { icon: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z", title: "Personalized Planning", desc: "No cookie-cutter packages. Every itinerary tailored to your pace and preferences." },
-  { icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z", title: "On-Call Support", desc: "24/7 assistance during your trip. One call away, even in remote Spiti villages." },
-  { icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15", title: "Flexible Itineraries", desc: "Plans that adapt. Change routes, extend stays, or add experiences on the go." },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+      </svg>
+    ),
+    title: "Small Group Expeditions",
+    desc: "Intimate groups of 8–12 travelers. More connection, less crowd. Every seat is intentional.",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    title: "Slow Travel Philosophy",
+    desc: "Fewer destinations, deeper immersion. We design journeys that breathe — unhurried and deliberate.",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+      </svg>
+    ),
+    title: "Acclimatized Itineraries",
+    desc: "Routes paced for altitude. Gradual ascents, rest days, and safety-first scheduling at every stage.",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+      </svg>
+    ),
+    title: "Experienced Mountain Drivers",
+    desc: "Local drivers who know every curve, every pass, and every safe stop along the Himalayan roads.",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+      </svg>
+    ),
+    title: "Curated Homestays",
+    desc: "Authentic Himalayan stays — handpicked homestays, heritage properties, and mountain-view retreats.",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      </svg>
+    ),
+    title: "Safety-First Planning",
+    desc: "Emergency protocols, oxygen support at altitude, verified vehicles, and 24/7 on-trip assistance.",
+  },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 md:py-32 px-4">
+    <section className="section-cinematic px-4">
       <div className="max-w-7xl mx-auto">
-        <SectionHeading label="Why CoreTrail" title="Your Mountains, Our Passion" description="We don't just plan trips — we craft experiences that stay with you long after you leave the mountains." />
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <SectionHeading
+          label="Why Trail Core"
+          title="Expeditions Designed With Intent"
+          description="We don't sell trips. We design experiences — with the care, safety, and authenticity that the Himalayas demand."
+        />
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {reasons.map((r) => (
             <StaggerItem key={r.title}>
-              <div className="glass rounded-2xl p-6 h-full hover:border-forest/30 transition-all duration-300 group">
-                <div className="w-12 h-12 rounded-xl bg-forest/15 flex items-center justify-center mb-4 group-hover:bg-forest/25 transition-colors">
-                  <svg className="w-6 h-6 text-forest-glow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d={r.icon} />
-                  </svg>
+              <div className="glass rounded-xl p-7 h-full hover:border-white/[0.08] transition-all duration-500 group">
+                <div className="w-10 h-10 rounded-lg bg-forest/10 flex items-center justify-center mb-5 text-forest-glow/60 group-hover:text-forest-glow group-hover:bg-forest/15 transition-all duration-500">
+                  {r.icon}
                 </div>
-                <h3 className="text-base font-bold text-snow mb-2">{r.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{r.desc}</p>
+                <h3
+                  className="text-base font-semibold text-snow/90 mb-2"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  {r.title}
+                </h3>
+                <p className="text-sm text-stone/45 leading-relaxed font-light">
+                  {r.desc}
+                </p>
               </div>
             </StaggerItem>
           ))}

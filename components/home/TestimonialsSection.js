@@ -3,31 +3,53 @@ import SectionHeading from "../SectionHeading";
 import { StaggerContainer, StaggerItem } from "../Animations";
 
 const testimonials = [
-  { name: "Priya Sharma", trip: "Spiti Valley Circuit", text: "CoreTrail made our Spiti dream come true. Every detail was perfect — from the cozy stays in Kalpa to the monasteries in Kaza. They handled everything so we could just soak in the beauty.", rating: 5 },
-  { name: "Rahul & Meena", trip: "Honeymoon Trip", text: "Our honeymoon in Himachal was magical. The private cottage in Manali, the surprise café visits, the snowfall experience — CoreTrail created memories we'll cherish forever.", rating: 5 },
-  { name: "Arjun Verma", trip: "Budget Road Trip", text: "Best budget trip I've ever taken! The team planned an incredible route through Shimla, Narkanda, and Sarahan. Quality stays at amazing prices. Highly recommend!", rating: 5 },
+  {
+    name: "Priya Sharma",
+    trip: "Spiti Circuit Expedition",
+    text: "Trail Core didn't just take us to Spiti — they made us feel it. The silence of Key Monastery, the homestay in Kibber where the host cooked us rajma-chawal by firelight, the acclimatization day in Kalpa that let us actually breathe. This wasn't tourism. This was something else entirely.",
+  },
+  {
+    name: "Rahul & Meena",
+    trip: "Kinnaur Odyssey",
+    text: "We've traveled a lot, but Kinnaur with Trail Core was different. The driver knew every turn, every safe stop, every hidden viewpoint. The homestay in Chitkul felt like staying with family. No rush, no crowds — just the mountains and us.",
+  },
+  {
+    name: "Arjun Verma",
+    trip: "Himalayan Escape",
+    text: "The Hampta Pass crossing was the most meaningful journey I've ever taken. The team ensured we were acclimatized, safe, and comfortable. Waking up at Chandratal under those stars — I understood why they call these the Himalayas.",
+  },
 ];
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 md:py-32 px-4">
+    <section className="section-cinematic px-4">
       <div className="max-w-7xl mx-auto">
-        <SectionHeading label="Testimonials" title="Stories From Fellow Travelers" description="Don't take our word for it — hear from the explorers who trusted us with their mountain dreams." />
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <SectionHeading
+          label="Testimonials"
+          title="Stories From the Trail"
+          description="Voices from travelers who experienced the Himalayas through Trail Core."
+        />
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {testimonials.map((t) => (
             <StaggerItem key={t.name}>
-              <div className="glass rounded-2xl p-8 h-full flex flex-col">
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-accent-gold" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
+              <div className="glass rounded-xl p-7 md:p-8 h-full flex flex-col">
+                {/* Quote mark */}
+                <div className="text-3xl text-forest-glow/20 mb-4 leading-none" style={{ fontFamily: "Georgia, serif" }}>
+                  &ldquo;
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed flex-1">&ldquo;{t.text}&rdquo;</p>
-                <div className="mt-6 pt-4 border-t border-white/5">
-                  <p className="text-snow font-semibold text-sm">{t.name}</p>
-                  <p className="text-xs text-forest-glow">{t.trip}</p>
+                <p className="text-stone/50 text-sm leading-[1.7] flex-1 font-light">
+                  {t.text}
+                </p>
+                <div className="mt-6 pt-5 border-t border-white/[0.04]">
+                  <p
+                    className="text-snow/80 font-medium text-sm"
+                    style={{ fontFamily: "var(--font-outfit)" }}
+                  >
+                    {t.name}
+                  </p>
+                  <p className="text-[11px] text-forest-glow/40 mt-0.5 tracking-wide">
+                    {t.trip}
+                  </p>
                 </div>
               </div>
             </StaggerItem>

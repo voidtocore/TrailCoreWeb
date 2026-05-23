@@ -1,8 +1,14 @@
-import { Outfit, Playfair_Display } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -10,23 +16,18 @@ const outfit = Outfit({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata = {
-  title: "CoreTrail — Premium Himachal Mountain Experiences",
+  title: "Trail Core — Premium Himalayan Expeditions",
   description:
-    "Curated mountain experiences in Himachal Pradesh. Spiti Valley circuits, budget road trips, adventure treks, and custom honeymoon trips crafted by local experts.",
+    "Curated slow-travel expeditions across Spiti Valley, Kinnaur, and the Indian Himalayas. Small group journeys designed for meaningful mountain experiences.",
   keywords:
-    "Himachal Pradesh travel, Spiti Valley tour, Manali trip, Shimla tour, adventure trekking Himachal, honeymoon Himachal, road trip Himachal",
+    "Himalayan expeditions, Spiti Valley expedition, Kinnaur journey, premium mountain travel, slow travel India, curated Himalayan experiences, Trail Core",
   openGraph: {
-    title: "CoreTrail — Premium Himachal Mountain Experiences",
+    title: "Trail Core — Premium Himalayan Expeditions",
     description:
-      "Curated mountain experiences in Himachal Pradesh. From Spiti circuits to custom honeymoons.",
+      "Slow travel experiences across Spiti, Kinnaur, and the Indian Himalayas. Curated expeditions for meaningful exploration.",
     type: "website",
+    siteName: "Trail Core",
   },
 };
 
@@ -35,7 +36,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${outfit.variable} ${playfair.variable} h-full antialiased overflow-x-hidden`}
+      className={`${inter.variable} ${outfit.variable} h-full antialiased overflow-x-hidden`}
     >
       <body className="min-h-full flex flex-col bg-mountain-black text-foreground overflow-x-hidden">
         <Navbar />

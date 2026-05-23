@@ -1,8 +1,8 @@
 import DestinationsPage from "./DestinationsPage";
 
 export const metadata = {
-  title: "Destinations — Explore Himachal Pradesh | CoreTrail",
-  description: "Discover the most stunning destinations in Himachal Pradesh. From Shimla to Spiti Valley, explore our curated collection of mountain destinations.",
+  title: "Destinations — Explore the Himalayas | Trail Core",
+  description: "Discover our curated Himalayan destinations. From the cold desert of Spiti to the apple orchards of Kinnaur — explore where we take our expeditions.",
 };
 
 export default function Page() {

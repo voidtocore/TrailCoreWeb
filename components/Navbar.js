@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/packages", label: "Expeditions" },
   { href: "/destinations", label: "Destinations" },
-  { href: "/packages", label: "Packages" },
   { href: "/adventures", label: "Adventures" },
-  { href: "/honeymoon", label: "Honeymoon" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -20,9 +20,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -34,7 +32,6 @@ export default function Navbar() {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
@@ -44,44 +41,34 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled
-            ? "bg-mountain-black/90 backdrop-blur-xl border-b border-white/5 py-2 sm:py-3"
-            : "bg-transparent py-3 sm:py-5"
+            ? "bg-mountain-black/85 backdrop-blur-2xl border-b border-white/[0.04] py-2 sm:py-3"
+            : "bg-transparent py-4 sm:py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-lg bg-forest flex items-center justify-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                className="w-5 h-5 text-white"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 2L2 22h20L12 2z" />
-                <path d="M12 2L8 12h8L12 2z" opacity="0.5" />
-              </svg>
-            </div>
-
-            <span className="text-xl font-bold tracking-tight text-snow group-hover:text-forest-glow transition-colors">
-              Core<span className="text-forest-light">Trail</span>
-            </span>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <Image
+              src="/images/logo-trailcore.png"
+              alt="Trail Core"
+              width={140}
+              height={36}
+              className="h-7 sm:h-8 w-auto brightness-[10] opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-sm text-slate-300 hover:text-snow transition-colors relative group"
+                className="px-4 py-2 text-[13px] font-light tracking-wide text-stone-light/80 hover:text-snow transition-colors duration-300 relative group"
               >
                 {link.label}
-
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-forest-light group-hover:w-4/5 transition-all duration-300" />
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-forest-glow/60 group-hover:w-3/4 transition-all duration-500" />
               </Link>
             ))}
           </div>
@@ -89,13 +76,12 @@ export default function Navbar() {
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
             <Link
-              href="/custom-trip"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-forest hover:bg-forest-light text-white text-sm font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-forest/20"
+              href="/packages"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-[13px] font-medium tracking-wide rounded-full transition-all duration-500 hover:shadow-lg hover:shadow-forest/10 border border-forest-light/20"
             >
-              Plan Your Trip
-
+              Explore Expeditions
               <svg
-                className="w-4 h-4"
+                className="w-3.5 h-3.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -111,25 +97,23 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden relative w-12 h-12 flex items-center justify-center rounded-xl active:bg-white/10 z-[1000]"
+              className="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-lg z-[1000]"
               aria-label="Toggle menu"
             >
-              <div className="w-6 flex flex-col gap-1.5">
+              <div className="w-5 flex flex-col gap-[5px]">
                 <span
-                  className={`block h-0.5 bg-snow transition-all duration-300 ${
-                    mobileOpen ? "rotate-45 translate-y-2" : ""
+                  className={`block h-[1.5px] bg-snow/80 transition-all duration-400 ${
+                    mobileOpen ? "rotate-45 translate-y-[6.5px]" : ""
                   }`}
                 />
-
                 <span
-                  className={`block h-0.5 bg-snow transition-all duration-300 ${
+                  className={`block h-[1.5px] bg-snow/80 transition-all duration-400 ${
                     mobileOpen ? "opacity-0" : ""
                   }`}
                 />
-
                 <span
-                  className={`block h-0.5 bg-snow transition-all duration-300 ${
-                    mobileOpen ? "-rotate-45 -translate-y-2" : ""
+                  className={`block h-[1.5px] bg-snow/80 transition-all duration-400 ${
+                    mobileOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
                   }`}
                 />
               </div>
@@ -145,11 +129,12 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[999] lg:hidden"
           >
             {/* Overlay */}
             <div
-              className="absolute inset-0 bg-black/80 backdrop-blur-2xl"
+              className="absolute inset-0 bg-black/85 backdrop-blur-3xl"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -158,21 +143,21 @@ export default function Navbar() {
               initial={{ x: 320 }}
               animate={{ x: 0 }}
               exit={{ x: 320 }}
-              transition={{ type: "tween", duration: 0.3 }}
-              className="mobile-menu-scroll fixed inset-y-0 right-0 w-full max-w-[88vw] h-screen bg-mountain-black border-l border-white/5 pt-16 px-5"
+              transition={{ type: "tween", duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mobile-menu-scroll fixed inset-y-0 right-0 w-full max-w-[85vw] h-screen bg-mountain-black/98 border-l border-white/[0.04] pt-20 px-6 overflow-y-auto"
             >
               {/* Close Button */}
               <button
                 onClick={() => setMobileOpen(false)}
-                className="absolute top-5 right-5 text-snow z-50"
+                className="absolute top-5 right-5 text-snow/60 hover:text-snow z-50 transition-colors"
                 aria-label="Close menu"
               >
                 <svg
-                  className="w-7 h-7"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                 >
                   <path
                     strokeLinecap="round"
@@ -182,18 +167,29 @@ export default function Navbar() {
                 </svg>
               </button>
 
-              <div className="flex flex-col gap-0.5">
+              {/* Mobile Logo */}
+              <div className="mb-10">
+                <Image
+                  src="/images/logo-trailcore.png"
+                  alt="Trail Core"
+                  width={120}
+                  height={32}
+                  className="h-6 w-auto brightness-[10] opacity-80"
+                />
+              </div>
+
+              <div className="flex flex-col gap-0">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 24 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block px-4 py-2.5 text-lg text-slate-300 hover:text-snow hover:bg-white/5 rounded-lg transition-all"
+                      className="block px-3 py-3.5 text-lg font-light text-stone-light/70 hover:text-snow hover:bg-white/[0.03] rounded-lg transition-all duration-300"
                     >
                       {link.label}
                     </Link>
@@ -202,18 +198,17 @@ export default function Navbar() {
 
                 {/* CTA */}
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="mt-6 pt-6 border-t border-white/10"
+                  className="mt-8 pt-8 border-t border-white/[0.06]"
                 >
                   <Link
-                    href="/custom-trip"
+                    href="/packages"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-forest hover:bg-forest-light text-white font-medium rounded-full transition-all"
+                    className="flex items-center justify-center gap-2 w-full px-6 py-3.5 bg-forest/80 hover:bg-forest-light/80 text-white/90 font-medium tracking-wide rounded-full transition-all duration-500 border border-forest-light/20"
                   >
-                    Plan Your Trip
-
+                    Explore Expeditions
                     <svg
                       className="w-4 h-4"
                       fill="none"
@@ -235,18 +230,18 @@ export default function Navbar() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="mt-8 space-y-3 text-sm text-slate-400"
+                  className="mt-10 space-y-4 text-sm"
                 >
                   <a
                     href="tel:+919876543210"
-                    className="flex items-center gap-3 hover:text-snow transition-colors"
+                    className="flex items-center gap-3 text-stone/70 hover:text-snow transition-colors"
                   >
                     <svg
-                      className="w-4 h-4 text-forest-light"
+                      className="w-4 h-4 text-forest-glow/60"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="1.5"
                     >
                       <path
                         strokeLinecap="round"
@@ -254,20 +249,19 @@ export default function Navbar() {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-
                     +91 98765 43210
                   </a>
 
                   <a
-                    href="mailto:hello@coretrail.in"
-                    className="flex items-center gap-3 hover:text-snow transition-colors"
+                    href="mailto:hello@trailcore.in"
+                    className="flex items-center gap-3 text-stone/70 hover:text-snow transition-colors"
                   >
                     <svg
-                      className="w-4 h-4 text-forest-light"
+                      className="w-4 h-4 text-forest-glow/60"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="1.5"
                     >
                       <path
                         strokeLinecap="round"
@@ -275,8 +269,7 @@ export default function Navbar() {
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-
-                    hello@coretrail.in
+                    hello@trailcore.in
                   </a>
                 </motion.div>
               </div>
