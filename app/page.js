@@ -5,7 +5,6 @@ import ExpeditionPhilosophy from "@/components/home/ExpeditionPhilosophy";
 import GallerySection from "@/components/home/GallerySection";
 import AdventureSection from "@/components/home/AdventureSection";
 import HoneymoonSection from "@/components/home/HoneymoonSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
 import InquiryCTA from "@/components/home/InquiryCTA";
 
 export default function Home() {
@@ -23,9 +22,8 @@ export default function Home() {
       <AdventureSection />
       <div className="section-divider" />
       <HoneymoonSection />
-      <div className="section-divider" />
-      <TestimonialsSection />
       <InquiryCTA />
     </>
   );
 }
+

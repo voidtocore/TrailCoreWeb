@@ -81,7 +81,7 @@ export default function WhyChooseUs() {
                 >
                   {r.title}
                 </h3>
-                <p className="text-sm text-stone/45 leading-relaxed font-light">
+                <p className="text-sm text-parchment/50 leading-relaxed font-light">
                   {r.desc}
                 </p>
               </div>

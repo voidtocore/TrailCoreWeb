@@ -36,7 +36,7 @@ export default function HeroSection() {
             alt="Trail Core"
             width={180}
             height={46}
-            className="h-8 sm:h-10 w-auto mx-auto brightness-[10] opacity-50"
+            className="h-10 sm:h-14 w-auto mx-auto brightness-[10] opacity-60"
           />
         </motion.div>
 
@@ -45,7 +45,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="inline-block text-[11px] font-medium uppercase tracking-[0.25em] text-stone/50 mb-6"
+          className="inline-block text-[11px] sm:text-xs font-medium uppercase tracking-[0.25em] text-parchment/50 mb-6"
         >
           Curated Himalayan Journeys
         </motion.span>
@@ -55,7 +55,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-snow/95 mb-6"
+          className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6"
           style={{ fontFamily: "var(--font-outfit)" }}
         >
           Premium Himalayan
@@ -68,7 +68,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-sm sm:text-base md:text-lg text-stone/50 max-w-xl mx-auto mb-10 leading-relaxed font-light"
+          className="text-sm sm:text-base md:text-lg text-parchment/55 max-w-xl mx-auto mb-10 leading-relaxed font-light"
         >
           Slow travel experiences across Spiti, Kinnaur, and the Indian
           Himalayas. Designed for meaningful exploration.
@@ -102,7 +102,7 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/contact"
-            className="w-full sm:w-auto justify-center px-8 py-3.5 border border-white/10 hover:bg-white/[0.04] text-snow/70 hover:text-snow font-medium tracking-wide rounded-full transition-all duration-500 backdrop-blur-sm flex items-center text-sm"
+            className="w-full sm:w-auto justify-center px-8 py-3.5 border border-white/12 hover:bg-white/[0.05] text-snow/80 hover:text-snow font-medium tracking-wide rounded-full transition-all duration-500 backdrop-blur-sm flex items-center text-sm"
           >
             Upcoming Departures
           </Link>

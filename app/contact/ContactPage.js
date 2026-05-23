@@ -10,7 +10,7 @@ export default function ContactPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const msg = `Hi Trail Core! I'd like to plan an expedition.\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nDestination: ${formData.destination}\nTravelers: ${formData.travelers}\nMessage: ${formData.message}`;
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(`https://wa.me/917560065963?text=${encodeURIComponent(msg)}`, "_blank");
     setSubmitted(true);
   };
 
@@ -27,25 +27,25 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Contact Methods */}
           <FadeIn direction="right" className="lg:col-span-2 space-y-5">
-            <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="glass rounded-xl p-6 flex items-start gap-4 hover:border-[#25D366]/20 transition-all duration-500 group block">
+            <a href="https://wa.me/917560065963" target="_blank" rel="noopener noreferrer" className="glass rounded-xl p-6 flex items-start gap-4 hover:border-[#25D366]/20 transition-all duration-500 group block">
               <div className="w-11 h-11 rounded-lg bg-[#25D366]/10 flex items-center justify-center shrink-0 group-hover:bg-[#25D366]/15 transition-colors duration-500">
                 <svg className="w-5 h-5 text-[#25D366]/70" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /></svg>
               </div>
               <div>
                 <h3 className="text-snow/80 font-medium text-sm" style={{ fontFamily: "var(--font-outfit)" }}>WhatsApp</h3>
                 <p className="text-[11px] text-stone/35 mt-1">Fastest way to reach us</p>
-                <p className="text-[11px] text-[#25D366]/60 mt-1">+91 98765 43210</p>
+                <p className="text-[11px] text-[#25D366]/60 mt-1">+91 75600 65963</p>
               </div>
             </a>
 
-            <a href="tel:+919876543210" className="glass rounded-xl p-6 flex items-start gap-4 hover:border-white/[0.08] transition-all duration-500 group block">
+            <a href="tel:+917560065963" className="glass rounded-xl p-6 flex items-start gap-4 hover:border-white/[0.08] transition-all duration-500 group block">
               <div className="w-11 h-11 rounded-lg bg-forest/10 flex items-center justify-center shrink-0 group-hover:bg-forest/15 transition-colors duration-500">
                 <svg className="w-5 h-5 text-forest-glow/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
               </div>
               <div>
                 <h3 className="text-snow/80 font-medium text-sm" style={{ fontFamily: "var(--font-outfit)" }}>Phone</h3>
                 <p className="text-[11px] text-stone/35 mt-1">Talk to our expedition specialist</p>
-                <p className="text-[11px] text-forest-glow/50 mt-1">+91 98765 43210</p>
+                <p className="text-[11px] text-forest-glow/50 mt-1">+91 75600 65963</p>
               </div>
             </a>
 
@@ -97,7 +97,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-[11px] text-stone/40 mb-1.5 tracking-wide uppercase">Phone</label>
-                      <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.06] rounded-lg text-snow/90 text-sm placeholder:text-stone/25 focus:outline-none focus:border-forest/30 transition-colors duration-500" placeholder="+91 98765 43210" />
+                      <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.06] rounded-lg text-snow/90 text-sm placeholder:text-stone/25 focus:outline-none focus:border-forest/30 transition-colors duration-500" placeholder="+91 75600 65963" />
                     </div>
                     <div>
                       <label className="block text-[11px] text-stone/40 mb-1.5 tracking-wide uppercase">No. of Travelers</label>

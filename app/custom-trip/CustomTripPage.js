@@ -23,7 +23,7 @@ export default function CustomTripPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const msg = `Hi Trail Core! I want to plan a custom expedition.\n\nName: ${form.name}\nPhone: ${form.phone}\nTrip Type: ${form.tripType}\nDuration: ${form.duration} days\nBudget: ${form.budget}\nInterests: ${form.interests.join(", ")}\nStart Date: ${form.startDate}\nNotes: ${form.notes}`;
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(`https://wa.me/917560065963?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   return (
@@ -70,7 +70,7 @@ export default function CustomTripPage() {
                   </div>
                   <div>
                     <label className="block text-[11px] text-stone/40 mb-1.5 tracking-wide uppercase">Phone *</label>
-                    <input type="tel" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.06] rounded-lg text-snow/90 text-sm placeholder:text-stone/25 focus:outline-none focus:border-forest/30 transition-colors duration-500" placeholder="+91 98765 43210" />
+                    <input type="tel" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.06] rounded-lg text-snow/90 text-sm placeholder:text-stone/25 focus:outline-none focus:border-forest/30 transition-colors duration-500" placeholder="+91 75600 65963" />
                   </div>
                 </div>
 

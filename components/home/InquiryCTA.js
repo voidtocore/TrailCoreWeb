@@ -23,7 +23,7 @@ export default function InquiryCTA() {
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
         <FadeIn>
-          <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone/40 mb-6">
+          <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone-light/50 mb-6">
             Begin Your Journey
           </span>
         </FadeIn>
@@ -38,7 +38,7 @@ export default function InquiryCTA() {
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="text-stone/45 mt-5 text-base md:text-lg leading-relaxed font-light max-w-xl mx-auto">
+          <p className="text-parchment/50 mt-5 text-base md:text-lg leading-relaxed font-light max-w-xl mx-auto">
             Tell us about your expedition plans. Our mountain specialists will
             craft a journey tailored to your pace, interests, and season.
           </p>
@@ -46,7 +46,7 @@ export default function InquiryCTA() {
         <FadeIn delay={0.3}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10">
             <a
-              href="https://wa.me/919876543210?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
+              href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-7 py-3.5 bg-[#25D366]/90 hover:bg-[#25D366] text-white font-medium tracking-wide rounded-full transition-all duration-300 text-sm"
@@ -58,7 +58,7 @@ export default function InquiryCTA() {
             </a>
             <Link
               href="/contact"
-              className="flex items-center gap-2 px-7 py-3.5 border border-white/10 hover:bg-white/[0.04] text-snow/70 hover:text-snow font-medium tracking-wide rounded-full transition-all duration-500 backdrop-blur-sm text-sm"
+              className="flex items-center gap-2 px-7 py-3.5 border border-white/12 hover:bg-white/[0.05] text-snow/80 hover:text-snow font-medium tracking-wide rounded-full transition-all duration-500 backdrop-blur-sm text-sm"
             >
               Send an Inquiry
             </Link>

@@ -53,9 +53,9 @@ export default function Navbar() {
             <Image
               src="/images/logo-trailcore.png"
               alt="Trail Core"
-              width={140}
-              height={36}
-              className="h-7 sm:h-8 w-auto brightness-[10] opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              width={220}
+              height={56}
+              className="h-9 sm:h-11 w-auto brightness-[10] opacity-95 group-hover:opacity-100 transition-opacity duration-300"
             />
           </Link>
 
@@ -65,7 +65,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-[13px] font-light tracking-wide text-stone-light/80 hover:text-snow transition-colors duration-300 relative group"
+                className="px-4 py-2 text-[13px] font-light tracking-wide text-parchment/70 hover:text-snow transition-colors duration-300 relative group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-forest-glow/60 group-hover:w-3/4 transition-all duration-500" />
@@ -172,9 +172,9 @@ export default function Navbar() {
                 <Image
                   src="/images/logo-trailcore.png"
                   alt="Trail Core"
-                  width={120}
-                  height={32}
-                  className="h-6 w-auto brightness-[10] opacity-80"
+                  width={180}
+                  height={46}
+                  className="h-8 w-auto brightness-[10] opacity-90"
                 />
               </div>
 
@@ -189,7 +189,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block px-3 py-3.5 text-lg font-light text-stone-light/70 hover:text-snow hover:bg-white/[0.03] rounded-lg transition-all duration-300"
+                      className="block px-3 py-3.5 text-lg font-light text-parchment/65 hover:text-snow hover:bg-white/[0.03] rounded-lg transition-all duration-300"
                     >
                       {link.label}
                     </Link>
@@ -233,8 +233,8 @@ export default function Navbar() {
                   className="mt-10 space-y-4 text-sm"
                 >
                   <a
-                    href="tel:+919876543210"
-                    className="flex items-center gap-3 text-stone/70 hover:text-snow transition-colors"
+                    href="tel:+917560065963"
+                    className="flex items-center gap-3 text-parchment/60 hover:text-snow transition-colors"
                   >
                     <svg
                       className="w-4 h-4 text-forest-glow/60"
@@ -249,12 +249,12 @@ export default function Navbar() {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-                    +91 98765 43210
+                    +91 75600 65963
                   </a>
 
                   <a
                     href="mailto:hello@trailcore.in"
-                    className="flex items-center gap-3 text-stone/70 hover:text-snow transition-colors"
+                    className="flex items-center gap-3 text-parchment/60 hover:text-snow transition-colors"
                   >
                     <svg
                       className="w-4 h-4 text-forest-glow/60"

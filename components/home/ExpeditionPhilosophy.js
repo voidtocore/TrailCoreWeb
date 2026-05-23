@@ -22,7 +22,7 @@ export default function ExpeditionPhilosophy() {
           {/* Text */}
           <div className="lg:col-span-7">
             <FadeIn>
-              <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone/40 mb-6">
+              <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone-light/50 mb-6">
                 Our Philosophy
               </span>
             </FadeIn>
@@ -33,18 +33,18 @@ export default function ExpeditionPhilosophy() {
               >
                 Experience over speed.
                 <br />
-                <span className="text-stone/40">Connection over convenience.</span>
+                <span className="text-stone-light/45">Connection over convenience.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-stone/45 text-base md:text-lg leading-relaxed font-light max-w-xl mb-6">
+              <p className="text-parchment/50 text-base md:text-lg leading-relaxed font-light max-w-xl mb-6">
                 Trail Core designs journeys that prioritize depth over distance.
                 Every expedition is crafted for meaningful exploration, comfort,
                 safety, and authentic Himalayan connection.
               </p>
             </FadeIn>
             <FadeIn delay={0.3}>
-              <p className="text-stone/35 text-sm leading-relaxed font-light max-w-xl">
+              <p className="text-stone-light/40 text-sm leading-relaxed font-light max-w-xl">
                 We believe the best journeys leave room for the unplanned —
                 a conversation with a monastery monk, an extra hour at a
                 mountain pass watching clouds roll through valleys, a bonfire
@@ -63,12 +63,12 @@ export default function ExpeditionPhilosophy() {
                 ].map((stat) => (
                   <div key={stat.label}>
                     <p
-                      className="text-2xl md:text-3xl font-semibold text-forest-glow/60"
+                      className="text-2xl md:text-3xl font-semibold text-forest-glow/70"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     >
                       {stat.num}
                     </p>
-                    <p className="text-[11px] text-stone/35 mt-1 tracking-wide uppercase">
+                    <p className="text-[11px] text-stone-light/40 mt-1 tracking-wide uppercase">
                       {stat.label}
                     </p>
                   </div>

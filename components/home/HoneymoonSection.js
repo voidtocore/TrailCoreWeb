@@ -28,7 +28,7 @@ export default function HoneymoonSection() {
           {/* Text */}
           <div className="lg:col-span-5">
             <FadeIn>
-              <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone/40 mb-6">
+              <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone-light/50 mb-6">
                 Food & Stay Experience
               </span>
             </FadeIn>
@@ -39,11 +39,11 @@ export default function HoneymoonSection() {
               >
                 Where comfort meets
                 <br />
-                <span className="text-stone/40">the mountains.</span>
+                <span className="text-stone-light/45">the mountains.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-stone/45 text-base leading-relaxed font-light max-w-md mb-8">
+              <p className="text-parchment/50 text-base leading-relaxed font-light max-w-md mb-8">
                 Every stay is handpicked for warmth, every meal for authenticity.
                 We believe comfort in the mountains means local character, not
                 luxury chains — real fires, real food, real people.
@@ -52,7 +52,7 @@ export default function HoneymoonSection() {
             <FadeIn delay={0.3}>
               <div className="space-y-3">
                 {["Curated homestays & heritage stays", "Traditional Himalayan cuisine", "Mountain café mornings", "Bonfire nights under the stars", "Slow evenings with chai"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-sm text-stone/40 font-light">
+                  <div key={item} className="flex items-center gap-3 text-sm text-parchment/45 font-light">
                     <div className="w-1 h-1 rounded-full bg-forest-glow/40" />
                     {item}
                   </div>

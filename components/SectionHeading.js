@@ -12,7 +12,7 @@ export default function SectionHeading({
     <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} mb-16 md:mb-20`}>
       {label && (
         <FadeIn>
-          <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone/50 mb-5">
+          <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone-light/60 mb-5">
             {label}
           </span>
         </FadeIn>
@@ -27,7 +27,7 @@ export default function SectionHeading({
       </FadeIn>
       {description && (
         <FadeIn delay={0.2}>
-          <p className="mt-5 text-stone/50 text-base md:text-lg leading-relaxed font-light">
+          <p className="mt-5 text-stone-light/55 text-base md:text-lg leading-relaxed font-light">
             {description}
           </p>
         </FadeIn>

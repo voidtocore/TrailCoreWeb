@@ -38,10 +38,10 @@ export default function Footer() {
                 alt="Trail Core"
                 width={140}
                 height={36}
-                className="h-7 w-auto brightness-[10] opacity-80"
+                className="h-8 w-auto brightness-[10] opacity-90"
               />
             </Link>
-            <p className="text-stone/60 text-sm leading-relaxed max-w-sm mb-8">
+            <p className="text-parchment/50 text-sm leading-relaxed max-w-sm mb-8">
               Curated Himalayan expeditions designed for meaningful travel
               experiences. Slow journeys through Spiti, Kinnaur, and the
               Indian Himalayas.
@@ -52,7 +52,7 @@ export default function Footer() {
                 <a
                   key={social}
                   href="#"
-                  className="w-9 h-9 rounded-full border border-white/[0.06] flex items-center justify-center hover:bg-forest/20 hover:border-forest/30 text-stone/40 hover:text-forest-glow transition-all duration-300"
+                  className="w-9 h-9 rounded-full border border-white/[0.06] flex items-center justify-center hover:bg-forest/20 hover:border-forest/30 text-stone/50 hover:text-forest-glow transition-all duration-300"
                   aria-label={social}
                 >
                   {social === "instagram" && (
@@ -68,10 +68,10 @@ export default function Footer() {
                 </a>
               ))}
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/917560065963"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-white/[0.06] flex items-center justify-center hover:bg-[#25D366]/10 hover:border-[#25D366]/30 text-stone/40 hover:text-[#25D366] transition-all duration-300"
+                className="w-9 h-9 rounded-full border border-white/[0.06] flex items-center justify-center hover:bg-[#25D366]/10 hover:border-[#25D366]/30 text-stone/50 hover:text-[#25D366] transition-all duration-300"
                 aria-label="WhatsApp"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -83,7 +83,7 @@ export default function Footer() {
 
           {/* Expeditions */}
           <div className="lg:col-span-2">
-            <h3 className="text-[11px] font-medium text-stone/40 uppercase tracking-[0.15em] mb-5">
+            <h3 className="text-[11px] font-medium text-stone-light/45 uppercase tracking-[0.15em] mb-5">
               Expeditions
             </h3>
             <ul className="space-y-3">
@@ -91,7 +91,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-stone/55 hover:text-snow transition-colors duration-300"
+                    className="text-sm text-parchment/50 hover:text-snow transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -102,7 +102,7 @@ export default function Footer() {
 
           {/* Destinations */}
           <div className="lg:col-span-2">
-            <h3 className="text-[11px] font-medium text-stone/40 uppercase tracking-[0.15em] mb-5">
+            <h3 className="text-[11px] font-medium text-stone-light/45 uppercase tracking-[0.15em] mb-5">
               Destinations
             </h3>
             <ul className="space-y-3">
@@ -121,7 +121,7 @@ export default function Footer() {
 
           {/* Company */}
           <div className="lg:col-span-3">
-            <h3 className="text-[11px] font-medium text-stone/40 uppercase tracking-[0.15em] mb-5">
+            <h3 className="text-[11px] font-medium text-stone-light/45 uppercase tracking-[0.15em] mb-5">
               Company
             </h3>
             <ul className="space-y-3">
@@ -137,11 +137,11 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-8 space-y-2">
-              <a href="mailto:hello@trailcore.in" className="block text-sm text-stone/55 hover:text-snow transition-colors">
+              <a href="mailto:hello@trailcore.in" className="block text-sm text-parchment/50 hover:text-snow transition-colors">
                 hello@trailcore.in
               </a>
-              <a href="tel:+919876543210" className="block text-sm text-stone/55 hover:text-snow transition-colors">
-                +91 98765 43210
+              <a href="tel:+917560065963" className="block text-sm text-parchment/50 hover:text-snow transition-colors">
+                +91 75600 65963
               </a>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/[0.03]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-stone/30 tracking-wide">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-stone-light/35 tracking-wide">
           <p>© 2026 Trail Core. All rights reserved.</p>
           <p>Curated Himalayan expeditions for meaningful exploration.</p>
         </div>

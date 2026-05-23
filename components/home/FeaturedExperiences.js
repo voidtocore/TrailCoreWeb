@@ -75,7 +75,7 @@ export default function FeaturedExperiences() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/5 transition-all duration-500" />
 
                 {/* Badge */}
                 <div className="absolute top-5 left-5 z-10">
@@ -92,12 +92,12 @@ export default function FeaturedExperiences() {
                   >
                     {exp.title}
                   </h3>
-                  <p className="text-sm text-parchment/40 leading-relaxed mb-4 max-w-md font-light">
+                  <p className="text-sm text-parchment/55 leading-relaxed mb-4 max-w-md font-light">
                     {exp.desc}
                   </p>
 
                   {/* Meta */}
-                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-stone/50 tracking-wide">
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-parchment/50 tracking-wide">
                     <span className="flex items-center gap-1.5">
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -119,7 +119,7 @@ export default function FeaturedExperiences() {
                   </div>
 
                   {/* Hover arrow */}
-                  <div className="mt-4 flex items-center gap-1.5 text-[11px] text-forest-glow/60 font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500">
+                  <div className="mt-4 flex items-center gap-1.5 text-[11px] text-forest-glow/70 font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500">
                     View expedition
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
