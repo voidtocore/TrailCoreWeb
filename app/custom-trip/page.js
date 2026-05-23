@@ -1,6 +1,6 @@
 import CustomTripPage from "./CustomTripPage";
 export const metadata = {
-  title: "Custom Trip Planner — Design Your Himachal Journey | CoreTrail",
-  description: "Design your perfect Himachal Pradesh trip. Tell us your preferences and our experts will craft a personalized itinerary just for you.",
+  title: "Custom Expedition — Design Your Himalayan Journey | Trail Core",
+  description: "Design a bespoke Himalayan expedition with Trail Core. Choose your route, pace, stays, and experiences.",
 };
 export default function Page() { return <CustomTripPage />; }

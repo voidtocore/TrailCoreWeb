@@ -1,6 +1,6 @@
 import PackagesPage from "./PackagesPage";
 export const metadata = {
-  title: "Packages — Curated Himachal Trips | CoreTrail",
-  description: "Explore our curated Himachal Pradesh travel packages. Spiti Valley circuits, budget road trips, and customized mountain experiences.",
+  title: "Expeditions — Curated Himalayan Journeys | Trail Core",
+  description: "Explore our curated Himalayan expeditions. Spiti Valley circuits, Kinnaur odysseys, and bespoke mountain journeys designed for meaningful exploration.",
 };
 export default function Page() { return <PackagesPage />; }

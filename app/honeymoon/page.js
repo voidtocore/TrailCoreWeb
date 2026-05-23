@@ -1,6 +1,6 @@
 import HoneymoonPage from "./HoneymoonPage";
 export const metadata = {
-  title: "Honeymoon Trips — Romantic Himachal Getaways | CoreTrail",
-  description: "Plan your dream honeymoon in Himachal Pradesh. Cozy mountain stays, private retreats, and romantic experiences crafted for couples.",
+  title: "Mountain Retreats — Intimate Himalayan Journeys | Trail Core",
+  description: "Curated mountain retreats for couples. Intimate Himalayan experiences with private stays, scenic roads, and meaningful moments.",
 };
 export default function Page() { return <HoneymoonPage />; }

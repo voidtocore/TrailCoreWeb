@@ -28,9 +28,9 @@ export function FadeIn({ children, delay = 0, direction = "up", className = "" }
           : { opacity: 0, ...directions[direction] }
       }
       transition={{
-        duration: 0.7,
+        duration: 0.8,
         delay,
-        ease: [0.21, 0.47, 0.32, 0.98],
+        ease: [0.25, 0.46, 0.45, 0.94],
       }}
       className={className}
     >
@@ -72,8 +72,8 @@ export function StaggerItem({ children, className = "" }) {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 0.6,
-            ease: [0.21, 0.47, 0.32, 0.98],
+            duration: 0.7,
+            ease: [0.25, 0.46, 0.45, 0.94],
           },
         },
       }}
@@ -98,9 +98,9 @@ export function ScaleIn({ children, delay = 0, className = "" }) {
           : { opacity: 0, scale: 0.9 }
       }
       transition={{
-        duration: 0.6,
+        duration: 0.7,
         delay,
-        ease: [0.21, 0.47, 0.32, 0.98],
+        ease: [0.25, 0.46, 0.45, 0.94],
       }}
       className={className}
     >
