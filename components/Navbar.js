@@ -49,13 +49,13 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link href="/" className="flex items-center group">
             <Image
-              src="/images/logo-trailcore.png"
+              src="/images/logo-trailcore.svg"
               alt="Trail Core"
-              width={220}
-              height={56}
-              className="h-9 sm:h-11 w-auto brightness-[10] opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+              width={218}
+              height={48}
+              className="h-10 sm:h-12 w-auto opacity-95 group-hover:opacity-100 transition-opacity duration-300"
             />
           </Link>
 
@@ -170,11 +170,11 @@ export default function Navbar() {
               {/* Mobile Logo */}
               <div className="mb-10">
                 <Image
-                  src="/images/logo-trailcore.png"
+                  src="/images/logo-trailcore.svg"
                   alt="Trail Core"
-                  width={180}
-                  height={46}
-                  className="h-8 w-auto brightness-[10] opacity-90"
+                  width={181}
+                  height={40}
+                  className="h-10 w-auto opacity-90"
                 />
               </div>
 

@@ -32,11 +32,11 @@ export default function HeroSection() {
           className="mb-8"
         >
           <Image
-            src="/images/logo-trailcore.png"
+            src="/images/logo-trailcore.svg"
             alt="Trail Core"
-            width={180}
-            height={46}
-            className="h-10 sm:h-14 w-auto mx-auto brightness-[10] opacity-60"
+            width={290}
+            height={64}
+            className="h-12 sm:h-16 w-auto mx-auto opacity-60"
           />
         </motion.div>
 
