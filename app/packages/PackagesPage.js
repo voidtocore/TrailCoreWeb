@@ -7,6 +7,20 @@ import InquiryCTA from "@/components/home/InquiryCTA";
 
 const expeditions = [
   {
+    title: "Chanshal Pass & Pabbar Valley Road Trip",
+    slug: "chanshal-pass",
+    duration: "4 Days / 3 Nights",
+    price: "From ₹18,999",
+    priceNote: "per person",
+    img: "/images/road-trip.png",
+    badge: "Offbeat",
+    route: "Shimla → Rohru → Chanshal → Narkanda → Shimla",
+    season: "Apr — Jun, Sep — Nov",
+    difficulty: "Moderate",
+    groupSize: "4–6",
+    includes: ["Transport", "Riverside Stay", "Meals", "Chanshal Excursion", "Bonfire"],
+  },
+  {
     title: "Spiti Circuit Expedition",
     duration: "10 Days / 9 Nights",
     price: "From ₹18,999",
@@ -151,10 +165,10 @@ export default function PackagesPage() {
                         <span className="text-[11px] text-stone/30 ml-1.5">/{exp.priceNote}</span>
                       </div>
                       <Link
-                        href="/contact"
-                        className="px-4 py-2 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-[11px] font-medium tracking-wide rounded-full transition-all duration-500 border border-forest-light/20"
+                        href={exp.slug ? `/packages/${exp.slug}` : "/contact"}
+                        className="px-4 py-2 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-[11px] font-medium tracking-wide rounded-full transition-all duration-500 border border-forest-light/20 text-center"
                       >
-                        Inquire
+                        {exp.slug ? "View Expedition" : "Inquire"}
                       </Link>
                     </div>
                   </div>
