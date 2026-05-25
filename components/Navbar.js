@@ -148,25 +148,23 @@ function MenuItem({ item }) {
 
 const menuVariants = {
   open: {
-    opacity: 0.99,
-    y: 0,
+    opacity: 1,
     pointerEvents: "auto",
     visibility: "visible",
     transition: {
-      duration: 0.15,
-      ease: "easeOut"
+      duration: 0.12,
+      ease: "linear"
     }
   },
   closed: {
     opacity: 0,
-    y: 12,
     pointerEvents: "none",
     transitionEnd: {
       visibility: "hidden"
     },
     transition: {
-      duration: 0.15,
-      ease: "easeOut"
+      duration: 0.1,
+      ease: "linear"
     }
   }
 };
@@ -203,13 +201,11 @@ export default function Navbar() {
       <nav
         ref={navContainerRef}
         onMouseLeave={() => setActiveMenu(null)}
-        className={`fixed top-0 left-0 right-0 transition-all duration-700 ${
-          mobileOpen ? "z-[1000]" : "z-50"
-        } ${
-          scrolled || activeMenu
+        className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${mobileOpen ? "z-[1000]" : "z-50"
+          } ${scrolled || activeMenu
             ? "bg-mountain-black/85 backdrop-blur-2xl border-b border-white/[0.04] py-2 sm:py-3"
             : "bg-transparent py-4 sm:py-6"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-between">
           {/* Logo */}
@@ -226,14 +222,14 @@ export default function Navbar() {
               />
             </div>
             {/* Mobile Monogram Icon Crop */}
-            <div className="lg:hidden w-10 h-10 overflow-hidden relative rounded-lg flex items-center justify-start">
+            <div className="lg:hidden">
               <Image
                 src="/images/logo-tc.png"
                 alt="TrailCore"
-                width={120}
-                height={40}
+                width={36}
+                height={36}
                 priority
-                className="max-w-none h-10 w-[120px] object-cover object-left opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+                className="w-9 h-9 object-contain"
               />
             </div>
           </Link>
@@ -281,14 +277,12 @@ export default function Navbar() {
           >
             <div className="relative w-5 h-3 flex items-center justify-center">
               <span
-                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${
-                  mobileOpen ? "rotate-45" : "-translate-y-[4px]"
-                }`}
+                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${mobileOpen ? "rotate-45" : "-translate-y-[4px]"
+                  }`}
               />
               <span
-                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${
-                  mobileOpen ? "-rotate-45" : "translate-y-[4px]"
-                }`}
+                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${mobileOpen ? "-rotate-45" : "translate-y-[4px]"
+                  }`}
               />
             </div>
           </button>
@@ -319,10 +313,10 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed inset-0 z-[999] lg:hidden bg-[#070708] flex flex-col pt-28 px-8 pb-10 overflow-y-auto"
+        className="fixed inset-0 z-[999] lg:hidden bg-black flex flex-col pt-24 px-8 pb-10 overflow-y-auto"
       >
         {/* Scroll Container */}
-        <div className="flex-1 max-w-md mx-auto w-full flex flex-col justify-center space-y-1.5 py-6">
+        <div className="flex-1 w-full flex flex-col justify-center space-y-1.5 py-6">
           {Object.keys(menuData).map((key) => {
             const isExpanded = expandedSection === key;
             return (
