@@ -313,7 +313,7 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed inset-0 z-[999] lg:hidden bg-black flex flex-col pt-24 px-8 pb-10 overflow-y-auto"
+        className="fixed inset-0 z-[999] lg:hidden bg-black flex flex-col pt-28 px-8 pb-10 overflow-y-auto"
       >
         {/* Scroll Container */}
         <div className="flex-1 w-full flex flex-col justify-center space-y-1.5 py-6">
