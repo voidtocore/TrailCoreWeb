@@ -146,6 +146,31 @@ function MenuItem({ item }) {
   );
 }
 
+const menuVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    pointerEvents: "auto",
+    visibility: "visible",
+    transition: {
+      duration: 0.15,
+      ease: "easeOut"
+    }
+  },
+  closed: {
+    opacity: 0,
+    y: 15,
+    pointerEvents: "none",
+    transitionEnd: {
+      visibility: "hidden"
+    },
+    transition: {
+      duration: 0.15,
+      ease: "easeOut"
+    }
+  }
+};
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -189,13 +214,28 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group relative z-[1000]">
-            <Image
-              src="/images/logo-tc.png"
-              alt="Trail Core"
-              width={144}
-              height={48}
-              className="h-9 sm:h-10 md:h-11 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity duration-300"
-            />
+            {/* Desktop Wordmark */}
+            <div className="hidden lg:block">
+              <Image
+                src="/images/logo-tc.png"
+                alt="TrailCore"
+                width={144}
+                height={48}
+                priority
+                className="h-11 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
+            {/* Mobile Monogram Icon Crop */}
+            <div className="lg:hidden w-10 h-10 overflow-hidden relative rounded-lg flex items-center justify-start">
+              <Image
+                src="/images/logo-tc.png"
+                alt="TrailCore"
+                width={120}
+                height={40}
+                priority
+                className="max-w-none h-10 w-[120px] object-cover object-left opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation Items */}
@@ -247,7 +287,7 @@ export default function Navbar() {
               />
               <span
                 className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "opacity-0" : ""
+                  mobileOpen ? "scale-0" : ""
                 }`}
               />
               <span
@@ -280,90 +320,85 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Fullscreen Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-[999] lg:hidden bg-mountain-black/98 backdrop-blur-3xl flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
-          >
-            {/* Scroll Container */}
-            <div className="flex-1 space-y-1">
-              {Object.keys(menuData).map((key) => {
-                const isExpanded = expandedSection === key;
-                return (
-                  <div key={key} className="border-b border-white/[0.04] py-3.5 first:pt-0">
-                    <button
-                      onClick={() => setExpandedSection(isExpanded ? null : key)}
-                      className="w-full flex justify-between items-center text-lg font-light tracking-wide text-snow/90 leading-relaxed uppercase"
-                      style={{ fontFamily: "var(--font-outfit)" }}
+      <motion.div
+        initial="closed"
+        animate={mobileOpen ? "open" : "closed"}
+        variants={menuVariants}
+        className="fixed inset-0 z-[999] lg:hidden bg-mountain-black/95 backdrop-blur-md flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
+      >
+        {/* Scroll Container */}
+        <div className="flex-1 space-y-1">
+          {Object.keys(menuData).map((key) => {
+            const isExpanded = expandedSection === key;
+            return (
+              <div key={key} className="border-b border-white/[0.03] py-4 first:pt-0">
+                <button
+                  onClick={() => setExpandedSection(isExpanded ? null : key)}
+                  className="w-full flex justify-between items-center text-[17px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  <span>{menuData[key].label}</span>
+                  <span className={`text-stone/45 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="overflow-hidden mt-3 pl-2 grid grid-cols-2 gap-x-4 gap-y-2"
                     >
-                      <span className="lowercase">{menuData[key].label}</span>
-                      <span className={`text-stone/45 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </span>
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden mt-3 pl-2 grid grid-cols-2 gap-x-4 gap-y-2"
-                        >
-                          {menuData[key].items.map((item) => {
-                            if (item.href) {
-                              return (
-                                <Link
-                                  key={item.label}
-                                  href={item.href}
-                                  onClick={() => setMobileOpen(false)}
-                                  className="py-1.5 text-xs text-parchment/65 active:text-snow block lowercase hover:text-snow transition-colors"
-                                >
-                                  {item.label}
-                                </Link>
-                              );
-                            }
-                            return (
-                              <div key={item.label} className="py-1.5 flex items-center gap-1.5 select-none opacity-40">
-                                <span className="text-xs text-parchment/50 lowercase">{item.label}</span>
-                                <span className="text-[9px] uppercase tracking-wider bg-white/[0.05] text-stone px-1 rounded font-medium border border-white/[0.03]">
-                                  soon
-                                </span>
-                              </div>
-                            );
-                          })}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Bottom Actions & Contact */}
-            <div className="mt-8 space-y-6 pt-6 border-t border-white/[0.04]">
-              <Link
-                href="/custom-trip"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 w-full px-6 py-3.5 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-xs font-medium tracking-wide rounded-full border border-forest-light/20 transition-all duration-300"
-              >
-                reserve custom plan
-              </Link>
-              <div className="flex justify-between text-[11px] text-stone/40">
-                <a href="mailto:hello@trailcore.in" className="hover:text-snow">hello@trailcore.in</a>
-                <a href="tel:+917560065963" className="hover:text-snow">+91 75600 65963</a>
+                      {menuData[key].items.map((item) => {
+                        if (item.href) {
+                          return (
+                            <Link
+                              key={item.label}
+                              href={item.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="py-2 text-[13px] text-parchment/60 active:text-snow block lowercase hover:text-snow transition-colors"
+                            >
+                              {item.label}
+                            </Link>
+                          );
+                        }
+                        return (
+                          <div key={item.label} className="py-2 flex items-center gap-1.5 select-none opacity-40">
+                            <span className="text-[13px] text-parchment/50 lowercase">{item.label}</span>
+                            <span className="text-[9px] tracking-widest text-parchment/40 bg-white/[0.03] px-2 py-0.5 rounded-full border border-white/[0.02] font-light">
+                              soon
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            );
+          })}
+        </div>
+
+        {/* Bottom Actions & Contact */}
+        <div className="mt-8 space-y-6 pt-6 border-t border-white/[0.03]">
+          <Link
+            href="/custom-trip"
+            onClick={() => setMobileOpen(false)}
+            className="flex items-center justify-center gap-2 w-full px-6 py-3.5 bg-white/[0.03] hover:bg-white/[0.06] text-parchment/90 text-xs font-medium tracking-wide rounded-full border border-white/[0.05] transition-all duration-300"
+          >
+            reserve custom plan
+          </Link>
+          <div className="flex justify-between text-[12px] tracking-wider font-light text-parchment/40">
+            <a href="mailto:hello@trailcore.in" className="hover:text-snow">hello@trailcore.in</a>
+            <a href="tel:+917560065963" className="hover:text-snow">+91 75600 65963</a>
+          </div>
+        </div>
+      </motion.div>
     </>
   );
 }
