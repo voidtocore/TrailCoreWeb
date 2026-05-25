@@ -207,7 +207,7 @@ export default function Navbar() {
             : "bg-transparent py-4 sm:py-6"
           }`}
       >
-        <div className="h-16 px-5 flex items-center justify-between">
+        <div className="h-12 px-5 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group relative z-[1000]">
             {/* Desktop Wordmark */}
@@ -215,10 +215,10 @@ export default function Navbar() {
               <Image
                 src="/images/logo-tc.png"
                 alt="TrailCore"
-                width={144}
-                height={48}
+                width={128}
+                height={42}
                 priority
-                className="h-11 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+                className="h-9 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity duration-300"
               />
             </div>
             {/* Mobile Monogram Icon Crop */}
