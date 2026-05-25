@@ -34,11 +34,11 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <Link href="/" className="inline-block mb-6">
               <Image
-                src="/images/logo-trailcore.svg"
-                alt="Trail Core"
-                width={163}
+                src="/images/logo-tc.png"
+                alt="TrailCore"
+                width={108}
                 height={36}
-                className="h-9 w-auto opacity-90"
+                className="h-9 w-auto object-contain opacity-90"
               />
             </Link>
             <p className="text-parchment/50 text-sm leading-relaxed max-w-sm mb-8">

@@ -24,22 +24,6 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-5xl mx-auto px-5 sm:px-6 text-center">
-        {/* Logo watermark */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-8"
-        >
-          <Image
-            src="/images/logo-trailcore.svg"
-            alt="Trail Core"
-            width={290}
-            height={64}
-            className="h-12 sm:h-16 w-auto mx-auto opacity-60"
-          />
-        </motion.div>
-
         {/* Label */}
         <motion.span
           initial={{ opacity: 0, y: 16 }}
@@ -108,22 +92,6 @@ export default function HeroSection() {
           </Link>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-          className="w-5 h-8 rounded-full border border-white/15 flex justify-center pt-1.5"
-        >
-          <div className="w-[2px] h-1.5 rounded-full bg-white/30" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

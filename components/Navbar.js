@@ -148,7 +148,7 @@ function MenuItem({ item }) {
 
 const menuVariants = {
   open: {
-    opacity: 1,
+    opacity: 0.99,
     y: 0,
     pointerEvents: "auto",
     visibility: "visible",
@@ -159,7 +159,7 @@ const menuVariants = {
   },
   closed: {
     opacity: 0,
-    y: 15,
+    y: 12,
     pointerEvents: "none",
     transitionEnd: {
       visibility: "hidden"
@@ -279,20 +279,15 @@ export default function Navbar() {
             className="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-lg z-[1000] text-snow"
             aria-label="Toggle menu"
           >
-            <div className="w-5 flex flex-col gap-[5px]">
+            <div className="relative w-5 h-3 flex items-center justify-center">
               <span
-                className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "rotate-45 translate-y-[6.5px]" : ""
+                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${
+                  mobileOpen ? "rotate-45" : "-translate-y-[4px]"
                 }`}
               />
               <span
-                className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "scale-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
+                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${
+                  mobileOpen ? "-rotate-45" : "translate-y-[4px]"
                 }`}
               />
             </div>
@@ -324,22 +319,22 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed inset-0 z-[999] lg:hidden bg-mountain-black/95 backdrop-blur-md flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
+        className="fixed inset-0 z-[999] lg:hidden bg-[#070708] flex flex-col pt-28 px-8 pb-10 overflow-y-auto"
       >
         {/* Scroll Container */}
-        <div className="flex-1 space-y-1">
+        <div className="flex-1 max-w-md mx-auto w-full flex flex-col justify-center space-y-1.5 py-6">
           {Object.keys(menuData).map((key) => {
             const isExpanded = expandedSection === key;
             return (
-              <div key={key} className="border-b border-white/[0.03] py-4 first:pt-0">
+              <div key={key} className="border-b border-white/[0.02] py-4 last:border-0">
                 <button
                   onClick={() => setExpandedSection(isExpanded ? null : key)}
-                  className="w-full flex justify-between items-center text-[17px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
+                  className="w-full flex justify-between items-center text-[18px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
-                  <span>{menuData[key].label}</span>
-                  <span className={`text-stone/45 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <span className="hover:text-snow transition-colors duration-200">{menuData[key].label}</span>
+                  <span className={`text-stone/40 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                   </span>
@@ -351,8 +346,8 @@ export default function Navbar() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="overflow-hidden mt-3 pl-2 grid grid-cols-2 gap-x-4 gap-y-2"
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="overflow-hidden mt-3 pl-1 grid grid-cols-2 gap-x-4 gap-y-2.5"
                     >
                       {menuData[key].items.map((item) => {
                         if (item.href) {
@@ -361,16 +356,16 @@ export default function Navbar() {
                               key={item.label}
                               href={item.href}
                               onClick={() => setMobileOpen(false)}
-                              className="py-2 text-[13px] text-parchment/60 active:text-snow block lowercase hover:text-snow transition-colors"
+                              className="py-1 text-xs text-parchment/60 active:text-snow hover:text-snow transition-colors lowercase font-light"
                             >
                               {item.label}
                             </Link>
                           );
                         }
                         return (
-                          <div key={item.label} className="py-2 flex items-center gap-1.5 select-none opacity-40">
-                            <span className="text-[13px] text-parchment/50 lowercase">{item.label}</span>
-                            <span className="text-[9px] tracking-widest text-parchment/40 bg-white/[0.03] px-2 py-0.5 rounded-full border border-white/[0.02] font-light">
+                          <div key={item.label} className="py-1 flex items-center gap-1.5 opacity-30 select-none">
+                            <span className="text-xs text-parchment/50 lowercase font-light">{item.label}</span>
+                            <span className="text-[8px] tracking-[0.1em] text-parchment/40 bg-white/[0.02] px-1.5 py-0.5 rounded border border-white/[0.01] font-light">
                               soon
                             </span>
                           </div>
@@ -385,17 +380,18 @@ export default function Navbar() {
         </div>
 
         {/* Bottom Actions & Contact */}
-        <div className="mt-8 space-y-6 pt-6 border-t border-white/[0.03]">
+        <div className="mt-auto pt-8 border-t border-white/[0.02] max-w-md mx-auto w-full space-y-6">
           <Link
             href="/custom-trip"
             onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center gap-2 w-full px-6 py-3.5 bg-white/[0.03] hover:bg-white/[0.06] text-parchment/90 text-xs font-medium tracking-wide rounded-full border border-white/[0.05] transition-all duration-300"
+            className="flex items-center justify-center w-full py-3.5 bg-white/[0.03] hover:bg-white/[0.06] text-parchment/90 text-xs font-light tracking-widest rounded-full border border-white/[0.05] transition-all duration-300 uppercase"
+            style={{ fontFamily: "var(--font-outfit)" }}
           >
             reserve custom plan
           </Link>
-          <div className="flex justify-between text-[12px] tracking-wider font-light text-parchment/40">
-            <a href="mailto:hello@trailcore.in" className="hover:text-snow">hello@trailcore.in</a>
-            <a href="tel:+917560065963" className="hover:text-snow">+91 75600 65963</a>
+          <div className="flex justify-between text-[11px] tracking-wider font-light text-parchment/35">
+            <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors">hello@trailcore.in</a>
+            <a href="tel:+917560065963" className="hover:text-snow transition-colors">+91 75600 65963</a>
           </div>
         </div>
       </motion.div>
