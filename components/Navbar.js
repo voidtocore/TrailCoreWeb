@@ -295,7 +295,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="absolute top-full left-0 right-0 mt-0 w-full bg-mountain-900/98 backdrop-blur-3xl border border-white/[0.05] rounded-xl p-8 shadow-2xl z-40"
+                className="absolute top-full left-0 right-0 mt-0 w-full bg-mountain-900/98 backdrop-blur-3xl border border-white/[0.05] rounded-b-xl p-8 shadow-2xl z-40"
               >
                 <div className="max-w-4xl mx-auto grid grid-cols-4 gap-4">
                   {menuData[activeMenu].items.map((item) => (
