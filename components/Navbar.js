@@ -226,10 +226,10 @@ export default function Navbar() {
               <Image
                 src="/images/logo-tc.png"
                 alt="TrailCore"
-                width={52}
-                height={52}
+                width={56}
+                height={56}
                 priority
-                className="w-12 h-12 object-contain opacity-95"
+                className="w-14 h-14 object-contain opacity-95"
               />
             </div>
           </Link>
@@ -313,17 +313,17 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed inset-0 z-[999] lg:hidden bg-black flex flex-col pt-28 px-8 pb-10 overflow-y-auto"
+        className="fixed inset-0 z-[999] lg:hidden bg-black flex flex-col pt-20 px-8 pb-10 overflow-y-auto"
       >
         {/* Scroll Container */}
-        <div className="w-full max-w-md mx-auto flex flex-col space-y-0 pt-6">
+        <div className="w-full flex flex-col space-y-0 pt-6">
           {Object.keys(menuData).map((key) => {
             const isExpanded = expandedSection === key;
             return (
               <div key={key} className="border-b border-white/[0.02] py-4 last:border-0">
                 <button
                   onClick={() => setExpandedSection(isExpanded ? null : key)}
-                  className="w-full flex justify-between items-center text-[18px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
+                  className="w-full flex justify-between items-center text-[20px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   <span className="hover:text-snow transition-colors duration-200">{menuData[key].label}</span>
@@ -374,7 +374,7 @@ export default function Navbar() {
         </div>
 
         {/* Bottom Actions & Contact */}
-        <div className="mt-auto pt-8 border-t border-white/[0.02] max-w-md mx-auto w-full space-y-6">
+        <div className="mt-10 pt-8 border-t border-white/[0.02] max-w-md mx-auto w-full space-y-6">
           <Link
             href="/custom-trip"
             onClick={() => setMobileOpen(false)}
