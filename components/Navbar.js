@@ -218,7 +218,7 @@ export default function Navbar() {
                 width={128}
                 height={42}
                 priority
-                className="h-9 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+                className="h-8 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity duration-300"
               />
             </div>
             {/* Mobile Monogram Icon Crop */}
