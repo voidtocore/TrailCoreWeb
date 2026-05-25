@@ -207,7 +207,7 @@ export default function Navbar() {
             : "bg-transparent py-4 sm:py-6"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-between">
+        <div className="h-20 px-5 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group relative z-[1000]">
             {/* Desktop Wordmark */}
@@ -226,10 +226,10 @@ export default function Navbar() {
               <Image
                 src="/images/logo-tc.png"
                 alt="TrailCore"
-                width={36}
-                height={36}
+                width={52}
+                height={52}
                 priority
-                className="w-9 h-9 object-contain"
+                className="w-12 h-12 object-contain opacity-95"
               />
             </div>
           </Link>
