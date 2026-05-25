@@ -178,13 +178,11 @@ export default function Navbar() {
       <nav
         ref={navContainerRef}
         onMouseLeave={() => setActiveMenu(null)}
-        className={`fixed top-0 left-0 right-0 transition-all duration-700 ${
-          mobileOpen ? "z-[1000]" : "z-50"
-        } ${
-          scrolled || activeMenu
+        className={`fixed top-0 left-0 right-0 transition-all duration-700 ${mobileOpen ? "z-[1000]" : "z-50"
+          } ${scrolled || activeMenu
             ? "bg-mountain-black/85 backdrop-blur-2xl border-b border-white/[0.04] py-2 sm:py-3"
             : "bg-transparent py-4 sm:py-6"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex items-center justify-between">
           {/* Logo */}
@@ -241,19 +239,16 @@ export default function Navbar() {
           >
             <div className="w-5 flex flex-col gap-[5px]">
               <span
-                className={`block h-[1.5px] bg-snow/80 transition-all duration-400 ${
-                  mobileOpen ? "rotate-45 translate-y-[6.5px]" : ""
-                }`}
+                className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${mobileOpen ? "rotate-45 translate-y-[6.5px]" : ""
+                  }`}
               />
               <span
-                className={`block h-[1.5px] bg-snow/80 transition-all duration-400 ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
+                className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${mobileOpen ? "opacity-0" : ""
+                  }`}
               />
               <span
-                className={`block h-[1.5px] bg-snow/80 transition-all duration-400 ${
-                  mobileOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
-                }`}
+                className={`block h-[1.5px] bg-snow/80 transition-transform duration-300 ease-out ${mobileOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
+                  }`}
               />
             </div>
           </button>
@@ -286,8 +281,8 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-[999] lg:hidden bg-mountain-black/98 backdrop-blur-3xl flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-[999] lg:hidden bg-mountain-black/98 backdrop-blur-xl flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
           >
             {/* Scroll Container */}
             <div className="flex-1 space-y-1">
