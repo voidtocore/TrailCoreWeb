@@ -83,68 +83,106 @@ const menuData = {
 };
 
 function MenuItem({ item }) {
-  const [hovered, setHovered] = useState(false);
-
   if (item.href) {
     return (
       <Link
         href={item.href}
-        className="group/item flex items-center justify-between p-3 rounded-[4px] hover:bg-white/[0.02] border border-transparent hover:border-white/[0.04] transition-all duration-300"
+        className="group/item flex items-center justify-between py-3.5 border-b border-white/[0.02] hover:border-white/[0.08] transition-all duration-500"
       >
-        <span className="text-xs font-light text-parchment/65 group-hover/item:text-snow group-hover/item:pl-1.5 transition-all duration-300 lowercase relative">
+        <span className="text-sm font-light text-parchment/65 group-hover/item:text-snow group-hover/item:translate-x-2 transition-transform duration-500 lowercase relative flex items-center gap-3">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-warm opacity-0 group-hover/item:opacity-100 transition-all duration-500 scale-50 group-hover/item:scale-100" />
           {item.label}
-          <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-accent-warm group-hover/item:w-full transition-all duration-300" />
         </span>
-        <svg
-          className="w-3 h-3 text-stone/30 group-hover/item:text-forest-glow opacity-0 group-hover/item:opacity-100 transition-all duration-300"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
+        <span className="text-[10px] text-accent-warm/40 font-mono tracking-wider opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 uppercase">
+          explore
+        </span>
       </Link>
     );
   }
 
   return (
-    <div
-      className="relative flex items-center justify-between p-3 rounded-[4px] cursor-not-allowed group/item"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="flex items-center gap-2">
-        <span className="text-xs font-light text-parchment/30 lowercase">
-          {item.label}
-        </span>
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-stone/20 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-stone/35"></span>
-        </span>
-      </div>
-
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -4 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -4 }}
-            transition={{ duration: 0.2 }}
-            className="absolute z-[100] left-1/2 -translate-x-1/2 -top-9 px-3 py-1 bg-black/85 backdrop-blur-md border border-white/[0.08] rounded-full shadow-lg shadow-black/50 pointer-events-none whitespace-nowrap"
-          >
-            <div className="flex items-center gap-1.5">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-forest-glow animate-pulse" />
-              <span className="text-[10px] tracking-wide text-parchment/80 font-light lowercase">
-                {item.status}
-              </span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="flex items-center justify-between py-3.5 border-b border-white/[0.02] cursor-not-allowed select-none">
+      <span className="text-sm font-light text-parchment/30 lowercase flex items-center gap-3">
+        <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+        {item.label}
+      </span>
+      <span className="text-[8px] font-mono text-stone-light/35 bg-white/[0.02] px-2 py-0.5 rounded border border-white/[0.04] tracking-widest lowercase">
+        {item.status || "soon"}
+      </span>
     </div>
   );
 }
+
+const menuTaglines = {
+  discover: {
+    tag: "explore / pathways",
+    title: "walk the untamed edges",
+    desc: "slow journeys through high-altitude spiti, deep pine valleys, and raw Himalayan terrain."
+  },
+  offgrid: {
+    tag: "silence / isolation",
+    title: "dwellings of complete quiet",
+    desc: "digital detox and immersive retreats in remote mountain outposts far beyond the signal line."
+  },
+  stays: {
+    tag: "shelter / luxury",
+    title: "luxury alpine sanctuaries",
+    desc: "architectural cabins, warm glass houses, and curated stays framing the massive mountain horizons."
+  },
+  editions: {
+    tag: "limited / curated",
+    title: "limited seasonal releases",
+    desc: "curated travel editions crafted for collectors. timed specifically for unique seasonal migrations."
+  },
+  reserve: {
+    tag: "bespoke / tailor-made",
+    title: "private expedition design",
+    desc: "tailored itineraries, private transport logs, and exclusive concierge access mapped solely to your request."
+  },
+  studio: {
+    tag: "philosophy / craft",
+    title: "the alpine design lab",
+    desc: "our core beliefs, sustainable partners, field logs, and contact endpoints for mountain inquiries."
+  }
+};
+
+const desktopDropdownVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: -12,
+    transition: {
+      duration: 0.4,
+      ease: [0.77, 0, 0.175, 1],
+    }
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.77, 0, 0.175, 1],
+      staggerChildren: 0.03,
+      delayChildren: 0.05,
+    }
+  }
+};
+
+const dropdownItemVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 10,
+    filter: "blur(4px)"
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.5,
+      ease: [0.77, 0, 0.175, 1]
+    }
+  }
+};
 
 const mobileOverlayVariants = {
   open: {
@@ -212,8 +250,13 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   
   const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    setHoveredIndex(null);
+  }, [activeMenu]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -382,16 +425,61 @@ export default function Navbar() {
           <AnimatePresence>
             {activeMenu && (
               <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.35, ease: [0.77, 0, 0.175, 1] }}
-                className="absolute top-full left-0 right-0 mt-0 w-full bg-[#121413]/98 backdrop-blur-3xl border border-white/[0.04] rounded-b-xl p-8 shadow-2xl z-40 hidden lg:block"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={desktopDropdownVariants}
+                className="absolute top-full left-0 right-0 mt-0 w-full bg-[#0c0d0c]/98 backdrop-blur-3xl border-b border-white/[0.04] py-16 px-12 z-40 hidden lg:block overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85)]"
+                style={{ willChange: "transform, opacity" }}
               >
-                <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
-                  {menuData[activeMenu].items.map((item) => (
-                    <MenuItem key={item.label} item={item} />
-                  ))}
+                {/* Ambient Radial Background Glow */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute -top-[20%] right-[10%] w-[50vw] h-[50vw] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[150px] rounded-full" />
+                </div>
+
+                <div className="max-w-7xl mx-auto grid grid-cols-12 gap-16 relative z-10">
+                  {/* Left Column: Editorial Tagline & Info */}
+                  <motion.div 
+                    variants={dropdownItemVariants}
+                    className="col-span-4 flex flex-col justify-between border-r border-white/[0.03] pr-12"
+                  >
+                    <div className="space-y-4">
+                      <span className="text-[9px] font-mono text-accent-warm uppercase tracking-[0.25em] block">
+                        {menuTaglines[activeMenu]?.tag}
+                      </span>
+                      <h3 className="font-display font-light text-2xl text-snow tracking-tight lowercase">
+                        {menuTaglines[activeMenu]?.title}
+                      </h3>
+                      <p className="text-xs text-parchment/50 font-light leading-relaxed max-w-xs lowercase">
+                        {menuTaglines[activeMenu]?.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-8">
+                      <span className="text-[9px] text-stone-light/25 font-mono uppercase tracking-widest">
+                        himalayan editorial system
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* Right Columns: Asymmetric Menu Links */}
+                  <div className="col-span-8 grid grid-cols-2 gap-x-16 gap-y-1">
+                    {menuData[activeMenu].items.map((item, idx) => (
+                      <motion.div
+                        key={item.label}
+                        variants={dropdownItemVariants}
+                        onMouseEnter={() => setHoveredIndex(idx)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                        style={{
+                          opacity: hoveredIndex !== null && hoveredIndex !== idx ? 0.35 : 1,
+                          transition: "opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1)",
+                          willChange: "opacity"
+                        }}
+                      >
+                        <MenuItem item={item} />
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -405,7 +493,7 @@ export default function Navbar() {
         animate={mobileOpen ? "open" : "closed"}
         variants={mobileOverlayVariants}
         className="fixed inset-0 z-[990] bg-[#0c0d0c]/98 backdrop-blur-2xl flex flex-col justify-between pt-32 px-6 pb-8 overflow-y-auto lg:hidden"
-        style={{ clipPath: "circle(0px at 93% 40px)" }}
+        style={{ clipPath: "circle(0px at 93% 40px)", willChange: "clip-path, opacity" }}
       >
         {/* Ambient radial background */}
         <div className="absolute inset-0 pointer-events-none">
@@ -425,14 +513,15 @@ export default function Navbar() {
                 <motion.div 
                   key={key} 
                   variants={mobileItemVariants}
-                  className="border-b border-white/[0.02] pb-3 last:border-0"
+                  className="border-b border-white/[0.02] pb-3.5 last:border-0"
+                  style={{ willChange: "transform, opacity" }}
                 >
                   <button
                     onClick={() => setExpandedSection(isExpanded ? null : key)}
-                    className="w-full flex justify-between items-baseline text-xl font-light text-snow/90 leading-relaxed lowercase focus:outline-none"
+                    className="w-full flex justify-between items-baseline text-2xl font-light text-snow/95 tracking-tight py-2.5 lowercase focus:outline-none font-display cursor-pointer"
                   >
                     <div className="flex items-baseline gap-3">
-                      <span className="text-[10px] font-mono text-accent-warm/50">{String(idx + 1).padStart(2, "0")}</span>
+                      <span className="text-[10px] font-mono text-accent-warm/50 select-none">{String(idx + 1).padStart(2, "0")}</span>
                       <span className="hover:text-snow transition-colors duration-200">{menuData[key].label}</span>
                     </div>
                     <span className={`text-stone/40 text-xs transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
@@ -449,7 +538,7 @@ export default function Navbar() {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.35, ease: [0.77, 0, 0.175, 1] }}
-                        className="overflow-hidden mt-3 pl-6 flex flex-col space-y-2.5"
+                        className="overflow-hidden mt-3 pl-6 flex flex-col space-y-3"
                       >
                         {menuData[key].items.map((item) => (
                           <div key={item.label}>
@@ -458,12 +547,13 @@ export default function Navbar() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
-                                className="block py-1 text-sm text-parchment/60 active:text-snow hover:text-snow transition-colors lowercase font-light"
+                                className="group/mob-link flex items-center gap-3 py-2 text-sm text-parchment/65 active:text-snow hover:text-snow transition-all duration-300 lowercase font-light"
                               >
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent-warm/40 group-active/mob-link:bg-accent-warm scale-50 transition-all duration-300" />
                                 {item.label}
                               </Link>
                             ) : (
-                              <div key={item.label} className="py-1 flex items-baseline gap-2 opacity-35 select-none">
+                              <div key={item.label} className="py-2 flex items-baseline gap-3 opacity-35 select-none pl-3.5">
                                 <span className="text-sm text-parchment/50 lowercase font-light">{item.label}</span>
                                 <span className="text-[7px] tracking-[0.1em] text-accent-warm/80 bg-accent-warm/5 px-1.5 py-0.5 rounded border border-accent-warm/15 font-mono lowercase">
                                   soon
@@ -493,8 +583,8 @@ export default function Navbar() {
               reserve via whatsapp
             </a>
             <div className="flex justify-between text-[9px] tracking-[0.18em] font-light text-parchment-dim uppercase">
-              <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors lowercase tracking-normal text-xs">hello@trailcore.in</a>
-              <a href="tel:+917560065963" className="hover:text-snow transition-colors lowercase tracking-normal text-xs">+91 75600 65963</a>
+              <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors lowercase tracking-normal text-xs font-light">hello@trailcore.in</a>
+              <a href="tel:+917560065963" className="hover:text-snow transition-colors lowercase tracking-normal text-xs font-light">+91 75600 65963</a>
             </div>
           </div>
 
