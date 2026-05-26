@@ -11,19 +11,18 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <div className="section-divider" />
+      <hr className="editorial-divider" />
       <FeaturedExperiences />
-      <div className="section-divider" />
+      <hr className="editorial-divider" />
       <WhyChooseUs />
       <ExpeditionPhilosophy />
-      <div className="section-divider" />
+      <hr className="editorial-divider" />
       <GallerySection />
-      <div className="section-divider" />
+      <hr className="editorial-divider" />
       <AdventureSection />
-      <div className="section-divider" />
+      <hr className="editorial-divider" />
       <HoneymoonSection />
       <InquiryCTA />
     </>
   );
 }
-

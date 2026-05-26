@@ -14,7 +14,7 @@ export default function ExpeditionPhilosophy() {
           className="object-cover opacity-20"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-mountain-black via-mountain-black/80 to-mountain-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-mountain-black via-mountain-black/92 to-mountain-black" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -28,12 +28,12 @@ export default function ExpeditionPhilosophy() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-snow/90 leading-[1.15] mb-8"
+                className="text-[clamp(2rem,4.5vw,3.75rem)] font-semibold text-snow/90 leading-[0.95] tracking-[-0.03em] mb-8"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
                 Experience over speed.
                 <br />
-                <span className="text-stone-light/45">Connection over convenience.</span>
+                <span className="text-stone-light/35">Connection over convenience.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
@@ -63,12 +63,11 @@ export default function ExpeditionPhilosophy() {
                 ].map((stat) => (
                   <div key={stat.label}>
                     <p
-                      className="text-2xl md:text-3xl font-semibold text-forest-glow/70"
-                      style={{ fontFamily: "var(--font-outfit)" }}
+                      className="text-2xl md:text-3xl font-semibold text-forest-glow/70 mono-number"
                     >
                       {stat.num}
                     </p>
-                    <p className="text-[11px] text-stone-light/40 mt-1 tracking-wide uppercase">
+                    <p className="text-[10px] text-stone-light/35 mt-1.5 tracking-[0.12em] uppercase">
                       {stat.label}
                     </p>
                   </div>
@@ -80,7 +79,7 @@ export default function ExpeditionPhilosophy() {
           {/* Image */}
           <div className="lg:col-span-5">
             <FadeIn delay={0.2} direction="left">
-              <div className="relative rounded-xl overflow-hidden aspect-[3/4]">
+              <div className="relative rounded-lg overflow-hidden aspect-[3/4]">
                 <Image
                   src="/images/camping.png"
                   alt="Mountain campsite under stars"

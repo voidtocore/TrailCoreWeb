@@ -42,6 +42,17 @@
   --font-display: var(--font-outfit);
 }
 
+/* ─── Design System Variables ─── */
+:root {
+  --ease-editorial: cubic-bezier(0.65, 0.05, 0, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-default: 0.75s;
+  --duration-fast: 0.3s;
+  --duration-slow: 1.2s;
+  --container-max: 1280px;
+}
+
 /* ─── Smooth Scrolling ─── */
 html[data-scroll-behavior="smooth"] {
   scroll-behavior: smooth;
@@ -63,21 +74,22 @@ h1, h2, h3, h4, h5, h6 {
   color: #F5F5F5;
   font-weight: 600;
   letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 /* ─── Custom Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: #080808;
 }
 ::-webkit-scrollbar-thumb {
-  background: #262628;
-  border-radius: 3px;
+  background: #1a1a1c;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-stone);
+  background: #3e3e40;
 }
 
 /* ─── Selection ─── */
@@ -86,12 +98,39 @@ h1, h2, h3, h4, h5, h6 {
   color: #F5F5F5;
 }
 
-/* ─── Card Styling Base ─── */
+/* ─── Editorial Surface ─── */
+.editorial-surface {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: border-color var(--duration-fast) ease,
+              transform var(--duration-fast) ease;
+}
+.editorial-surface:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ─── Editorial Card ─── */
 .editorial-card {
   background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
   overflow: hidden;
+  transition: border-color var(--duration-fast) ease,
+              transform var(--duration-fast) ease;
+}
+.editorial-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+/* ─── Editorial Divider ─── */
+.editorial-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  margin: 0;
 }
 
 /* ─── Outline Button System ─── */
@@ -99,21 +138,25 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 1.5rem;
+  padding: 0.7rem 1.75rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: transparent;
   color: #FFFFFF;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 9999px;
-  transition: all 0.3s ease;
+  transition: all var(--duration-fast) ease;
+  cursor: pointer;
+  white-space: nowrap;
 }
-
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.3);
+}
+.btn-outline:active {
+  transform: scale(0.98);
 }
 
 /* ─── Text Gradients ─── */
@@ -131,37 +174,66 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
+/* ─── Animated Link Underline ─── */
+.link-underline {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 /* ─── Smooth Image Loading ─── */
 img {
   transition: opacity 0.4s ease;
 }
 
-/* ─── Cinematic Grain Overlay ─── */
-.cinematic-grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.3;
-  mix-blend-mode: overlay;
+/* ─── Mono Number Styling (Terminal Industries) ─── */
+.mono-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 
-/* ─── Section Divider ─── */
+/* ─── Section Spacing ─── */
+.section-editorial {
+  padding-top: clamp(5rem, 10vw, 9rem);
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+
+.section-cinematic {
+  padding-top: clamp(4rem, 10vw, 10rem);
+  padding-bottom: clamp(4rem, 10vw, 10rem);
+}
+
+/* ─── Section Divider (Legacy) ─── */
 .section-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
 }
 
-/* ─── Alpine Green Glow ─── */
+/* ─── Alpine Radial Glow ─── */
 .alpine-glow {
   position: absolute;
   top: -30%;
   left: 10%;
   right: 10%;
   bottom: 30%;
-  opacity: 0.12;
+  opacity: 0.08;
   pointer-events: none;
   filter: blur(150px);
   border-radius: 9999px;
@@ -169,11 +241,6 @@ img {
 }
 
 /* ─── Animation Keyframes ─── */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
 @keyframes fade-up-in {
   from {
     opacity: 0;
@@ -185,31 +252,15 @@ img {
   }
 }
 
-@keyframes cinematic-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @keyframes subtle-zoom {
   from { transform: scale(1); }
-  to { transform: scale(1.05); }
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
+  to { transform: scale(1.03); }
 }
 
 /* ─── Mobile Menu Scroll ─── */
 .mobile-menu-scroll::-webkit-scrollbar {
   display: none;
 }
-
 .mobile-menu-scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -220,16 +271,14 @@ img {
   letter-spacing: 0.2em;
 }
 
-/* ─── Cinematic Section Spacing ─── */
-.section-cinematic {
-  padding-top: clamp(4rem, 10vw, 10rem);
-  padding-bottom: clamp(4rem, 10vw, 10rem);
-}
-
-/* ─── Mobile Improvements ─── */
+/* ─── Mobile Refinements ─── */
 @media (max-width: 768px) {
   .section-cinematic {
     padding-top: clamp(3.5rem, 8vw, 6rem);
     padding-bottom: clamp(3.5rem, 8vw, 6rem);
+  }
+  .section-editorial {
+    padding-top: clamp(3rem, 7vw, 5rem);
+    padding-bottom: clamp(3rem, 7vw, 5rem);
   }
 }

@@ -5,21 +5,18 @@ import { FadeIn } from "../Animations";
 
 export default function InquiryCTA() {
   return (
-    <section className="relative py-28 md:py-40 px-4 overflow-hidden">
+    <section className="relative py-32 md:py-48 px-4 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <Image
           src="/images/hero-mountains.png"
           alt="Himalayan peaks"
           fill
-          className="object-cover opacity-15"
+          className="object-cover opacity-10"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-mountain-black via-mountain-black/85 to-mountain-black" />
       </div>
-
-      {/* Grain */}
-      <div className="cinematic-grain absolute inset-0 pointer-events-none" />
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
         <FadeIn>
@@ -29,7 +26,7 @@ export default function InquiryCTA() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-semibold text-snow/90 leading-[1.15]"
+            className="text-[clamp(2.5rem,6vw,4.75rem)] font-semibold text-snow/90 leading-[0.95] tracking-[-0.04em]"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Ready to experience

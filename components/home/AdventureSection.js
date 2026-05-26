@@ -47,41 +47,48 @@ export default function AdventureSection() {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {departures.map((dep) => (
             <StaggerItem key={dep.destination + dep.dates}>
-              <div className="glass rounded-xl p-6 md:p-7 hover:border-white/[0.08] transition-all duration-500 group">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-forest-glow/60">
-                      {dep.category}
-                    </span>
-                    <h3
-                      className="text-lg font-semibold text-snow/95 mt-1"
-                      style={{ fontFamily: "var(--font-outfit)" }}
-                    >
-                      {dep.destination}
-                    </h3>
+              <div className="editorial-surface p-6 md:p-7 h-full flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-forest-glow/70">
+                        {dep.category}
+                      </span>
+                      <h3
+                        className="text-base md:text-lg font-semibold text-snow/95 mt-1"
+                        style={{ fontFamily: "var(--font-outfit)" }}
+                      >
+                        {dep.destination}
+                      </h3>
+                    </div>
                   </div>
+
+                  <p className="text-[0.8125rem] text-parchment/45 mb-6 leading-relaxed font-light">
+                    {dep.route}
+                  </p>
                 </div>
 
-                <p className="text-[11px] text-parchment/40 mb-4 tracking-wide">
-                  {dep.route}
-                </p>
-
-                <div className="flex items-center justify-between pt-4 border-t border-white/[0.05]">
-                  <div className="flex items-center gap-5 text-[12px] text-parchment/50">
+                <div className="flex items-center justify-between pt-4 border-t border-white/[0.04] mt-auto">
+                  <div className="flex items-center gap-5 text-[11px] text-parchment-dim/80 tracking-wide mono-number">
                     <span className="flex items-center gap-1.5">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <svg className="w-3.5 h-3.5 text-stone/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                       </svg>
                       {dep.dates}
                     </span>
-                    <span>{dep.duration}</span>
+                    <span className="flex items-center gap-1.5">
+                      <svg className="w-3.5 h-3.5 text-stone/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {dep.duration}
+                    </span>
                   </div>
                   <Link
                     href="/contact"
-                    className="text-[11px] font-medium text-forest-glow/60 hover:text-forest-glow transition-colors duration-300 flex items-center gap-1"
+                    className="text-[11px] font-medium text-forest-glow/70 hover:text-forest-glow transition-colors duration-300 flex items-center gap-1.5 group/btn"
                   >
-                    Inquire
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <span>Inquire</span>
+                    <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>

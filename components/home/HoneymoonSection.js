@@ -34,15 +34,16 @@ export default function HoneymoonSection() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#F5F5F5] leading-[1.15] mb-6"
+                className="text-[clamp(2rem,4.5vw,3.75rem)] font-semibold text-snow/90 leading-[0.95] tracking-[-0.03em] mb-6"
+                style={{ fontFamily: "var(--font-outfit)" }}
               >
                 Where comfort meets
                 <br />
-                <span className="text-[#a09a8e]">the mountains.</span>
+                <span className="text-stone/45">the mountains.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-parchment text-base leading-relaxed font-light max-w-md mb-8">
+              <p className="text-parchment/60 text-base leading-relaxed font-light max-w-md mb-8">
                 Every stay is handpicked for warmth, every meal for authenticity.
                 We believe comfort in the mountains means local character, not
                 luxury chains — real fires, real food, real people.
@@ -58,36 +59,37 @@ export default function HoneymoonSection() {
                   "Slow evenings with chai",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3 text-sm text-parchment-dim font-light">
-                    <div className="w-1.5 h-1.5 rounded-full bg-forest-glow" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-forest-glow/60" />
                     {item}
                   </div>
                 ))}
               </div>
             </FadeIn>
           </div>
-
+ 
           {/* Images */}
           <div className="lg:col-span-7">
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {experiences.map((exp) => (
                 <StaggerItem key={exp.title}>
-                  <div className="editorial-card group flex flex-col h-full hover:border-white/20 transition-all duration-300">
+                  <div className="editorial-card group flex flex-col h-full">
                     <div className="relative aspect-[16/10] w-full overflow-hidden">
                       <Image
                         src={exp.img}
                         alt={exp.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-102"
+                        className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, 25vw"
                       />
                     </div>
                     <div className="p-5 flex flex-col flex-1">
                       <h3
-                        className="text-sm font-semibold text-[#F5F5F5] mb-2"
+                        className="text-sm font-semibold text-snow/90 mb-2"
+                        style={{ fontFamily: "var(--font-outfit)" }}
                       >
                         {exp.title}
                       </h3>
-                      <p className="text-[11px] text-parchment-dim leading-relaxed font-light">
+                      <p className="text-[0.8125rem] text-parchment/45 leading-relaxed font-light">
                         {exp.desc}
                       </p>
                     </div>

@@ -19,19 +19,6 @@ const menuData = {
       { label: "international", status: "coming soon" },
     ]
   },
-  offgrid: {
-    label: "offgrid",
-    items: [
-      { label: "hidden escapes", href: "/packages" },
-      { label: "remote stays", status: "launching soon" },
-      { label: "cabin retreats", status: "coming soon" },
-      { label: "slow travel", status: "currently crafting" },
-      { label: "scenic routes", status: "coming soon" },
-      { label: "untouched places", status: "launching soon" },
-      { label: "digital detox", status: "coming soon" },
-      { label: "private escapes", status: "currently crafting" },
-    ]
-  },
   stays: {
     label: "stays",
     items: [
@@ -203,7 +190,7 @@ export default function Navbar() {
         onMouseLeave={() => setActiveMenu(null)}
         className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${mobileOpen ? "z-[1000]" : "z-50"
           } ${scrolled || activeMenu
-            ? "bg-mountain-black/85 backdrop-blur-2xl border-b border-white/[0.04] py-2 sm:py-3"
+            ? "bg-mountain-black/85 backdrop-blur-xl border-b border-white/[0.04] py-2 sm:py-3"
             : "bg-transparent py-4 sm:py-6"
           }`}
       >
@@ -244,12 +231,12 @@ export default function Navbar() {
                   className="static"
                   onMouseEnter={() => setActiveMenu(key)}
                 >
-                  <span className="relative z-10 px-4 py-3 text-[13px] font-medium tracking-wide text-parchment hover:text-snow cursor-pointer transition-colors duration-300 block lowercase">
+                  <span className="relative z-10 px-4 py-3 text-[11px] font-medium tracking-[0.05em] text-parchment hover:text-snow cursor-pointer transition-colors duration-300 block uppercase">
                     {menu.label}
                     {activeMenu === key && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-4 right-4 h-[1.5px] bg-forest-glow"
+                        className="absolute bottom-0 left-4 right-4 h-[1px] bg-forest-glow"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -299,7 +286,7 @@ export default function Navbar() {
                 transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="absolute top-full left-0 right-0 mt-0 w-full bg-mountain-900/98 backdrop-blur-3xl border border-white/[0.05] rounded-b-xl p-8 shadow-2xl z-40"
               >
-                <div className="max-w-4xl mx-auto grid grid-cols-4 gap-4">
+                <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
                   {menuData[activeMenu].items.map((item) => (
                     <MenuItem key={item.label} item={item} />
                   ))}

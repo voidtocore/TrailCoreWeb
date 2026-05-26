@@ -1,38 +1,37 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
+
+const EASE = [0.65, 0.05, 0, 1];
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Layered dark gradients and alpine green glow */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Layered dark gradients with subtle alpine radial glow */}
       <div className="absolute inset-0 bg-[#080808]">
         <div className="alpine-glow" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-[#080808]/85 to-[#080808]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#080808]/70 to-[#080808]" />
       </div>
-
-      {/* Grain Texture */}
-      <div className="cinematic-grain absolute inset-0 z-10 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-20 w-full max-w-5xl mx-auto px-5 sm:px-6 text-center">
         {/* Label */}
         <motion.span
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="inline-block text-[11px] sm:text-xs font-medium uppercase tracking-[0.25em] text-stone-light/60 mb-6"
+          transition={{ delay: 0.4, duration: 0.75, ease: EASE }}
+          className="inline-block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-stone/50 mb-7"
         >
           Curated Himalayan Journeys
         </motion.span>
 
         {/* Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] text-[#F5F5F5] mb-6"
+          transition={{ delay: 0.55, duration: 0.85, ease: EASE }}
+          className="text-[clamp(2.75rem,7vw,6rem)] leading-[0.95] font-bold tracking-[-0.04em] text-snow mb-6"
+          style={{ fontFamily: "var(--font-outfit)" }}
         >
           Premium Himalayan
           <br />
@@ -43,8 +42,8 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-sm sm:text-base md:text-lg text-parchment max-w-xl mx-auto mb-10 leading-relaxed font-light"
+          transition={{ delay: 0.7, duration: 0.75, ease: EASE }}
+          className="text-[0.9375rem] sm:text-base md:text-lg text-parchment/80 max-w-lg mx-auto mb-10 leading-relaxed font-light"
         >
           Slow Himalayan journeys designed for meaningful exploration.
         </motion.p>
@@ -53,7 +52,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ delay: 0.85, duration: 0.75, ease: EASE }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto"
         >
           <Link
@@ -62,7 +61,7 @@ export default function HeroSection() {
           >
             Explore Expeditions
             <svg
-              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+              className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
