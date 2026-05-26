@@ -71,7 +71,7 @@ export default function Footer() {
                 href="https://wa.me/917560065963"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-white/[0.08] flex items-center justify-center hover:bg-[#25D366]/10 hover:border-[#25D366]/30 text-stone-light/80 hover:text-[#25D366] transition-all duration-300"
+                className="w-8 h-8 rounded-full border border-white/[0.08] flex items-center justify-center hover:bg-forest/20 hover:border-forest/30 text-stone-light/80 hover:text-forest-glow transition-all duration-300"
                 aria-label="WhatsApp"
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">

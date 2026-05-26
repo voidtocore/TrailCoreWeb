@@ -112,3 +112,91 @@ export function ScaleIn({ children, delay = 0, className = "" }) {
     </motion.div>
   );
 }
+
+export function TextReveal({ children, delay = 0, className = "" }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const words = typeof children === "string" ? children.split(" ") : [];
+
+  if (words.length === 0) return <span className={className}>{children}</span>;
+
+  return (
+    <motion.span
+      ref={ref}
+      className={`inline-block ${className}`}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.04,
+            delayChildren: delay,
+          }
+        }
+      }}
+    >
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden mr-[0.25em] py-[0.05em]">
+          <motion.span
+            className="inline-block"
+            variants={{
+              hidden: { 
+                y: "110%", 
+                opacity: 0,
+                filter: "blur(4px)",
+              },
+              visible: { 
+                y: 0, 
+                opacity: 1,
+                filter: "blur(0px)",
+                transition: {
+                  duration: 0.8,
+                  ease: EDITORIAL_EASE
+                }
+              }
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </motion.span>
+  );
+}
+
+export function EditorialReveal({ children, delay = 0, className = "" }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-12%" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ 
+        opacity: 0, 
+        y: 36,
+        scale: 0.99,
+        filter: "blur(4px)"
+      }}
+      animate={isInView ? { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1,
+        filter: "blur(0px)"
+      } : { 
+        opacity: 0, 
+        y: 36,
+        scale: 0.99,
+        filter: "blur(4px)"
+      }}
+      transition={{
+        duration: 0.85,
+        delay,
+        ease: EDITORIAL_EASE
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}

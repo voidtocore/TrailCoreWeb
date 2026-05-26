@@ -1,65 +1,50 @@
 "use client";
-import Image from "next/image";
-import { FadeIn, StaggerContainer, StaggerItem } from "../Animations";
 
-const experiences = [
-  {
-    title: "Authentic Homestays",
-    desc: "Traditional homes, warm blankets, and stories by the fire.",
-    img: "/images/honeymoon-cabin.png",
-  },
-  {
-    title: "Himalayan Meals",
-    desc: "Dal, rice, thukpa, momos — soul food served at 12,000 feet.",
-    img: "/images/shimla.png",
-  },
-  {
-    title: "Bonfire Evenings",
-    desc: "Canopies of stars, slow fires, and absolute mountain stillness.",
-    img: "/images/camping.png",
-  },
-];
+import Image from "next/image";
+import { FadeIn } from "../Animations";
 
 export default function HoneymoonSection() {
   return (
-    <section className="section-cinematic px-4">
+    <section className="section-cinematic px-6 bg-[#0c0d0c]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Text */}
-          <div className="lg:col-span-5">
+          {/* Left Column: Text Content */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24">
             <FadeIn>
-              <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-light/70 mb-6">
+              <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-accent-warm mb-5">
                 Food & Stay Experience
               </span>
             </FadeIn>
+            
             <FadeIn delay={0.1}>
               <h2
-                className="text-[clamp(2rem,4.5vw,3.75rem)] font-semibold text-snow/90 leading-[0.95] tracking-[-0.03em] mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl font-medium text-snow leading-[1.05] tracking-tight mb-6"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
                 Where comfort meets
                 <br />
-                <span className="text-stone/45">the mountains.</span>
+                <span className="text-white/40">the mountains.</span>
               </h2>
             </FadeIn>
+
             <FadeIn delay={0.2}>
-              <p className="text-parchment/60 text-base leading-relaxed font-light max-w-md mb-8">
+              <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed font-light max-w-md mb-8">
                 Every stay is handpicked for warmth, every meal for authenticity.
                 We believe comfort in the mountains means local character, not
                 luxury chains — real fires, real food, real people.
               </p>
             </FadeIn>
+
             <FadeIn delay={0.3}>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {[
                   "Curated homestays & heritage stays",
                   "Traditional Himalayan cuisine",
-                  "Mountain café mornings",
                   "Bonfire nights under the stars",
                   "Slow evenings with chai",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-sm text-parchment-dim font-light">
-                    <div className="w-1.5 h-1.5 rounded-full bg-forest-glow/60" />
+                  <div key={item} className="flex items-center gap-3 text-xs text-parchment-dim font-light">
+                    <div className="w-1 h-1 rounded-full bg-forest-glow" />
                     {item}
                   </div>
                 ))}
@@ -67,36 +52,47 @@ export default function HoneymoonSection() {
             </FadeIn>
           </div>
  
-          {/* Images */}
-          <div className="lg:col-span-7">
-            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {experiences.map((exp) => (
-                <StaggerItem key={exp.title}>
-                  <div className="editorial-card group flex flex-col h-full">
-                    <div className="relative aspect-[16/10] w-full overflow-hidden">
-                      <Image
-                        src={exp.img}
-                        alt={exp.title}
-                        fill
-                        className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                      />
-                    </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      <h3
-                        className="text-sm font-semibold text-snow/90 mb-2"
-                        style={{ fontFamily: "var(--font-outfit)" }}
-                      >
-                        {exp.title}
-                      </h3>
-                      <p className="text-[0.8125rem] text-parchment/45 leading-relaxed font-light">
-                        {exp.desc}
-                      </p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+          {/* Right Column: Restrained Asymmetrical Image Blocks */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
+            {/* Block 1: Tall Vertical Frame */}
+            <div className="flex flex-col">
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#121413] rounded-[4px] border border-white/[0.03] group">
+                <Image
+                  src="/images/honeymoon-cabin.png"
+                  alt="Traditional Himalayan Cabin"
+                  fill
+                  className="object-cover cinematic-image"
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                />
+              </div>
+              <div className="pt-4">
+                <span className="text-[0.55rem] font-bold uppercase tracking-[0.15em] text-stone">Stay</span>
+                <h3 className="text-sm font-medium text-snow mt-1 mb-1.5" style={{ fontFamily: "var(--font-outfit)" }}>Authentic Stays</h3>
+                <p className="text-xs text-parchment/60 font-light leading-relaxed">
+                  Traditional wooden homes, warm blankets, and stories by the fire.
+                </p>
+              </div>
+            </div>
+
+            {/* Block 2: Landscape Frame, Vertically Offset */}
+            <div className="flex flex-col sm:mt-16">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#121413] rounded-[4px] border border-white/[0.03] group">
+                <Image
+                  src="/images/camping.png"
+                  alt="Campsite bonfire under stars"
+                  fill
+                  className="object-cover cinematic-image"
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                />
+              </div>
+              <div className="pt-4">
+                <span className="text-[0.55rem] font-bold uppercase tracking-[0.15em] text-stone">Evening</span>
+                <h3 className="text-sm font-medium text-snow mt-1 mb-1.5" style={{ fontFamily: "var(--font-outfit)" }}>Bonfire Evenings</h3>
+                <p className="text-xs text-parchment/60 font-light leading-relaxed">
+                  Canopies of stars, slow fires, and absolute winter stillness.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

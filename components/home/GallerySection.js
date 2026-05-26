@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import SectionHeading from "../SectionHeading";
 import { StaggerContainer, StaggerItem } from "../Animations";
@@ -16,28 +17,29 @@ const images = [
 
 export default function GallerySection() {
   return (
-    <section className="section-cinematic px-4 bg-mountain-900/30">
+    <section className="section-cinematic px-6 bg-[#0c0d0c]">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           label="Gallery"
           title="Frames From the Field"
-          description="Real moments from real expeditions — every image a story of altitude, silence, and the raw beauty of the Himalayas."
+          description="Real moments from expeditions — altitude, silence, and raw Himalayan landscapes."
         />
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+        
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {images.map((img) => (
             <StaggerItem
               key={img.alt}
-              className={`${img.span} relative rounded-lg overflow-hidden group aspect-square`}
+              className={`${img.span} relative rounded-[4px] overflow-hidden group aspect-square border border-white/[0.02]`}
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
-                className="object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]"
+                className="object-cover cinematic-image transition-transform duration-[1200ms] group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-end p-4">
-                <span className="text-[11px] text-white/80 font-light tracking-wide opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+              <div className="absolute inset-0 bg-[#0c0d0c]/0 group-hover:bg-[#0c0d0c]/40 transition-all duration-[600ms] ease-out flex items-end p-4">
+                <span className="text-[10px] text-snow/90 font-light tracking-widest uppercase opacity-0 group-hover:opacity-100 translate-y-1.5 group-hover:translate-y-0 transition-all duration-[600ms] ease-out">
                   {img.alt}
                 </span>
               </div>

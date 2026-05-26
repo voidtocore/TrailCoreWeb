@@ -75,14 +75,14 @@ export default function ChanshalPassPage() {
   ];
 
   const highlights = [
-    { title: "Shimla Local Sightseeing", desc: "Heritage walks across Mall Road, The Ridge, and Christ Church.", icon: "🏛️" },
-    { title: "Riverside Stay in Rohru", desc: "Premium cabins situated directly on the banks of the Pabbar River.", icon: "🌊" },
-    { title: "Chanshal Pass Excursion", desc: "High-altitude drive to the untouched 3,750m Himalayan pass.", icon: "🏔️" },
-    { title: "Bonfire Evening", desc: "A cozy riverside bonfire gathering under starry mountain skies.", icon: "🔥" },
-    { title: "Apple Valley Drives", desc: "Scenic routes tracing through the famous Kotkhai apple orchards.", icon: "🍎" },
-    { title: "Narkanda & Hatu Peak", desc: "Panoramic view of Himalayan peaks from a forest-surrounded summit.", icon: "🌲" },
-    { title: "Scenic Himalayan Roads", desc: "Drives along offbeat roads, winding rivers, and towering ridges.", icon: "🚗" },
-    { title: "Photography Stops", desc: "Curated halts at dramatic viewpoints, bridges, and local hamlets.", icon: "📷" },
+    { title: "Shimla Local Sightseeing", desc: "Heritage walks across Mall Road, The Ridge, and Christ Church." },
+    { title: "Riverside Stay in Rohru", desc: "Premium cabins situated directly on the banks of the Pabbar River." },
+    { title: "Chanshal Pass Excursion", desc: "High-altitude drive to the untouched 3,750m Himalayan pass." },
+    { title: "Bonfire Evening", desc: "A cozy riverside bonfire gathering under starry mountain skies." },
+    { title: "Apple Valley Drives", desc: "Scenic routes tracing through the famous Kotkhai apple orchards." },
+    { title: "Narkanda & Hatu Peak", desc: "Panoramic view of Himalayan peaks from a forest-surrounded summit." },
+    { title: "Scenic Himalayan Roads", desc: "Drives along offbeat roads, winding rivers, and towering ridges." },
+    { title: "Photography Stops", desc: "Curated halts at dramatic viewpoints, bridges, and local hamlets." },
   ];
 
   const stays = [
@@ -116,22 +116,22 @@ export default function ChanshalPassPage() {
   };
 
   return (
-    <div className="bg-mountain-black text-foreground overflow-x-hidden min-h-screen">
+    <div className="bg-[#0c0d0c] text-foreground overflow-x-hidden min-h-screen">
       {/* 1. HERO SECTION (Typography-first, radial glows, no background image) */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-mountain-black pt-28 pb-16">
-        <div className="alpine-glow" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-mountain-black/70 to-mountain-black" />
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#0c0d0c] pt-28 pb-16">
+        <div className="alpine-glow animate-pulse" style={{ animationDuration: "10s" }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0c0d0c]/70 to-[#0c0d0c]" />
 
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-5 sm:px-6 text-center">
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center">
           <FadeIn delay={0.2} direction="up">
-            <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-forest-glow bg-forest/20 px-4 py-1.5 rounded-full border border-forest-light/10 mb-7">
+            <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-forest-glow bg-forest/35 px-4 py-1.5 rounded-[4px] border border-forest-light/10 mb-7">
               Offbeat Road Expedition
             </span>
           </FadeIn>
 
           <FadeIn delay={0.35} direction="up">
             <h1
-              className="text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] font-semibold text-snow/90 mb-6 tracking-[-0.04em]"
+              className="text-[clamp(2.5rem,6vw,4.75rem)] leading-[0.95] font-semibold text-snow mb-6 tracking-[-0.04em]"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
               Chanshal Pass &
@@ -173,8 +173,8 @@ export default function ChanshalPassPage() {
                 { label: "Summit altitude", val: "3,750 Meters" },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-stone-light/45 mb-1.5">{stat.label}</p>
-                  <p className="text-sm font-semibold text-snow/90 mono-number">{stat.val}</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-stone mb-1.5">{stat.label}</p>
+                  <p className="text-sm font-semibold text-snow mono-number">{stat.val}</p>
                 </div>
               ))}
             </div>
@@ -183,22 +183,21 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 2. QUICK PACKAGE INFO STRIP */}
-      <section className="relative z-30 px-4">
-        <div className="max-w-6xl mx-auto editorial-surface p-6 md:py-8 md:px-10 shadow-2xl">
+      <section className="relative z-30 px-6">
+        <div className="max-w-6xl mx-auto bg-[#121413] border border-white/[0.04] p-6 md:py-8 md:px-10 rounded-[4px] shadow-2xl">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
             {[
-              { title: "Duration", val: "4D / 3N", sub: "Shimla to Shimla", icon: "⏱️" },
-              { title: "Pickup", val: "Shimla", sub: "Railway/Bus Stand", icon: "📍" },
-              { title: "Best Time", val: "Apr-Jun, Sep-Nov", sub: "Himalayan Autumn", icon: "🌤️" },
-              { title: "Group Size", val: "4-6 Guests", sub: "Small Expeditions", icon: "👥" },
-              { title: "Meals", val: "MAP Plan", sub: "Breakfast & Dinner", icon: "🍽️" },
-              { title: "Accommodation", val: "Premium Stays", sub: "Riverside & Hotels", icon: "🏨" },
+              { title: "Duration", val: "4D / 3N", sub: "Shimla to Shimla" },
+              { title: "Pickup", val: "Shimla", sub: "Railway/Bus Stand" },
+              { title: "Best Time", val: "Apr-Jun, Sep-Nov", sub: "Himalayan Autumn" },
+              { title: "Group Size", val: "4-6 Guests", sub: "Small Expeditions" },
+              { title: "Meals", val: "MAP Plan", sub: "Breakfast & Dinner" },
+              { title: "Accommodation", val: "Premium Stays", sub: "Riverside & Hotels" },
             ].map((info, idx) => (
               <div key={idx} className="flex flex-col items-center md:items-start text-center md:text-left">
-                <span className="text-lg mb-2">{info.icon}</span>
-                <span className="text-[10px] uppercase tracking-[0.15em] text-stone-light/45 mb-1">{info.title}</span>
-                <span className="text-[13px] font-semibold text-snow/90 leading-tight mono-number">{info.val}</span>
-                <span className="text-[10px] text-stone-light/35 mt-0.5">{info.sub}</span>
+                <span className="text-[10px] uppercase tracking-[0.15em] text-stone mb-1.5">{info.title}</span>
+                <span className="text-[13px] font-medium text-snow leading-tight mono-number">{info.val}</span>
+                <span className="text-[10px] text-stone mt-0.5 font-light">{info.sub}</span>
               </div>
             ))}
           </div>
@@ -206,25 +205,25 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 3. ABOUT THE EXPERIENCE SECTION (Clean layout, no text-on-image) */}
-      <section className="py-24 px-4 relative">
+      <section className="py-24 px-6 relative bg-[#0c0d0c]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             <div className="lg:col-span-6 space-y-6">
-              <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.18em] text-forest-glow/70">
+              <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.18em] text-forest-glow">
                 The Expedition Philosophy
               </span>
               <h2
-                className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold text-snow/90 leading-[0.95] tracking-[-0.03em]"
+                className="text-2xl md:text-3.5xl font-medium text-snow leading-[1.05] tracking-tight"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
                 Untouched Valleys & Scenic Ridges
               </h2>
-              <p className="text-parchment/60 font-light leading-relaxed text-sm sm:text-base">
+              <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed font-light">
                 This offbeat Himalayan road journey takes travelers through the untouched beauty of Pabbar Valley and Chanshal Pass. 
                 From the bustling colonial paths of Shimla to riverside wood cabins in Rohru and high-altitude alpine ridges, 
                 this road trip blends scenic, slow-paced drives with comfortable stays and deep local culture.
               </p>
-              <p className="text-stone-light/35 text-xs sm:text-sm font-light leading-relaxed">
+              <p className="text-stone text-xs sm:text-sm font-light leading-relaxed">
                 Drive alongside the roaring Pabbar River, walk through ancient deodar forests, explore rich apple orchards, and ascend the Chanshal crest to witness towering white horizons away from commercialized tourism tracks.
               </p>
               <div className="pt-4">
@@ -237,19 +236,19 @@ export default function ChanshalPassPage() {
               </div>
             </div>
             <div className="lg:col-span-6">
-              <div className="editorial-card overflow-hidden">
-                <div className="relative aspect-video lg:aspect-[4/3] w-full">
+              <div className="border border-white/[0.03] rounded-[4px] overflow-hidden group">
+                <div className="relative aspect-video lg:aspect-[4/3] w-full bg-[#121413]">
                   <Image
                     src="/images/river.png"
                     alt="Flowing Pabbar River in Rohru"
                     fill
-                    className="object-cover"
+                    className="object-cover cinematic-image"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
-                <div className="p-5 border-t border-white/[0.04] bg-mountain-900/30">
-                  <p className="text-[10px] uppercase tracking-widest text-stone-light/45 mb-1">Stay Experience</p>
-                  <p className="text-sm font-semibold text-snow/90" style={{ fontFamily: "var(--font-outfit)" }}>Pabbar Valley Riverside Retreat</p>
+                <div className="p-5 border-t border-white/[0.04] bg-[#121413]/30">
+                  <p className="text-[10px] uppercase tracking-widest text-stone mb-1">Stay Experience</p>
+                  <p className="text-sm font-medium text-snow" style={{ fontFamily: "var(--font-outfit)" }}>Pabbar Valley Riverside Retreat</p>
                 </div>
               </div>
             </div>
@@ -258,7 +257,7 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 4. HIGHLIGHTS SECTION */}
-      <section className="py-24 px-4 bg-mountain-900/10 border-t border-b border-white/[0.02]">
+      <section className="py-24 px-6 bg-[#121413]/10 border-t border-b border-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             label="Expedition Features"
@@ -269,16 +268,16 @@ export default function ChanshalPassPage() {
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {highlights.map((hl, i) => (
               <StaggerItem key={i}>
-                <div className="editorial-surface p-6 h-full flex flex-col justify-between group">
+                <div className="bg-[#121413] border border-white/[0.04] p-6 rounded-[4px] h-full flex flex-col justify-between group">
                   <div>
-                    <span className="text-2xl mb-4 block">{hl.icon}</span>
+                    <span className="text-xs font-semibold text-stone mono-number mb-4 block">0{i + 1}</span>
                     <h3
-                      className="text-base font-semibold text-snow/90 mb-2"
+                      className="text-sm font-medium text-snow mb-2 tracking-tight"
                       style={{ fontFamily: "var(--font-outfit)" }}
                     >
                       {hl.title}
                     </h3>
-                    <p className="text-[0.8125rem] text-parchment/45 leading-relaxed font-light">{hl.desc}</p>
+                    <p className="text-xs text-parchment/65 leading-relaxed font-light">{hl.desc}</p>
                   </div>
                 </div>
               </StaggerItem>
@@ -288,7 +287,7 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 5. COMPLETE ITINERARY TIMELINE */}
-      <section ref={itineraryRef} className="py-24 px-4 relative scroll-mt-20">
+      <section ref={itineraryRef} className="py-24 px-6 relative scroll-mt-20">
         <div className="max-w-4xl mx-auto">
           <SectionHeading
             label="Day by Day Itinerary"
@@ -307,16 +306,16 @@ export default function ChanshalPassPage() {
                     onClick={() => setActiveDay(isOpen ? null : day.day)}
                     className={`absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-500 ${
                       isOpen
-                        ? "bg-forest border border-forest-glow/40 text-forest-glow scale-110"
-                        : "bg-mountain-900 border border-white/[0.08] text-stone-light/45 hover:border-forest-glow hover:text-snow"
+                        ? "bg-[#121413] border border-forest-glow text-forest-glow scale-110"
+                        : "bg-[#0c0d0c] border border-white/[0.08] text-stone-light/45 hover:border-forest-glow hover:text-snow"
                     }`}
                   >
                     <span className="text-xs font-semibold mono-number">{day.day}</span>
                   </button>
 
                   {/* Timeline content card */}
-                  <div className={`editorial-surface overflow-hidden transition-all duration-500 ${
-                    isOpen ? "border-forest-light/40" : "border-white/[0.04]"
+                  <div className={`bg-[#121413] border border-white/[0.04] rounded-[4px] overflow-hidden transition-all duration-500 ${
+                    isOpen ? "border-forest-glow/30" : "border-white/[0.04]"
                   }`}>
                     {/* Header */}
                     <div
@@ -324,18 +323,18 @@ export default function ChanshalPassPage() {
                       className="p-5 sm:p-6 flex justify-between items-center cursor-pointer select-none"
                     >
                       <div className="pr-4">
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-forest-glow/80 mono-number">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-accent-warm mono-number">
                           Day 0{day.day}
                         </span>
                         <h3
-                          className="text-base sm:text-lg font-semibold text-snow/90 mt-0.5 group-hover:text-forest-glow transition-colors"
+                          className="text-base sm:text-lg font-medium text-snow mt-0.5 group-hover:text-forest-glow transition-colors"
                           style={{ fontFamily: "var(--font-outfit)" }}
                         >
                           {day.title}
                         </h3>
-                        <p className="text-xs text-stone-light/45 font-light mt-1.5 max-w-xl">{day.shortDesc}</p>
+                        <p className="text-xs text-stone font-light mt-1.5 max-w-xl">{day.shortDesc}</p>
                       </div>
-                      <span className={`text-stone-light/35 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+                      <span className={`text-stone/40 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -354,8 +353,8 @@ export default function ChanshalPassPage() {
                           <div className="px-5 pb-6 sm:px-6 sm:pb-8 pt-0 border-t border-white/[0.03] space-y-4">
                             <ul className="space-y-3 pt-4">
                               {day.details.map((point, pIdx) => (
-                                <li key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-parchment-dim/80 font-light leading-relaxed">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-forest-glow/65 mt-2 flex-shrink-0" />
+                                <li key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-parchment-dim font-light leading-relaxed">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-forest-glow mt-2 flex-shrink-0" />
                                   <span>{point}</span>
                                 </li>
                               ))}
@@ -363,18 +362,16 @@ export default function ChanshalPassPage() {
 
                             {/* Stay & Meal details */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-5 border-t border-white/[0.04]">
-                              <div className="flex items-center gap-3 bg-white/[0.01] p-3 rounded-lg border border-white/[0.02]">
-                                <span className="text-lg">🏨</span>
+                              <div className="flex items-center gap-3 bg-white/[0.01] p-3 rounded-[2px] border border-white/[0.02]">
                                 <div>
-                                  <p className="text-[10px] uppercase tracking-wider text-stone-light/45">Accommodation</p>
-                                  <p className="text-xs font-medium text-snow/90 mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{day.stay}</p>
+                                  <p className="text-[9px] uppercase tracking-widest text-stone">Accommodation</p>
+                                  <p className="text-xs font-medium text-snow mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{day.stay}</p>
                                 </div>
                               </div>
-                              <div className="flex items-center gap-3 bg-white/[0.01] p-3 rounded-lg border border-white/[0.02]">
-                                <span className="text-lg">🍽️</span>
+                              <div className="flex items-center gap-3 bg-white/[0.01] p-3 rounded-[2px] border border-white/[0.02]">
                                 <div>
-                                  <p className="text-[10px] uppercase tracking-wider text-stone-light/45">Meals Included</p>
-                                  <p className="text-xs font-medium text-snow/90 mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{day.meals}</p>
+                                  <p className="text-[9px] uppercase tracking-widest text-stone">Meals Included</p>
+                                  <p className="text-xs font-medium text-snow mt-0.5" style={{ fontFamily: "var(--font-outfit)" }}>{day.meals}</p>
                                 </div>
                               </div>
                             </div>
@@ -391,7 +388,7 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 6. STAY SECTION (Clean, typography first, no text-on-image) */}
-      <section className="py-24 px-4 bg-mountain-900/10 border-t border-b border-white/[0.02]">
+      <section className="py-24 px-6 bg-[#121413]/10 border-t border-b border-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             label="Base Camps"
@@ -399,40 +396,40 @@ export default function ChanshalPassPage() {
             description="Carefully selected retreats that combine comfort with local charm and stunning scenery."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-5xl mx-auto">
             {stays.map((stay, i) => (
-              <div key={i} className="editorial-card flex flex-col h-full group">
-                <div className="relative aspect-[16/10] overflow-hidden w-full">
+              <div key={i} className="flex flex-col h-full group">
+                <div className="relative aspect-[16/10] overflow-hidden w-full bg-[#121413] rounded-[4px] border border-white/[0.03]">
                   <Image
                     src={stay.img}
                     alt={stay.name}
                     fill
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-[900ms] ease-out"
+                    className="object-cover cinematic-image transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col justify-between bg-mountain-900/30">
+                <div className="pt-6 flex-1 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <h3
-                        className="text-base sm:text-lg font-semibold text-snow/90 leading-tight"
+                        className="text-base sm:text-lg font-medium text-snow leading-tight"
                         style={{ fontFamily: "var(--font-outfit)" }}
                       >
                         {stay.name}
                       </h3>
-                      <span className="text-[9px] uppercase tracking-[0.15em] text-forest-glow bg-forest/25 px-2 py-0.5 rounded border border-forest-light/10">
+                      <span className="text-[8px] uppercase tracking-[0.2em] text-accent-warm bg-white/[0.02] px-2 py-0.5 rounded border border-white/[0.04]">
                         {stay.location}
                       </span>
                     </div>
-                    <p className="text-[0.8125rem] text-parchment/45 font-light leading-relaxed">{stay.description}</p>
+                    <p className="text-xs text-parchment/65 font-light leading-relaxed">{stay.description}</p>
                   </div>
 
                   <div className="pt-4 border-t border-white/[0.04] mt-6">
-                    <p className="text-[10px] uppercase tracking-wider text-stone-light/45 mb-2">Key Amenities</p>
-                    <div className="flex flex-wrap gap-2">
+                    <p className="text-[9px] uppercase tracking-widest text-stone mb-2">Key Amenities</p>
+                    <div className="flex flex-wrap gap-1.5">
                       {stay.amenities.map((am, idx) => (
-                        <span key={idx} className="text-[10px] px-2.5 py-0.5 bg-white/[0.02] text-parchment-dim/80 border border-white/[0.02] rounded font-light">
+                        <span key={idx} className="text-[10px] px-2.5 py-0.5 bg-white/[0.01] text-parchment-dim border border-white/[0.02] rounded-[2px] font-light">
                           {am}
                         </span>
                       ))}
@@ -446,26 +443,24 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 7. MEAL SECTION */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto editorial-surface p-8 md:p-10 text-center relative overflow-hidden">
-          <span className="text-xl mb-4 block">🍳</span>
-          <h2 className="text-lg sm:text-xl font-semibold text-snow/90 mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
+      <section className="py-20 px-6 bg-[#0c0d0c]">
+        <div className="max-w-4xl mx-auto bg-[#121413] border border-white/[0.04] rounded-[4px] p-8 md:p-10 text-center relative overflow-hidden">
+          <h2 className="text-lg sm:text-xl font-medium text-snow mb-4" style={{ fontFamily: "var(--font-outfit)" }}>
             Mountain Dining & Hydration
           </h2>
-          <p className="text-[0.8125rem] text-parchment/60 font-light leading-relaxed max-w-xl mx-auto mb-8">
+          <p className="text-xs sm:text-[0.8125rem] text-parchment/60 font-light leading-relaxed max-w-xl mx-auto mb-8">
             Experience organic mountain food prepared at the retreats. We ensure clean preparation, regional delicacies, and packed refreshments during high-altitude pass explorations.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto text-left">
             {[
-              { title: "Breakfast Included", desc: "Healthy regional & classic spreads served warm at base hotels daily.", icon: "🥛" },
-              { title: "Dinner Included", desc: "Cozy local dinners prepared with fresh organic mountain ingredients.", icon: "🍲" },
-              { title: "Packed Snacks", desc: "Fresh alpine drinks & packed lunch during Chanshal pass excursions.", icon: "🎒" },
+              { title: "Breakfast Included", desc: "Healthy regional & classic spreads served warm at base hotels daily." },
+              { title: "Dinner Included", desc: "Cozy local dinners prepared with fresh organic mountain ingredients." },
+              { title: "Packed Snacks", desc: "Fresh alpine drinks & packed lunch during Chanshal pass excursions." },
             ].map((meal, i) => (
-              <div key={i} className="bg-white/[0.01] p-4 rounded-lg border border-white/[0.02] space-y-2">
-                <span className="text-lg">{meal.icon}</span>
+              <div key={i} className="bg-white/[0.01] p-4 rounded-[2px] border border-white/[0.02] space-y-2">
                 <h4 className="text-xs font-semibold text-snow/90" style={{ fontFamily: "var(--font-outfit)" }}>{meal.title}</h4>
-                <p className="text-[11px] text-stone-light/45 font-light leading-relaxed">{meal.desc}</p>
+                <p className="text-[11px] text-stone font-light leading-relaxed">{meal.desc}</p>
               </div>
             ))}
           </div>
@@ -473,7 +468,7 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 8. GALLERY SECTION (No text on images) */}
-      <section className="py-24 px-4 bg-mountain-900/10 border-t border-white/[0.02]">
+      <section className="py-24 px-6 bg-[#121413]/10 border-t border-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             label="Visual Journey"
@@ -481,23 +476,23 @@ export default function ChanshalPassPage() {
             description="Explore glimpses of scenic ridges, apple trees, bonfires, and cold river waters along the route."
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
             {galleryImages.map((img, i) => (
               <div
                 key={i}
-                className="editorial-card group flex flex-col h-full"
+                className="flex flex-col h-full group"
               >
-                <div className="relative overflow-hidden aspect-[4/3] w-full">
+                <div className="relative overflow-hidden aspect-[4/3] w-full bg-[#121413] rounded-[4px] border border-white/[0.03]">
                   <Image
                     src={img.src}
                     alt={img.title}
                     fill
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-[900ms] ease-out"
+                    className="object-cover cinematic-image transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-                <div className="p-4 border-t border-white/[0.04] bg-mountain-900/30">
-                  <p className="text-xs font-medium text-snow/95" style={{ fontFamily: "var(--font-outfit)" }}>
+                <div className="pt-4">
+                  <p className="text-xs font-medium text-snow" style={{ fontFamily: "var(--font-outfit)" }}>
                     {img.title}
                   </p>
                 </div>
@@ -508,7 +503,7 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 9. PRICING SECTION */}
-      <section className="py-24 px-4 bg-mountain-900/10 border-t border-b border-white/[0.02]">
+      <section className="py-24 px-6 bg-[#0c0d0c] border-t border-b border-white/[0.02]">
         <div className="max-w-5xl mx-auto">
           <SectionHeading
             label="Pricing Breakdown"
@@ -516,142 +511,81 @@ export default function ChanshalPassPage() {
             description="Transparent tiered pricing options based on group size. Selected base vehicle is inclusive of driver charges."
           />
 
-          {/* Guests Selector Buttons */}
-          <div className="flex justify-center gap-2 mt-8 mb-12">
-            {[4, 5, 6].map((num) => (
-              <button
-                key={num}
-                onClick={() => setSelectedGuests(num)}
-                className={`px-5 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-300 ${
-                  selectedGuests === num
-                    ? "bg-forest border border-forest-light text-snow"
-                    : "bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.05] text-stone-light/50"
-                }`}
-              >
-                {num} Guests
-              </button>
+          {/* Minimalist Typographic Pricing Log */}
+          <div className="max-w-3xl mx-auto mt-12 border-t border-b border-white/10 divide-y divide-white/[0.06]">
+            {[
+              { label: "4 Guests", price: "₹22,999", note: "per person" },
+              { label: "5 Guests", price: "₹20,999", note: "per person" },
+              { label: "6 Guests", price: "₹18,999", note: "per person (best value)" },
+            ].map((option, idx) => (
+              <div key={idx} className="grid grid-cols-12 py-5 items-center text-xs font-light text-parchment-dim">
+                <div className="col-span-2 text-stone mono-number">0{idx + 1}</div>
+                <div className="col-span-4 text-snow font-medium" style={{ fontFamily: "var(--font-outfit)" }}>{option.label}</div>
+                <div className="col-span-3 text-right text-snow font-medium mono-number">{option.price}</div>
+                <div className="col-span-3 text-right text-stone font-light lowercase">{option.note}</div>
+              </div>
             ))}
           </div>
 
-          {/* Interactive Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-stretch">
-            {[4, 5, 6].map((num) => {
-              const option = pricingOptions[num];
-              const isSelected = selectedGuests === num;
-
-              return (
-                <div
-                  key={num}
-                  onClick={() => setSelectedGuests(num)}
-                  className={`editorial-surface p-6 flex flex-col justify-between cursor-pointer transition-all duration-500 ${
-                    isSelected
-                      ? "border-forest-glow scale-102"
-                      : "opacity-60 hover:opacity-80"
-                  }`}
-                >
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-start">
-                      <span className="text-[10px] uppercase tracking-widest text-stone-light/45 font-light">Expedition</span>
-                      {option.bestValue && (
-                        <span className="text-[9px] uppercase tracking-widest bg-forest border border-forest-glow/20 px-2 py-0.5 rounded text-forest-glow font-semibold">
-                          Best Value
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="text-base font-bold text-snow/90" style={{ fontFamily: "var(--font-outfit)" }}>{option.label}</h3>
-
-                    <div className="pt-2">
-                      <span className="text-2xl font-bold text-snow/95 mono-number">
-                        ₹{option.price}
-                      </span>
-                      <span className="text-xs text-stone-light/45 font-light"> / {option.perPerson}</span>
-                    </div>
-
-                    <ul className="space-y-2.5 pt-4 border-t border-white/[0.04] text-[11px] text-parchment/65 font-light">
-                      <li className="flex items-center gap-2">✓ Premium Mountain Lodging</li>
-                      <li className="flex items-center gap-2">✓ Dedicated SUV (Innova/similar)</li>
-                      <li className="flex items-center gap-2">✓ MAP Plan (Breakfast & Dinner)</li>
-                      <li className="flex items-center gap-2">✓ Excursions & Local Permit Fee</li>
-                    </ul>
-                  </div>
-
-                  <div className="mt-8">
-                    <Link
-                      href="/contact"
-                      className={`w-full block py-2.5 rounded-full text-center text-xs font-semibold tracking-widest uppercase transition-all duration-300 ${
-                        isSelected
-                          ? "bg-forest hover:bg-forest-light text-snow border border-forest-light/20"
-                          : "bg-white/[0.02] text-stone-light/45 border border-white/[0.04]"
-                      }`}
-                    >
-                      Inquire Trip
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="mt-8 text-center text-[10px] text-stone tracking-widest uppercase font-light">
+            Includes premium mountain lodging, dedicated SUV, and meals daily.
           </div>
         </div>
       </section>
 
       {/* 10. INCLUSIONS & EXCLUSIONS */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-6 bg-[#0c0d0c]">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {/* Inclusions */}
-            <div className="editorial-surface p-6 space-y-6">
-              <h3 className="text-base font-semibold text-snow/90 flex items-center gap-2" style={{ fontFamily: "var(--font-outfit)" }}>
-                <span className="text-forest-glow">✓</span> What is Included
+            <div className="space-y-6">
+              <h3 className="text-sm font-semibold tracking-wider text-snow uppercase" style={{ fontFamily: "var(--font-outfit)" }}>
+                What is Included
               </h3>
-              <ul className="space-y-3.5 text-[0.8125rem] text-parchment/60 font-light leading-relaxed">
+              <ul className="space-y-4 text-xs text-parchment leading-relaxed font-light">
                 <li className="flex items-start gap-2.5">
                   <span className="text-forest-glow">✓</span>
                   <span><strong>Accommodation:</strong> 3 Nights in premium mountain hotels and riverside cottages.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-forest-glow">✓</span>
-                  <span><strong>Transportation:</strong> Dedicated SUV (Innova or equivalent) for 4 days covering all drives.</span>
+                  <span><strong>Transportation:</strong> Dedicated SUV (Innova or equivalent) for 4 days.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-forest-glow">✓</span>
-                  <span><strong>Sightseeing:</strong> Guided local tours across Shimla, Chanshal Pass, and Narkanda peak.</span>
+                  <span><strong>Sightseeing:</strong> Guided local tours across Shimla, Chanshal, and Narkanda.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-forest-glow">✓</span>
-                  <span><strong>Driver Charges:</strong> Driver daily allowance, stays, food, and high road charges included.</span>
+                  <span><strong>Driver Charges:</strong> daily allowance, stays, food, and high road permits.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-forest-glow">✓</span>
-                  <span><strong>Permits & Taxes:</strong> Toll taxes, interstate permits, and hotel parking charges.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-forest-glow">✓</span>
-                  <span><strong>Meals:</strong> Breakfast and Dinner at the accommodations. Packed snacks during the pass excursion.</span>
+                  <span><strong>Permits & Taxes:</strong> Toll taxes, interstate permits, and parking charges.</span>
                 </li>
               </ul>
             </div>
 
             {/* Exclusions */}
-            <div className="editorial-surface p-6 space-y-6">
-              <h3 className="text-base font-semibold text-snow/90 flex items-center gap-2" style={{ fontFamily: "var(--font-outfit)" }}>
-                <span className="text-stone-light/45">✗</span> What is Excluded
+            <div className="space-y-6">
+              <h3 className="text-sm font-semibold tracking-wider text-snow uppercase" style={{ fontFamily: "var(--font-outfit)" }}>
+                What is Excluded
               </h3>
-              <ul className="space-y-3.5 text-[0.8125rem] text-parchment/60 font-light leading-relaxed">
+              <ul className="space-y-4 text-xs text-parchment leading-relaxed font-light">
                 <li className="flex items-start gap-2.5">
-                  <span className="text-stone-light/35">✗</span>
+                  <span className="text-white/20">✗</span>
                   <span><strong>Lunch:</strong> Meals during transit stops and local restaurant café hopping.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-stone-light/35">✗</span>
-                  <span><strong>Entry Tickets:</strong> Ticket fee for museums, heritage monuments, or local guides.</span>
+                  <span className="text-white/20">✗</span>
+                  <span><strong>Entry Tickets:</strong> Ticket fee for museums, monuments, or local guides.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-stone-light/35">✗</span>
+                  <span className="text-white/20">✗</span>
                   <span><strong>Personal Expenses:</strong> Laundry, mineral water, tipping, and telephone calls.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-stone-light/35">✗</span>
+                  <span className="text-white/20">✗</span>
                   <span><strong>Adventure Activities:</strong> Skiing/snow activities in Kufri/Narkanda or horse rides.</span>
                 </li>
               </ul>
@@ -661,25 +595,27 @@ export default function ChanshalPassPage() {
       </section>
 
       {/* 11. FINAL CTA SECTION (Radial glow, no background image) */}
-      <section className="relative py-32 px-4 overflow-hidden border-t border-white/[0.02]">
-        <div className="alpine-glow" />
-        <div className="absolute inset-0 bg-gradient-to-t from-mountain-black via-mountain-black/75 to-transparent z-10" />
+      <section className="relative py-28 md:py-36 px-6 overflow-hidden border-t border-white/[0.03] bg-[#0c0d0c]">
+        {/* Glowing radial accent */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-[30%] left-[20%] right-[20%] w-[60%] h-[40%] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[120px] rounded-full mx-auto" />
+        </div>
 
-        <div className="relative z-20 max-w-4xl mx-auto text-center space-y-8">
-          <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-forest-glow/70">
+        <div className="relative z-20 max-w-4xl mx-auto text-center space-y-6">
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
             Begin the Journey
           </span>
           <h2
-            className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold text-snow/90 leading-[0.95] tracking-[-0.03em]"
+            className="text-[clamp(2rem,4.5vw,3.5rem)] font-semibold text-snow leading-[0.95] tracking-tight"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Ready to Explore Hidden Himachal?
           </h2>
-          <p className="text-[0.9375rem] sm:text-base text-parchment/65 max-w-xl mx-auto leading-relaxed font-light">
+          <p className="text-xs sm:text-[0.8125rem] text-parchment/65 max-w-xl mx-auto leading-relaxed font-light">
             Inquire today to reserve private vehicle slots, premium riverside cabins, and custom itineraries for Pabbar Valley.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-sm mx-auto pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-sm mx-auto pt-6">
             <Link
               href="/contact"
               className="btn-outline w-full sm:w-auto text-xs tracking-widest py-3 px-8"

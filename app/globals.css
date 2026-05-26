@@ -2,40 +2,40 @@
 
 @theme inline {
   /* ─── Core Palette ─── */
-  --color-background: #080808;
+  --color-background: #0c0d0c;
   --color-foreground: rgba(255, 255, 255, 0.82);
-  --color-midnight: #050505;
-  --color-mountain-black: #080808;
-  --color-mountain-900: #111111;
-  --color-mountain-800: #1a1a1c;
-  --color-mountain-700: #262628;
-  --color-mountain-600: #3e3e40;
+  --color-midnight: #080908;
+  --color-mountain-black: #0c0d0c;
+  --color-mountain-900: #121413;
+  --color-mountain-800: #191b1a;
+  --color-mountain-700: #242725;
+  --color-mountain-600: #383c39;
 
   /* ─── Stone & Parchment ─── */
-  --color-stone: #a09a8e;
-  --color-stone-light: #c5c1b8;
-  --color-stone-dark: #6b665c;
+  --color-stone: #a69f94;
+  --color-stone-light: #c8c4bc;
+  --color-stone-dark: #6e6960;
   --color-parchment: rgba(255, 255, 255, 0.85);
   --color-parchment-dim: rgba(255, 255, 255, 0.72);
 
   /* ─── Slate ─── */
-  --color-slate-400: #a1a1aa;
-  --color-slate-300: #e4e4e7;
+  --color-slate-400: #9da0a5;
+  --color-slate-300: #e2e4e9;
 
   /* ─── Snow ─── */
   --color-snow: #F5F5F5;
-  --color-snow-dim: #d4d4d8;
+  --color-snow-dim: #d1d5db;
 
   /* ─── Forest / Expedition Green ─── */
-  --color-forest: #1c2b21;
-  --color-forest-light: #2d5a3f;
-  --color-forest-dark: #0d1712;
-  --color-forest-glow: #4a9a6a;
-  --color-expedition-green: #3d7a5a;
+  --color-forest: #0d110e;
+  --color-forest-light: #1b261f;
+  --color-forest-dark: #070a08;
+  --color-forest-glow: #488760;
+  --color-expedition-green: #376348;
 
   /* ─── Accent ─── */
-  --color-accent-warm: #c4a882;
-  --color-accent-gold: #b8a070;
+  --color-accent-warm: #bd9f76;
+  --color-accent-gold: #b39969;
 
   /* ─── Typography ─── */
   --font-sans: var(--font-inter);
@@ -47,8 +47,8 @@
   --ease-editorial: cubic-bezier(0.65, 0.05, 0, 1);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-default: 0.75s;
-  --duration-fast: 0.3s;
+  --duration-default: 0.85s;
+  --duration-fast: 0.35s;
   --duration-slow: 1.2s;
   --container-max: 1280px;
 }
@@ -60,7 +60,7 @@ html[data-scroll-behavior="smooth"] {
 
 /* ─── Base Body ─── */
 body {
-  background: #080808;
+  background: #0c0d0c;
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   font-weight: 400;
@@ -72,9 +72,9 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: #F5F5F5;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
 }
 
 /* ─── Custom Scrollbar ─── */
@@ -82,47 +82,57 @@ h1, h2, h3, h4, h5, h6 {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #080808;
+  background: #0c0d0c;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a1a1c;
+  background: #191b1a;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3e3e40;
+  background: #383c39;
 }
 
 /* ─── Selection ─── */
 ::selection {
-  background: rgba(74, 154, 106, 0.25);
+  background: rgba(72, 135, 96, 0.25);
   color: #F5F5F5;
 }
 
 /* ─── Editorial Surface ─── */
 .editorial-surface {
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background: #121413;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
   transition: border-color var(--duration-fast) ease,
-              transform var(--duration-fast) ease;
+              background var(--duration-fast) ease;
 }
 .editorial-surface:hover {
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #151817;
 }
 
 /* ─── Editorial Card ─── */
 .editorial-card {
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background: #121413;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
   overflow: hidden;
   transition: border-color var(--duration-fast) ease,
-              transform var(--duration-fast) ease;
+              background var(--duration-fast) ease;
 }
 .editorial-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #151817;
+}
+
+/* ─── Programmatic Cinematic Image Filter ─── */
+.cinematic-image {
+  filter: saturate(0.68) brightness(0.85) contrast(0.96) sepia(0.04) hue-rotate(6deg);
+  transition: filter var(--duration-default) var(--ease-editorial),
+              transform var(--duration-default) var(--ease-editorial);
+}
+.group:hover .cinematic-image {
+  filter: saturate(0.78) brightness(0.92) contrast(0.98) sepia(0.02) hue-rotate(3deg);
 }
 
 /* ─── Editorial Divider ─── */

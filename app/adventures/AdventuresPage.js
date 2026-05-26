@@ -6,58 +6,123 @@ import { StaggerContainer, StaggerItem } from "@/components/Animations";
 import InquiryCTA from "@/components/home/InquiryCTA";
 
 const treks = [
-  { name: "Hampta Pass Trek", duration: "5 Days", difficulty: "Moderate", altitude: "4,270m", img: "/images/adventure-trek.png", desc: "Cross from lush Kullu Valley to barren Lahaul through one of the Himalaya's most dramatic alpine passes." },
-  { name: "Pin Parvati Pass", duration: "11 Days", difficulty: "Challenging", altitude: "5,319m", img: "/images/hero-mountains.png", desc: "The ultimate Himalayan challenge — connecting Parvati Valley to Pin Valley through a high-altitude glacier crossing." },
-  { name: "Chandrakhani Pass", duration: "4 Days", difficulty: "Easy–Moderate", altitude: "3,660m", img: "/images/camping.png", desc: "Dense forests, alpine meadows, and sweeping views of the Pir Panjal range — perfect for a first Himalayan trek." },
-  { name: "Bhrigu Lake Trek", duration: "3 Days", difficulty: "Moderate", altitude: "4,300m", img: "/images/manali.png", desc: "Trek to one of the highest lakes in Himachal — where mythological significance meets breathtaking alpine scenery." },
+  { 
+    name: "Hampta Pass Trek", 
+    duration: "5 Days", 
+    difficulty: "Moderate", 
+    altitude: "4,270m", 
+    img: "/images/adventure-trek.png", 
+    desc: "Cross from lush Kullu Valley to barren Lahaul through one of the Himalaya's most dramatic alpine passes.",
+    alignOffset: ""
+  },
+  { 
+    name: "Pin Parvati Pass", 
+    duration: "11 Days", 
+    difficulty: "Challenging", 
+    altitude: "5,319m", 
+    img: "/images/hero-mountains.png", 
+    desc: "The ultimate Himalayan challenge — connecting Parvati Valley to Pin Valley through a high-altitude glacier crossing.",
+    alignOffset: "md:mt-24"
+  },
+  { 
+    name: "Chandrakhani Pass", 
+    duration: "4 Days", 
+    difficulty: "Easy–Moderate", 
+    altitude: "3,660m", 
+    img: "/images/camping.png", 
+    desc: "Dense forests, alpine meadows, and sweeping views of the Pir Panjal range — perfect for a first Himalayan trek.",
+    alignOffset: ""
+  },
+  { 
+    name: "Bhrigu Lake Trek", 
+    duration: "3 Days", 
+    difficulty: "Moderate", 
+    altitude: "4,300m", 
+    img: "/images/manali.png", 
+    desc: "Trek to one of the highest lakes in Himachal — where mythological significance meets breathtaking alpine scenery.",
+    alignOffset: "md:mt-24"
+  },
 ];
 
 const activities = [
-  { name: "River Exploration", desc: "Beas River rapids from Grade I to III", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
-  { name: "Paragliding", desc: "Soar over Solang and Bir Billing valleys", icon: "M5 3l14 9-14 9V3z" },
-  { name: "Mountain Biking", desc: "Trails from Manali along the Leh highway", icon: "M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" },
-  { name: "Alpine Camping", desc: "Under the stars at 10,000+ feet", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
+  { name: "River Exploration", desc: "Beas River rapids from Grade I to III" },
+  { name: "Paragliding", desc: "Soar over Solang and Bir Billing valleys" },
+  { name: "Mountain Biking", desc: "Trails from Manali along the Leh highway" },
+  { name: "Alpine Camping", desc: "Under the stars at 10,000+ feet" },
 ];
-
-const difficultyColor = { "Easy–Moderate": "text-forest-glow/60", "Moderate": "text-accent-warm/60", "Challenging": "text-red-400/60" };
 
 export default function AdventuresPage() {
   return (
     <>
-      <section className="relative pt-36 pb-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/[0.03] to-transparent" />
+      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0d110e]/[0.03] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <SectionHeading label="Adventures" title="Into the Himalayas" description="From first-time trails to expert-level expeditions — find the mountain challenge that matches your spirit." />
+          <SectionHeading 
+            label="Adventures" 
+            title="Into the Himalayas" 
+            description="From first-time trails to expert-level expeditions — find the mountain challenge that matches your spirit." 
+          />
         </div>
       </section>
 
       {/* Treks */}
-      <section className="pb-24 px-4">
+      <section className="pb-32 px-6 bg-[#0c0d0c]">
         <div className="max-w-7xl mx-auto">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-0">
             {treks.map((trek) => (
-              <StaggerItem key={trek.name}>
-                <div className="expedition-card group">
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image src={trek.img} alt={trek.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-mountain-900 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-semibold text-snow/95" style={{ fontFamily: "var(--font-outfit)" }}>{trek.name}</h3>
+              <StaggerItem 
+                key={trek.name}
+                className={`${trek.alignOffset} mb-16 md:mb-32`}
+              >
+                <div className="group block">
+                  <div className="flex flex-col">
+                    {/* Image container - Borderless, clean photographic frame */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#121413] rounded-[4px] border border-white/[0.03]">
+                      <Image
+                        src={trek.img}
+                        alt={trek.name}
+                        fill
+                        className="object-cover cinematic-image transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-sm text-stone/40 mb-4 font-light leading-relaxed">{trek.desc}</p>
-                    <div className="flex flex-wrap gap-4 text-[11px] text-stone/40 tracking-wide">
-                      <span className="flex items-center gap-1.5">
-                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        {trek.duration}
+
+                    {/* Content Area - Stacked cleanly below image */}
+                    <div className="pt-6 flex flex-col items-start">
+                      {/* Alt/Duration Label */}
+                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-2.5 mono-number">
+                        ALTITUDE: {trek.altitude}
                       </span>
-                      <span className={difficultyColor[trek.difficulty]}>⚡ {trek.difficulty}</span>
-                      <span>🏔 {trek.altitude}</span>
+
+                      {/* Title */}
+                      <h3
+                        className="text-base sm:text-lg font-medium text-snow mb-2.5 tracking-tight"
+                        style={{ fontFamily: "var(--font-outfit)" }}
+                      >
+                        {trek.name}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed mb-4 max-w-md font-light">
+                        {trek.desc}
+                      </p>
+
+                      {/* Metadata Row */}
+                      <div className="flex items-center gap-x-4 text-[0.6875rem] text-parchment-dim font-light tracking-wide mono-number mb-6">
+                        <span>
+                          {trek.duration}
+                        </span>
+                        <span className="text-white/10">|</span>
+                        <span className="text-stone">
+                          {trek.difficulty}
+                        </span>
+                      </div>
+
+                      {/* Inquiry Action */}
+                      <Link href="/contact" className="btn-outline text-[10px] py-2 px-6">
+                        Inquire About This Trek
+                      </Link>
                     </div>
-                    <Link href="/contact" className="inline-flex items-center gap-2 mt-5 px-5 py-2 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-[11px] font-medium tracking-wide rounded-full transition-all duration-500 border border-forest-light/20">
-                      Inquire About This Trek
-                    </Link>
                   </div>
                 </div>
               </StaggerItem>
@@ -67,24 +132,41 @@ export default function AdventuresPage() {
       </section>
 
       {/* Activities */}
-      <section className="py-24 px-4 bg-mountain-900/30">
+      <section className="py-24 px-6 border-t border-white/[0.03] bg-[#0c0d0c]">
         <div className="max-w-7xl mx-auto">
-          <SectionHeading label="Activities" title="More Ways to Explore" description="Beyond trekking — discover the full range of mountain experiences the Himalayas have to offer." />
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
-            {activities.map((a) => (
-              <StaggerItem key={a.name}>
-                <div className="glass rounded-xl p-7 text-center hover:border-white/[0.08] transition-all duration-500 group">
-                  <div className="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-forest/15 transition-colors duration-500">
-                    <svg className="w-5 h-5 text-forest-glow/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d={a.icon} />
-                    </svg>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+            <div className="lg:col-span-1">
+              <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-3 block">
+                Activities
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-medium text-snow mb-4 tracking-tight" style={{ fontFamily: "var(--font-outfit)" }}>
+                More Ways to Explore
+              </h2>
+              <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed font-light max-w-sm">
+                Beyond trekking — discover the full range of curated mountain experiences designed to immerse you deeply in the Himalayan terrain.
+              </p>
+            </div>
+            
+            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
+              {activities.map((a, idx) => (
+                <div key={a.name} className="border-t border-white/[0.05] pt-6 group">
+                  <div className="flex items-start gap-4">
+                    <span className="text-[10px] font-mono text-accent-warm/60 mono-number pt-1">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-medium text-snow mb-2 tracking-tight">
+                        {a.name}
+                      </h3>
+                      <p className="text-xs text-parchment-dim font-light leading-relaxed">
+                        {a.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-base font-semibold text-snow/90 mb-2" style={{ fontFamily: "var(--font-outfit)" }}>{a.name}</h3>
-                  <p className="text-sm text-stone/40 font-light">{a.desc}</p>
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

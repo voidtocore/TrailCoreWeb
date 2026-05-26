@@ -149,36 +149,72 @@ function MenuItem({ item }) {
 const menuVariants = {
   open: {
     opacity: 1,
+    y: 0,
     pointerEvents: "auto",
     visibility: "visible",
     transition: {
-      duration: 0.12,
-      ease: "linear"
+      duration: 0.55,
+      ease: [0.65, 0.05, 0, 1]
     }
   },
   closed: {
     opacity: 0,
+    y: -16,
     pointerEvents: "none",
     transitionEnd: {
       visibility: "hidden"
     },
     transition: {
-      duration: 0.1,
-      ease: "linear"
+      duration: 0.45,
+      ease: [0.65, 0.05, 0, 1]
     }
+  }
+};
+
+const mobileItemVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.5, ease: [0.65, 0.05, 0, 1] }
+  },
+  closed: {
+    opacity: 0,
+    y: 16,
+    filter: "blur(4px)",
+    transition: { duration: 0.4, ease: [0.65, 0.05, 0, 1] }
   }
 };
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
   const navContainerRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 30);
+      
+      if (currentScrollY > 120) {
+        if (currentScrollY > lastScrollY.current) {
+          // Scrolling down - hide nav
+          setVisible(false);
+        } else {
+          // Scrolling up - show nav
+          setVisible(true);
+        }
+      } else {
+        setVisible(true);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -198,12 +234,15 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
+      <motion.nav
         ref={navContainerRef}
         onMouseLeave={() => setActiveMenu(null)}
-        className={`fixed top-0 left-0 right-0 transition-opacity duration-300 ${mobileOpen ? "z-[1000]" : "z-50"
+        initial={{ y: 0 }}
+        animate={{ y: visible || mobileOpen ? 0 : -100 }}
+        transition={{ duration: 0.6, ease: [0.65, 0.05, 0, 1] }}
+        className={`fixed top-0 left-0 right-0 ${mobileOpen ? "z-[1000]" : "z-50"
           } ${scrolled || activeMenu
-            ? "bg-mountain-black/85 backdrop-blur-xl border-b border-white/[0.04] py-2 sm:py-3"
+            ? "bg-[#0c0d0c]/90 backdrop-blur-xl border-b border-white/[0.04] py-2 sm:py-3"
             : "bg-transparent py-4 sm:py-6"
           }`}
       >
@@ -249,7 +288,7 @@ export default function Navbar() {
                     {activeMenu === key && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-4 right-4 h-[1px] bg-forest-glow"
+                        className="absolute bottom-0 left-4 right-4 h-[1px] bg-accent-warm"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -297,7 +336,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="absolute top-full left-0 right-0 mt-0 w-full bg-mountain-900/98 backdrop-blur-3xl border border-white/[0.05] rounded-b-xl p-8 shadow-2xl z-40"
+                className="absolute top-full left-0 right-0 mt-0 w-full bg-[#121413]/98 backdrop-blur-3xl border border-white/[0.04] rounded-b-xl p-8 shadow-2xl z-40"
               >
                 <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
                   {menuData[activeMenu].items.map((item) => (
@@ -308,71 +347,88 @@ export default function Navbar() {
             )}
           </AnimatePresence>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Fullscreen Menu */}
       <motion.div
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed inset-0 z-[999] lg:hidden bg-black flex flex-col pt-20 px-8 pb-10 overflow-y-auto"
+        className="fixed inset-0 z-[999] lg:hidden bg-[#0c0d0c] flex flex-col pt-20 px-8 pb-10 overflow-y-auto"
       >
         {/* Scroll Container */}
-        <div className="w-full flex flex-col space-y-0 pt-6">
-          {Object.keys(menuData).map((key) => {
-            const isExpanded = expandedSection === key;
-            return (
-              <div key={key} className="border-b border-white/[0.02] py-4 last:border-0">
-                <button
-                  onClick={() => setExpandedSection(isExpanded ? null : key)}
-                  className="w-full flex justify-between items-center text-[20px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
-                  style={{ fontFamily: "var(--font-outfit)" }}
+        <div className="w-full flex flex-col pt-6">
+          <motion.div 
+            variants={{
+              open: {
+                transition: {
+                  staggerChildren: 0.05,
+                  delayChildren: 0.1
+                }
+              },
+              closed: {}
+            }}
+            className="w-full flex flex-col space-y-0"
+          >
+            {Object.keys(menuData).map((key) => {
+              const isExpanded = expandedSection === key;
+              return (
+                <motion.div 
+                  key={key} 
+                  variants={mobileItemVariants}
+                  className="border-b border-white/[0.02] py-4 last:border-0"
                 >
-                  <span className="hover:text-snow transition-colors duration-200">{menuData[key].label}</span>
-                  <span className={`text-stone/40 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                </button>
+                  <button
+                    onClick={() => setExpandedSection(isExpanded ? null : key)}
+                    className="w-full flex justify-between items-center text-[20px] font-light tracking-wide text-snow/90 leading-relaxed lowercase"
+                    style={{ fontFamily: "var(--font-outfit)" }}
+                  >
+                    <span className="hover:text-snow transition-colors duration-200">{menuData[key].label}</span>
+                    <span className={`text-stone/40 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </button>
 
-                <AnimatePresence initial={false}>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.15, ease: "easeOut" }}
-                      className="overflow-hidden mt-3 pl-1 grid grid-cols-2 gap-x-4 gap-y-2.5"
-                    >
-                      {menuData[key].items.map((item) => {
-                        if (item.href) {
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="overflow-hidden mt-3 pl-1 grid grid-cols-2 gap-x-4 gap-y-2.5"
+                      >
+                        {menuData[key].items.map((item) => {
+                          if (item.href) {
+                            return (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setMobileOpen(false)}
+                                className="py-1 text-xs text-parchment/60 active:text-snow hover:text-snow transition-colors lowercase font-light"
+                              >
+                                {item.label}
+                              </Link>
+                            );
+                          }
                           return (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="py-1 text-xs text-parchment/60 active:text-snow hover:text-snow transition-colors lowercase font-light"
-                            >
-                              {item.label}
-                            </Link>
+                            <div key={item.label} className="py-1 flex items-center gap-1.5 opacity-30 select-none">
+                              <span className="text-xs text-parchment/50 lowercase font-light">{item.label}</span>
+                              <span className="text-[8px] tracking-[0.1em] text-parchment/40 bg-white/[0.02] px-1.5 py-0.5 rounded border border-white/[0.01] font-light">
+                                soon
+                              </span>
+                            </div>
                           );
-                        }
-                        return (
-                          <div key={item.label} className="py-1 flex items-center gap-1.5 opacity-30 select-none">
-                            <span className="text-xs text-parchment/50 lowercase font-light">{item.label}</span>
-                            <span className="text-[8px] tracking-[0.1em] text-parchment/40 bg-white/[0.02] px-1.5 py-0.5 rounded border border-white/[0.01] font-light">
-                              soon
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
         {/* Bottom Actions & Contact */}
