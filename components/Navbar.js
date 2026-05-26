@@ -226,18 +226,16 @@ const mobileItemVariants = {
   open: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 0.55,
       ease: [0.77, 0, 0.175, 1]
     }
   },
   closed: {
-    y: 24,
+    y: 16,
     opacity: 0,
-    filter: "blur(4px)",
     transition: {
-      duration: 0.6,
+      duration: 0.45,
       ease: [0.77, 0, 0.175, 1]
     }
   }
@@ -492,7 +490,7 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={mobileOverlayVariants}
-        className="fixed inset-0 z-[990] bg-[#0c0d0c]/98 backdrop-blur-2xl flex flex-col lg:hidden"
+        className="fixed inset-0 z-[990] bg-[#0c0d0c] flex flex-col lg:hidden"
         style={{ clipPath: "circle(0px at 93% 40px)", willChange: "clip-path, opacity" }}
       >
         {/* Ambient radial background */}
@@ -533,29 +531,27 @@ export default function Navbar() {
                     </span>
                   </button>
 
-                  <AnimatePresence initial={false}>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: [0.77, 0, 0.175, 1] }}
-                        className="overflow-hidden mt-3 pl-6 flex flex-col space-y-3"
-                      >
+                  <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden ${
+                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden pl-6">
+                      <div className="mt-3 pb-2 flex flex-col space-y-3">
                         {menuData[key].items.map((item) => (
                           <div key={item.label}>
                             {item.href ? (
                               <Link
-                                key={item.label}
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
-                                className="group/mob-link flex items-center gap-3 py-2.5 text-[11px] font-medium tracking-[0.1em] text-parchment/55 active:text-snow hover:text-snow transition-all duration-300 uppercase"
+                                tabIndex={isExpanded ? 0 : -1}
+                                className="group/mob-link flex items-center gap-3 py-2 text-[11px] font-medium tracking-[0.1em] text-parchment/55 active:text-snow hover:text-snow transition-all duration-300 uppercase"
                               >
                                 <span className="w-1 h-1 rounded-full bg-accent-warm/50 group-hover/mob-link:bg-accent-warm transition-all duration-300" />
                                 {item.label}
                               </Link>
                             ) : (
-                              <div key={item.label} className="py-2.5 flex items-center gap-3 opacity-30 select-none">
+                              <div className="py-2 flex items-center gap-3 opacity-30 select-none">
                                 <span className="w-1 h-1 rounded-full bg-white/15" />
                                 <span className="text-[11px] font-medium tracking-[0.1em] text-parchment/40 uppercase">{item.label}</span>
                                 <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase">
@@ -565,9 +561,9 @@ export default function Navbar() {
                             )}
                           </div>
                         ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               );
             })}
