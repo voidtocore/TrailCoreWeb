@@ -490,19 +490,21 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={mobileOverlayVariants}
-        className="fixed inset-0 z-[990] bg-[#0c0d0c] flex flex-col lg:hidden"
-        style={{ clipPath: "circle(0px at 93% 40px)", willChange: "clip-path, opacity" }}
+        className="fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-full flex flex-col lg:hidden overscroll-contain"
+        style={{ 
+          clipPath: "circle(0px at 93% 40px)", 
+          willChange: "clip-path, opacity",
+          WebkitOverflowScrolling: "touch",
+          touchAction: "pan-y"
+        }}
       >
         {/* Ambient radial background */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-[20%] left-[30%] right-[30%] w-[40%] h-[40%] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[120px] rounded-full mx-auto" />
         </div>
 
-        {/* Scrollable Mobile Menu container */}
-        <div 
-          className="w-full flex-1 overflow-y-auto overscroll-contain px-6 pt-32 pb-8 relative z-10 flex flex-col"
-          style={{ WebkitOverflowScrolling: "touch" }}
-        >
+        {/* Mobile Menu Layout container */}
+        <div className="w-full flex-1 flex-shrink-0 px-6 pt-32 pb-8 relative z-10 flex flex-col">
           <motion.div 
             variants={mobileContainerVariants}
             className="w-full flex flex-col space-y-4 flex-shrink-0"
