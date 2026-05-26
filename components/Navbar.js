@@ -244,7 +244,7 @@ export default function Navbar() {
                   className="static"
                   onMouseEnter={() => setActiveMenu(key)}
                 >
-                  <span className="relative z-10 px-4 py-3 text-[13px] font-light tracking-wide text-parchment/70 hover:text-snow cursor-pointer transition-colors duration-300 block lowercase">
+                  <span className="relative z-10 px-4 py-3 text-[13px] font-medium tracking-wide text-parchment hover:text-snow cursor-pointer transition-colors duration-300 block lowercase">
                     {menu.label}
                     {activeMenu === key && (
                       <motion.div
@@ -261,12 +261,14 @@ export default function Navbar() {
 
           {/* Reserve / CTA Action */}
           <div className="hidden lg:flex items-center">
-            <Link
-              href="/custom-trip"
-              className="px-5 py-2.5 bg-white/[0.03] hover:bg-white/[0.06] text-parchment/90 text-xs font-medium tracking-wide rounded-full transition-all duration-500 border border-white/[0.05]"
+            <a
+              href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline text-xs tracking-widest"
             >
-              reserve plan
-            </Link>
+              reserve via whatsapp
+            </a>
           </div>
 
           {/* Mobile Hamburger menu */}
@@ -375,15 +377,17 @@ export default function Navbar() {
 
         {/* Bottom Actions & Contact */}
         <div className="mt-10 pt-8 border-t border-white/[0.02] max-w-md mx-auto w-full space-y-6">
-          <Link
-            href="/custom-trip"
+          <a
+            href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center w-full py-3.5 bg-white/[0.03] hover:bg-white/[0.06] text-parchment/90 text-xs font-light tracking-widest rounded-full border border-white/[0.05] transition-all duration-300 uppercase"
+            className="flex items-center justify-center w-full py-3.5 bg-white/[0.03] hover:bg-white/[0.06] text-white text-xs font-medium tracking-widest rounded-full border border-white/[0.05] transition-all duration-300 uppercase"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
-            reserve custom plan
-          </Link>
-          <div className="flex justify-between text-[11px] tracking-wider font-light text-parchment/35">
+            reserve via whatsapp
+          </a>
+          <div className="flex justify-between text-[11px] tracking-wider font-light text-parchment-dim">
             <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors">hello@trailcore.in</a>
             <a href="tel:+917560065963" className="hover:text-snow transition-colors">+91 75600 65963</a>
           </div>

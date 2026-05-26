@@ -6,18 +6,11 @@ import { motion } from "framer-motion";
 export default function HeroSection() {
   return (
     <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <Image
-        src="/images/hero-mountains.png"
-        alt="Himalayan mountain landscape at dawn"
-        fill
-        className="object-cover"
-        preload
-        quality={90}
-      />
-
-      {/* Cinematic Overlay */}
-      <div className="hero-overlay absolute inset-0 z-10" />
+      {/* Layered dark gradients and alpine green glow */}
+      <div className="absolute inset-0 bg-[#080808]">
+        <div className="alpine-glow" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-[#080808]/85 to-[#080808]" />
+      </div>
 
       {/* Grain Texture */}
       <div className="cinematic-grain absolute inset-0 z-10 pointer-events-none" />
@@ -29,7 +22,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="inline-block text-[11px] sm:text-xs font-medium uppercase tracking-[0.25em] text-parchment/50 mb-6"
+          className="inline-block text-[11px] sm:text-xs font-medium uppercase tracking-[0.25em] text-stone-light/60 mb-6"
         >
           Curated Himalayan Journeys
         </motion.span>
@@ -39,12 +32,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6"
-          style={{ fontFamily: "var(--font-outfit)" }}
+          className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] text-[#F5F5F5] mb-6"
         >
           Premium Himalayan
           <br />
-          <span className="text-gradient-green">Expeditions</span>
+          <span className="text-gradient-green">Journeys</span>
         </motion.h1>
 
         {/* Subheading */}
@@ -52,10 +44,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-sm sm:text-base md:text-lg text-parchment/55 max-w-xl mx-auto mb-10 leading-relaxed font-light"
+          className="text-sm sm:text-base md:text-lg text-parchment max-w-xl mx-auto mb-10 leading-relaxed font-light"
         >
-          Slow travel experiences across Spiti, Kinnaur, and the Indian
-          Himalayas. Designed for meaningful exploration.
+          Slow Himalayan journeys designed for meaningful exploration.
         </motion.p>
 
         {/* CTAs */}
@@ -63,19 +54,19 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full max-w-md mx-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto"
         >
           <Link
             href="/packages"
-            className="w-full sm:w-auto justify-center px-8 py-3.5 bg-forest/80 hover:bg-forest-light/80 text-white/90 font-medium tracking-wide rounded-full transition-all duration-500 hover:shadow-lg hover:shadow-forest/10 flex items-center gap-2 border border-forest-light/20 text-sm"
+            className="btn-outline w-full sm:w-auto flex items-center justify-center gap-2 group"
           >
             Explore Expeditions
             <svg
-              className="w-4 h-4"
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.5"
             >
               <path
                 strokeLinecap="round"
@@ -85,8 +76,8 @@ export default function HeroSection() {
             </svg>
           </Link>
           <Link
-            href="/contact"
-            className="w-full sm:w-auto justify-center px-8 py-3.5 border border-white/12 hover:bg-white/[0.05] text-snow/80 hover:text-snow font-medium tracking-wide rounded-full transition-all duration-500 backdrop-blur-sm flex items-center text-sm"
+            href="/adventures"
+            className="btn-outline w-full sm:w-auto"
           >
             Upcoming Departures
           </Link>

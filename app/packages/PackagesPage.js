@@ -117,57 +117,68 @@ export default function PackagesPage() {
 
       <section className="pb-24 px-4">
         <div className="max-w-7xl mx-auto">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {expeditions.map((exp) => (
               <StaggerItem key={exp.title}>
-                <div className="expedition-card h-full flex flex-col">
+                <div className="editorial-card h-full flex flex-col hover:border-white/20 transition-all duration-300 group">
+                  {/* Image Area */}
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={exp.img}
                       alt={exp.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-102"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-mountain-900 via-transparent to-transparent" />
-                    <span className="absolute top-4 left-4 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.15em] bg-white/[0.08] backdrop-blur-md text-parchment/80 rounded-full border border-white/[0.06]">
-                      {exp.badge}
-                    </span>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <p className="text-[11px] text-parchment/40 tracking-wide">{exp.duration}</p>
-                      <h3 className="text-lg font-semibold text-snow/95 mt-1" style={{ fontFamily: "var(--font-outfit)" }}>
-                        {exp.title}
-                      </h3>
-                    </div>
                   </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <p className="text-[11px] text-stone/35 mb-3 tracking-wide">{exp.route}</p>
 
-                    {/* Meta */}
-                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-stone/40 mb-4">
+                  {/* Content Area */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    {/* Badge & Duration */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] bg-white/[0.04] text-forest-glow rounded border border-white/[0.04]">
+                        {exp.badge}
+                      </span>
+                      <span className="text-[11px] text-parchment-dim font-light tracking-wide">{exp.duration}</span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-lg font-semibold text-[#F5F5F5] mb-2 leading-tight">
+                      {exp.title}
+                    </h3>
+
+                    {/* Route */}
+                    <p className="text-[11px] text-parchment-dim mb-4 tracking-wide font-light">{exp.route}</p>
+
+                    {/* Metadata (Season, Difficulty, Group) */}
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-stone-light/80 mb-4 font-light">
                       <span>{exp.season}</span>
+                      <span>·</span>
                       <span>{exp.difficulty}</span>
+                      <span>·</span>
                       <span>{exp.groupSize} travelers</span>
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 mb-5">
+                    {/* Includes Badges */}
+                    <div className="flex flex-wrap gap-1 mb-6">
                       {exp.includes.map((inc) => (
-                        <span key={inc} className="px-2 py-0.5 text-[10px] bg-white/[0.03] text-stone/35 rounded border border-white/[0.04]">
+                        <span key={inc} className="px-2 py-0.5 text-[10px] bg-white/[0.02] text-stone-light/70 rounded border border-white/[0.02] font-light">
                           {inc}
                         </span>
                       ))}
                     </div>
 
-                    <div className="mt-auto pt-4 border-t border-white/[0.04] flex items-end justify-between">
+                    {/* Footer Row */}
+                    <div className="mt-auto pt-4 border-t border-white/[0.04] flex items-center justify-between">
                       <div>
-                        <span className="text-xl font-semibold text-snow/90" style={{ fontFamily: "var(--font-outfit)" }}>
+                        <span className="text-lg font-semibold text-[#F5F5F5]">
                           {exp.price}
                         </span>
-                        <span className="text-[11px] text-stone/30 ml-1.5">/{exp.priceNote}</span>
+                        <span className="text-[11px] text-stone-light/60 ml-1.5">/{exp.priceNote}</span>
                       </div>
                       <Link
                         href={exp.slug ? `/packages/${exp.slug}` : "/contact"}
-                        className="px-4 py-2 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-[11px] font-medium tracking-wide rounded-full transition-all duration-500 border border-forest-light/20 text-center"
+                        className="px-4 py-2 border border-white/15 hover:bg-white/[0.04] text-white hover:border-white/35 text-[10px] font-medium tracking-widest uppercase rounded-full transition-all duration-300 text-center"
                       >
                         {exp.slug ? "View Expedition" : "Inquire"}
                       </Link>
@@ -177,7 +188,7 @@ export default function PackagesPage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-          <p className="text-center text-[11px] text-stone/25 mt-10 tracking-wide">
+          <p className="text-center text-[11px] text-stone-light/40 mt-10 tracking-wide">
             All expeditions are customizable. Pricing varies by season, group size, and preferences.
           </p>
         </div>

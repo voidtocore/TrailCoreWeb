@@ -39,16 +39,16 @@ export default function DestinationsPage() {
                 </div>
                 <div className={i % 2 === 1 ? "lg:order-1" : ""}>
                   <h2 className="text-3xl md:text-4xl font-semibold text-snow/90" style={{ fontFamily: "var(--font-outfit)" }}>{dest.name}</h2>
-                  <p className="text-stone/45 mt-5 leading-relaxed font-light">{dest.desc}</p>
+                  <p className="text-parchment-dim mt-5 leading-relaxed font-light">{dest.desc}</p>
                   <div className="grid grid-cols-2 gap-3 mt-6">
                     {dest.highlights.map((h) => (
-                      <div key={h} className="flex items-center gap-2 text-sm text-stone/40 font-light">
+                      <div key={h} className="flex items-center gap-2 text-sm text-parchment-dim font-light">
                         <div className="w-1 h-1 rounded-full bg-forest-glow/40" />
                         {h}
                       </div>
                     ))}
                   </div>
-                  <Link href="/contact" className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-forest/80 hover:bg-forest-light/80 text-white/90 text-sm font-medium tracking-wide rounded-full transition-all duration-500 border border-forest-light/20">
+                  <Link href="/contact" className="btn-outline gap-2 mt-8">
                     Inquire about {dest.name}
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </Link>

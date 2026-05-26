@@ -5,17 +5,17 @@ import { FadeIn, StaggerContainer, StaggerItem } from "../Animations";
 const experiences = [
   {
     title: "Authentic Homestays",
-    desc: "Sleep where the mountains live — traditional homes, warm blankets, and stories by the fireplace.",
+    desc: "Traditional homes, warm blankets, and stories by the fire.",
     img: "/images/honeymoon-cabin.png",
   },
   {
     title: "Himalayan Meals",
-    desc: "Dal, rice, thukpa, momos — local kitchens serve food that warms the soul at 12,000 feet.",
+    desc: "Dal, rice, thukpa, momos — soul food served at 12,000 feet.",
     img: "/images/shimla.png",
   },
   {
     title: "Bonfire Evenings",
-    desc: "Under a canopy of stars, around a fire — the kind of evening that makes you forget the world exists.",
+    desc: "Canopies of stars, slow fires, and absolute mountain stillness.",
     img: "/images/camping.png",
   },
 ];
@@ -28,22 +28,21 @@ export default function HoneymoonSection() {
           {/* Text */}
           <div className="lg:col-span-5">
             <FadeIn>
-              <span className="inline-block text-[11px] font-medium uppercase tracking-[0.2em] text-stone-light/50 mb-6">
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-light/70 mb-6">
                 Food & Stay Experience
               </span>
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-snow/90 leading-[1.15] mb-6"
-                style={{ fontFamily: "var(--font-outfit)" }}
+                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#F5F5F5] leading-[1.15] mb-6"
               >
                 Where comfort meets
                 <br />
-                <span className="text-stone-light/45">the mountains.</span>
+                <span className="text-[#a09a8e]">the mountains.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="text-parchment/50 text-base leading-relaxed font-light max-w-md mb-8">
+              <p className="text-parchment text-base leading-relaxed font-light max-w-md mb-8">
                 Every stay is handpicked for warmth, every meal for authenticity.
                 We believe comfort in the mountains means local character, not
                 luxury chains — real fires, real food, real people.
@@ -51,9 +50,15 @@ export default function HoneymoonSection() {
             </FadeIn>
             <FadeIn delay={0.3}>
               <div className="space-y-3">
-                {["Curated homestays & heritage stays", "Traditional Himalayan cuisine", "Mountain café mornings", "Bonfire nights under the stars", "Slow evenings with chai"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-sm text-parchment/45 font-light">
-                    <div className="w-1 h-1 rounded-full bg-forest-glow/40" />
+                {[
+                  "Curated homestays & heritage stays",
+                  "Traditional Himalayan cuisine",
+                  "Mountain café mornings",
+                  "Bonfire nights under the stars",
+                  "Slow evenings with chai",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 text-sm text-parchment-dim font-light">
+                    <div className="w-1.5 h-1.5 rounded-full bg-forest-glow" />
                     {item}
                   </div>
                 ))}
@@ -66,23 +71,23 @@ export default function HoneymoonSection() {
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {experiences.map((exp) => (
                 <StaggerItem key={exp.title}>
-                  <div className="relative rounded-xl overflow-hidden aspect-[3/4] group">
-                    <Image
-                      src={exp.img}
-                      alt={exp.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="editorial-card group flex flex-col h-full hover:border-white/20 transition-all duration-300">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                      <Image
+                        src={exp.img}
+                        alt={exp.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-102"
+                        sizes="(max-width: 768px) 100vw, 25vw"
+                      />
+                    </div>
+                    <div className="p-5 flex flex-col flex-1">
                       <h3
-                        className="text-sm font-semibold text-snow/90 mb-1"
-                        style={{ fontFamily: "var(--font-outfit)" }}
+                        className="text-sm font-semibold text-[#F5F5F5] mb-2"
                       >
                         {exp.title}
                       </h3>
-                      <p className="text-[11px] text-parchment/35 leading-relaxed font-light">
+                      <p className="text-[11px] text-parchment-dim leading-relaxed font-light">
                         {exp.desc}
                       </p>
                     </div>
