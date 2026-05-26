@@ -8,76 +8,76 @@ import { useLoading } from "./home/LoadingOrchestrator";
 
 const menuData = {
   discover: {
-    label: "discover",
+    label: "DISCOVER",
     items: [
-      { label: "mountains", href: "/destinations" },
-      { label: "forests", status: "coming soon" },
-      { label: "coastal", status: "launching soon" },
-      { label: "heritage", status: "currently crafting" },
-      { label: "snow", status: "coming soon" },
-      { label: "weekend escapes", status: "launching soon" },
-      { label: "hidden towns", status: "currently crafting" },
-      { label: "international", status: "coming soon" },
+      { label: "MOUNTAINS", href: "/destinations" },
+      { label: "FORESTS", status: "COMING SOON" },
+      { label: "COASTAL", status: "LAUNCHING SOON" },
+      { label: "HERITAGE", status: "CRAFTING" },
+      { label: "SNOW", status: "COMING SOON" },
+      { label: "WEEKEND ESCAPES", status: "LAUNCHING SOON" },
+      { label: "HIDDEN TOWNS", status: "CRAFTING" },
+      { label: "INTERNATIONAL", status: "COMING SOON" },
     ]
   },
   offgrid: {
-    label: "offgrid",
+    label: "OFFGRID",
     items: [
-      { label: "hidden escapes", href: "/packages" },
-      { label: "remote stays", status: "launching soon" },
-      { label: "cabin retreats", status: "coming soon" },
-      { label: "slow travel", status: "currently crafting" },
-      { label: "scenic routes", status: "coming soon" },
-      { label: "untouched places", status: "launching soon" },
-      { label: "digital detox", status: "coming soon" },
-      { label: "private escapes", status: "currently crafting" },
+      { label: "HIDDEN ESCAPES", href: "/packages" },
+      { label: "REMOTE STAYS", status: "LAUNCHING SOON" },
+      { label: "CABIN RETREATS", status: "COMING SOON" },
+      { label: "SLOW TRAVEL", status: "CRAFTING" },
+      { label: "SCENIC ROUTES", status: "COMING SOON" },
+      { label: "UNTOUCHED PLACES", status: "LAUNCHING SOON" },
+      { label: "DIGITAL DETOX", status: "COMING SOON" },
+      { label: "PRIVATE ESCAPES", status: "CRAFTING" },
     ]
   },
   stays: {
-    label: "stays",
+    label: "STAYS",
     items: [
-      { label: "boutique hotels", status: "coming soon" },
-      { label: "luxury cabins", status: "launching soon" },
-      { label: "villas", status: "currently crafting" },
-      { label: "mountain retreats", href: "/honeymoon" },
-      { label: "glass houses", status: "coming soon" },
-      { label: "homestays", status: "currently crafting" },
-      { label: "wellness stays", status: "launching soon" },
-      { label: "curated stays", status: "coming soon" },
+      { label: "BOUTIQUE HOTELS", status: "COMING SOON" },
+      { label: "LUXURY CABINS", status: "LAUNCHING SOON" },
+      { label: "VILLAS", status: "CRAFTING" },
+      { label: "MOUNTAIN RETREATS", href: "/honeymoon" },
+      { label: "GLASS HOUSES", status: "COMING SOON" },
+      { label: "HOMESTAYS", status: "CRAFTING" },
+      { label: "WELLNESS STAYS", status: "LAUNCHING SOON" },
+      { label: "CURATED STAYS", status: "COMING SOON" },
     ]
   },
   editions: {
-    label: "editions",
+    label: "EDITIONS",
     items: [
-      { label: "summer edition", status: "launching soon" },
-      { label: "snowfall edition", status: "coming soon" },
-      { label: "honeymoon edition", href: "/honeymoon" },
-      { label: "workation edition", status: "currently crafting" },
-      { label: "48 hour escapes", status: "coming soon" },
-      { label: "luxury roadtrips", href: "/packages" },
-      { label: "café trails", status: "launching soon" },
-      { label: "wellness escapes", status: "currently crafting" },
+      { label: "SUMMER EDITION", status: "LAUNCHING SOON" },
+      { label: "SNOWFALL EDITION", status: "COMING SOON" },
+      { label: "HONEYMOON EDITION", href: "/honeymoon" },
+      { label: "WORKATION EDITION", status: "CRAFTING" },
+      { label: "48 HOUR ESCAPES", status: "COMING SOON" },
+      { label: "LUXURY ROADTRIPS", href: "/packages" },
+      { label: "CAFÉ TRAILS", status: "LAUNCHING SOON" },
+      { label: "WELLNESS ESCAPES", status: "CRAFTING" },
     ]
   },
   reserve: {
-    label: "reserve",
+    label: "RESERVE",
     items: [
-      { label: "custom planning", href: "/custom-trip" },
-      { label: "private bookings", status: "coming soon" },
-      { label: "group journeys", status: "launching soon" },
-      { label: "transport", status: "currently crafting" },
-      { label: "concierge", status: "coming soon" },
-      { label: "exclusive access", status: "launching soon" },
+      { label: "CUSTOM PLANNING", href: "/custom-trip" },
+      { label: "PRIVATE BOOKINGS", status: "COMING SOON" },
+      { label: "GROUP JOURNEYS", status: "LAUNCHING SOON" },
+      { label: "TRANSPORT", status: "CRAFTING" },
+      { label: "CONCIERGE", status: "COMING SOON" },
+      { label: "EXCLUSIVE ACCESS", status: "LAUNCHING SOON" },
     ]
   },
   studio: {
-    label: "studio",
+    label: "STUDIO",
     items: [
-      { label: "philosophy", href: "/about" },
-      { label: "partnerships", status: "launching soon" },
-      { label: "careers", status: "currently crafting" },
-      { label: "contact", href: "/contact" },
-      { label: "press", status: "coming soon" },
+      { label: "PHILOSOPHY", href: "/about" },
+      { label: "PARTNERSHIPS", status: "LAUNCHING SOON" },
+      { label: "CAREERS", status: "CRAFTING" },
+      { label: "CONTACT", href: "/contact" },
+      { label: "PRESS", status: "COMING SOON" },
     ]
   }
 };
@@ -87,27 +87,27 @@ function MenuItem({ item }) {
     return (
       <Link
         href={item.href}
-        className="group/item flex items-center justify-between py-3.5 border-b border-white/[0.02] hover:border-white/[0.08] transition-all duration-500"
+        className="group/item flex items-center justify-between py-4 border-b border-white/[0.02] hover:border-white/[0.06] transition-all duration-500"
       >
-        <span className="text-sm font-light text-parchment/65 group-hover/item:text-snow group-hover/item:translate-x-2 transition-transform duration-500 lowercase relative flex items-center gap-3">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-warm opacity-0 group-hover/item:opacity-100 transition-all duration-500 scale-50 group-hover/item:scale-100" />
+        <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/60 group-hover/item:text-snow group-hover/item:translate-x-2 transition-all duration-500 uppercase relative flex items-center gap-3">
+          <span className="w-1 h-1 rounded-full bg-accent-warm opacity-0 group-hover/item:opacity-100 transition-all duration-500 scale-50 group-hover/item:scale-100" />
           {item.label}
         </span>
-        <span className="text-[10px] text-accent-warm/40 font-mono tracking-wider opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 uppercase">
-          explore
+        <span className="text-[9px] text-accent-warm/50 font-mono tracking-[0.2em] opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 uppercase">
+          VIEW
         </span>
       </Link>
     );
   }
 
   return (
-    <div className="flex items-center justify-between py-3.5 border-b border-white/[0.02] cursor-not-allowed select-none">
-      <span className="text-sm font-light text-parchment/30 lowercase flex items-center gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+    <div className="flex items-center justify-between py-4 border-b border-white/[0.015] cursor-not-allowed select-none">
+      <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/25 uppercase flex items-center gap-3">
+        <span className="w-1 h-1 rounded-full bg-white/8" />
         {item.label}
       </span>
-      <span className="text-[8px] font-mono text-stone-light/35 bg-white/[0.02] px-2 py-0.5 rounded border border-white/[0.04] tracking-widest lowercase">
-        {item.status || "soon"}
+      <span className="text-[8px] font-mono text-stone-light/30 bg-white/[0.02] px-2 py-0.5 rounded-sm border border-white/[0.04] tracking-[0.15em] uppercase">
+        {item.status || "SOON"}
       </span>
     </div>
   );
@@ -115,34 +115,34 @@ function MenuItem({ item }) {
 
 const menuTaglines = {
   discover: {
-    tag: "explore / pathways",
-    title: "walk the untamed edges",
-    desc: "slow journeys through high-altitude spiti, deep pine valleys, and raw Himalayan terrain."
+    tag: "EXPLORE · PATHWAYS",
+    title: "Walk the untamed edges",
+    desc: "Slow journeys through high-altitude Spiti, deep pine valleys, and raw Himalayan terrain — curated for deliberate travellers."
   },
   offgrid: {
-    tag: "silence / isolation",
-    title: "dwellings of complete quiet",
-    desc: "digital detox and immersive retreats in remote mountain outposts far beyond the signal line."
+    tag: "SILENCE · ISOLATION",
+    title: "Dwellings of complete quiet",
+    desc: "Remote mountain retreats designed for digital detox, reflection, and stillness in places far beyond the signal line."
   },
   stays: {
-    tag: "shelter / luxury",
-    title: "luxury alpine sanctuaries",
-    desc: "architectural cabins, warm glass houses, and curated stays framing the massive mountain horizons."
+    tag: "SHELTER · LUXURY",
+    title: "Alpine sanctuaries",
+    desc: "Boutique cabins, glass houses, and mountain retreats — each chosen for architectural character and Himalayan setting."
   },
   editions: {
-    tag: "limited / curated",
-    title: "limited seasonal releases",
-    desc: "curated travel editions crafted for collectors. timed specifically for unique seasonal migrations."
+    tag: "LIMITED · CURATED",
+    title: "Seasonal travel editions",
+    desc: "Time-specific journeys crafted around snowfall, bloom, and altitude — Trail Core's curated travel calendar."
   },
   reserve: {
-    tag: "bespoke / tailor-made",
-    title: "private expedition design",
-    desc: "tailored itineraries, private transport logs, and exclusive concierge access mapped solely to your request."
+    tag: "BESPOKE · PRIVATE",
+    title: "Private expedition design",
+    desc: "Tailored itineraries built around your pace, group, and terrain preferences. Nothing template-made."
   },
   studio: {
-    tag: "philosophy / craft",
-    title: "the alpine design lab",
-    desc: "our core beliefs, sustainable partners, field logs, and contact endpoints for mountain inquiries."
+    tag: "PHILOSOPHY · CRAFT",
+    title: "About Trail Core",
+    desc: "Our approach to slow travel, our network of field partners, and how to get in touch with the team."
   }
 };
 
@@ -444,20 +444,20 @@ export default function Navbar() {
                     className="col-span-4 flex flex-col justify-between border-r border-white/[0.03] pr-12"
                   >
                     <div className="space-y-4">
-                      <span className="text-[9px] font-mono text-accent-warm uppercase tracking-[0.25em] block">
+                      <span className="text-[9px] font-mono text-accent-warm/80 uppercase tracking-[0.2em] block">
                         {menuTaglines[activeMenu]?.tag}
                       </span>
-                      <h3 className="font-display font-light text-2xl text-snow tracking-tight lowercase">
+                      <h3 className="font-display font-light text-2xl text-snow/90 leading-tight" style={{ letterSpacing: "-0.02em" }}>
                         {menuTaglines[activeMenu]?.title}
                       </h3>
-                      <p className="text-xs text-parchment/50 font-light leading-relaxed max-w-xs lowercase">
+                      <p className="text-xs text-parchment/45 font-light leading-relaxed max-w-xs">
                         {menuTaglines[activeMenu]?.desc}
                       </p>
                     </div>
 
-                    <div className="pt-8">
-                      <span className="text-[9px] text-stone-light/25 font-mono uppercase tracking-widest">
-                        himalayan editorial system
+                    <div className="pt-8 border-t border-white/[0.03]">
+                      <span className="text-[9px] text-stone-light/20 font-mono uppercase tracking-[0.2em]">
+                        SLOW TRAVEL THROUGH THE HIMALAYAS
                       </span>
                     </div>
                   </motion.div>
@@ -518,11 +518,11 @@ export default function Navbar() {
                 >
                   <button
                     onClick={() => setExpandedSection(isExpanded ? null : key)}
-                    className="w-full flex justify-between items-baseline text-2xl font-light text-snow/95 tracking-tight py-2.5 lowercase focus:outline-none font-display cursor-pointer"
+                    className="w-full flex justify-between items-center text-xl font-medium tracking-[0.06em] text-snow/85 uppercase py-3 focus:outline-none font-display cursor-pointer hover:text-snow transition-colors duration-300"
                   >
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-[10px] font-mono text-accent-warm/50 select-none">{String(idx + 1).padStart(2, "0")}</span>
-                      <span className="hover:text-snow transition-colors duration-200">{menuData[key].label}</span>
+                    <div className="flex items-center gap-4">
+                      <span className="text-[9px] font-mono text-accent-warm/40 select-none tabular-nums">{String(idx + 1).padStart(2, "0")}</span>
+                      <span>{menuData[key].label}</span>
                     </div>
                     <span className={`text-stone/40 text-xs transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
@@ -547,16 +547,17 @@ export default function Navbar() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
-                                className="group/mob-link flex items-center gap-3 py-2 text-sm text-parchment/65 active:text-snow hover:text-snow transition-all duration-300 lowercase font-light"
+                                className="group/mob-link flex items-center gap-3 py-2.5 text-[11px] font-medium tracking-[0.1em] text-parchment/55 active:text-snow hover:text-snow transition-all duration-300 uppercase"
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent-warm/40 group-active/mob-link:bg-accent-warm scale-50 transition-all duration-300" />
+                                <span className="w-1 h-1 rounded-full bg-accent-warm/50 group-hover/mob-link:bg-accent-warm transition-all duration-300" />
                                 {item.label}
                               </Link>
                             ) : (
-                              <div key={item.label} className="py-2 flex items-baseline gap-3 opacity-35 select-none pl-3.5">
-                                <span className="text-sm text-parchment/50 lowercase font-light">{item.label}</span>
-                                <span className="text-[7px] tracking-[0.1em] text-accent-warm/80 bg-accent-warm/5 px-1.5 py-0.5 rounded border border-accent-warm/15 font-mono lowercase">
-                                  soon
+                              <div key={item.label} className="py-2.5 flex items-center gap-3 opacity-30 select-none">
+                                <span className="w-1 h-1 rounded-full bg-white/15" />
+                                <span className="text-[11px] font-medium tracking-[0.1em] text-parchment/40 uppercase">{item.label}</span>
+                                <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase">
+                                  {item.status || "SOON"}
                                 </span>
                               </div>
                             )}
@@ -577,14 +578,13 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center w-full py-3.5 bg-white/[0.02] hover:bg-white/[0.04] text-white text-xs font-medium tracking-widest rounded-full border border-white/[0.05] transition-all duration-300 uppercase"
-              style={{ fontFamily: "var(--font-outfit)" }}
+              className="flex items-center justify-center w-full py-3.5 bg-white/[0.02] hover:bg-white/[0.05] text-snow text-[10px] font-medium tracking-[0.2em] rounded-full border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 uppercase"
             >
-              reserve via whatsapp
+              RESERVE VIA WHATSAPP
             </a>
-            <div className="flex justify-between text-[9px] tracking-[0.18em] font-light text-parchment-dim uppercase">
-              <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors lowercase tracking-normal text-xs font-light">hello@trailcore.in</a>
-              <a href="tel:+917560065963" className="hover:text-snow transition-colors lowercase tracking-normal text-xs font-light">+91 75600 65963</a>
+            <div className="flex justify-between">
+              <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors text-[10px] tracking-[0.12em] text-parchment/35 font-light uppercase">HELLO@TRAILCORE.IN</a>
+              <a href="tel:+917560065963" className="hover:text-snow transition-colors text-[10px] tracking-[0.12em] text-parchment/35 font-light uppercase">+91 75600 65963</a>
             </div>
           </div>
 
