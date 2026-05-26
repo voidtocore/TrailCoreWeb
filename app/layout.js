@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LoadingOrchestrator from "@/components/home/LoadingOrchestrator";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${outfit.variable} h-full antialiased overflow-x-hidden`}
     >
       <body className="min-h-full flex flex-col bg-mountain-black text-foreground overflow-x-hidden">
+        <SmoothScroll />
         <LoadingOrchestrator>
           <Navbar />
           <main className="flex-1">{children}</main>

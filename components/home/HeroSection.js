@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useLoading } from "./LoadingOrchestrator";
 import { ParallaxText, ParallaxImage, DriftTypography } from "../Animations";
 
-const EASE = [0.65, 0.05, 0, 1];
+const EASE = [0.77, 0, 0.175, 1];
 
 export default function HeroSection() {
   const { isLoaded } = useLoading();
@@ -39,9 +39,9 @@ export default function HeroSection() {
           {/* Drifting Coordinates / Metadata */}
           <ParallaxText speed={0.2} direction={-1} className="mb-6">
             <motion.div
-              initial={{ opacity: 0, x: -12 }}
-              animate={isLoaded ? { opacity: 0.5, x: 0 } : {}}
-              transition={{ delay: 0.1, duration: 1.0, ease: EASE }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isLoaded ? { opacity: 0.5, y: 0 } : {}}
+              transition={{ delay: 0.1, duration: 1.2, ease: EASE }}
               className="text-[0.625rem] font-mono uppercase tracking-[0.3em] text-accent-warm flex items-center gap-4 mono-number"
             >
               <span>32.2396° N, 77.1887° E</span>
@@ -53,9 +53,9 @@ export default function HeroSection() {
           {/* Kinetic Asymmetrical Heading */}
           <div className="overflow-hidden mb-8 w-full">
             <motion.h1
-              initial={{ opacity: 0, y: 56, filter: "blur(8px)" }}
+              initial={{ opacity: 0, y: 64, filter: "blur(8px)" }}
               animate={isLoaded ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-              transition={{ delay: 0.25, duration: 1.3, ease: EASE }}
+              transition={{ delay: 0.3, duration: 1.6, ease: EASE }}
               className="text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] font-medium text-snow tracking-tighter flex flex-col"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
@@ -73,9 +73,9 @@ export default function HeroSection() {
           {/* Drifting description block */}
           <ParallaxText speed={0.1} direction={1} className="w-full">
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={isLoaded ? { opacity: 0.8, y: 0 } : {}}
-              transition={{ delay: 0.5, duration: 1.1, ease: EASE }}
+              transition={{ delay: 0.5, duration: 1.3, ease: EASE }}
               className="text-xs sm:text-[0.875rem] text-parchment max-w-md mb-12 leading-relaxed font-light"
             >
               A Himalayan travel studio designing slow, spatial expeditions through Spiti Valley, Kinnaur, and high alpine passes.
@@ -84,9 +84,9 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.7, duration: 0.9, ease: EASE }}
+            transition={{ delay: 0.7, duration: 1.1, ease: EASE }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
             <Link
@@ -116,9 +116,9 @@ export default function HeroSection() {
         {/* Right Foreground: Floating parallax visual frame */}
         <div className="lg:col-span-5 relative mt-12 lg:mt-0 z-10">
           <motion.div
-            initial={{ opacity: 0, y: 64, scale: 0.98, filter: "blur(8px)" }}
+            initial={{ opacity: 0, y: 80, scale: 0.96, filter: "blur(10px)" }}
             animate={isLoaded ? { opacity: 0.65, y: 0, scale: 1, filter: "blur(0px)" } : {}}
-            transition={{ delay: 0.45, duration: 1.5, ease: EASE }}
+            transition={{ delay: 0.5, duration: 1.8, ease: EASE }}
           >
             <ParallaxImage 
               src="/images/hero-mountains.png" 
