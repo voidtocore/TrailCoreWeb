@@ -31,9 +31,9 @@ export default function DestinationsPage() {
           {destinations.map((dest, i) => (
             <FadeIn key={dest.id} delay={0.1}>
               <div id={dest.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center`}>
-                <div className={`relative rounded-xl overflow-hidden aspect-[4/3] ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <Image src={dest.img} alt={dest.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-                  <div className="absolute top-4 right-4 glass px-3 py-1.5 rounded-full text-[11px] text-parchment/60 font-medium tracking-wide">
+                <div className={`relative rounded-lg overflow-hidden aspect-[4/3] ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                  <Image src={dest.img} alt={dest.name} fill className="object-cover transition-transform duration-[900ms] ease-out hover:scale-[1.03]" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <div className="absolute top-4 right-4 bg-mountain-900/80 border border-white/[0.04] px-3 py-1 rounded-full text-[10px] text-snow/80 font-medium tracking-wide mono-number">
                     {dest.alt}
                   </div>
                 </div>

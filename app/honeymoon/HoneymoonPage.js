@@ -34,28 +34,33 @@ export default function HoneymoonPage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {retreats.map((r) => (
               <StaggerItem key={r.title}>
-                <div className="expedition-card h-full flex flex-col">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image src={r.img} alt={r.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-mountain-900 via-transparent to-transparent" />
+                <div className="editorial-card h-full flex flex-col group">
+                  <div className="relative aspect-[16/10] overflow-hidden w-full">
+                    <Image
+                      src={r.img}
+                      alt={r.title}
+                      fill
+                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <p className="text-[11px] text-accent-warm/50 tracking-wide">{r.duration}</p>
-                    <h3 className="text-lg font-semibold text-snow/90 mt-1" style={{ fontFamily: "var(--font-outfit)" }}>{r.title}</h3>
+                  <div className="p-5 md:p-6 flex-1 flex flex-col">
+                    <p className="text-[10px] uppercase tracking-wider text-accent-warm/70 mono-number">{r.duration}</p>
+                    <h3 className="text-base md:text-lg font-semibold text-snow/90 mt-1" style={{ fontFamily: "var(--font-outfit)" }}>{r.title}</h3>
                     <ul className="mt-4 space-y-2 flex-1">
                       {r.highlights.map((h) => (
-                        <li key={h} className="flex items-center gap-2 text-sm text-stone/40 font-light">
-                          <div className="w-1 h-1 rounded-full bg-accent-warm/40" />
+                        <li key={h} className="flex items-center gap-2.5 text-xs sm:text-sm text-parchment-dim/80 font-light">
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent-warm/40" />
                           {h}
                         </li>
                       ))}
                     </ul>
                     <div className="mt-6 pt-4 border-t border-white/[0.04] flex items-center justify-between">
                       <div>
-                        <span className="text-xl font-semibold text-snow/90" style={{ fontFamily: "var(--font-outfit)" }}>{r.price}</span>
-                        <span className="text-[11px] text-stone/30 ml-1.5">/couple</span>
+                        <span className="text-lg font-semibold text-snow/90 mono-number" style={{ fontFamily: "var(--font-outfit)" }}>{r.price}</span>
+                        <span className="text-[11px] text-stone-light/45 ml-1.5">/couple</span>
                       </div>
-                      <Link href="/contact" className="px-4 py-2 bg-accent-warm/10 hover:bg-accent-warm/15 text-accent-warm/70 border border-accent-warm/15 text-[11px] font-medium tracking-wide rounded-full transition-all duration-500">
+                      <Link href="/contact" className="btn-outline text-[10px] tracking-widest py-2 px-4">
                         Inquire
                       </Link>
                     </div>
@@ -68,16 +73,16 @@ export default function HoneymoonPage() {
       </section>
 
       {/* Experiences */}
-      <section className="py-24 px-4 bg-mountain-900/30">
+      <section className="py-24 px-4 bg-mountain-900/10">
         <div className="max-w-7xl mx-auto">
           <SectionHeading label="Curated Experiences" title="Moments Worth Sharing" />
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {experiences.map((e) => (
               <StaggerItem key={e.name}>
-                <div className="glass rounded-xl p-7 text-center hover:border-accent-warm/10 transition-all duration-500">
+                <div className="editorial-surface p-6 sm:p-7 text-center group">
                   <span className="text-2xl">{e.icon}</span>
                   <h3 className="text-base font-semibold text-snow/90 mt-3 mb-2" style={{ fontFamily: "var(--font-outfit)" }}>{e.name}</h3>
-                  <p className="text-sm text-stone/40 font-light">{e.desc}</p>
+                  <p className="text-[0.8125rem] text-parchment/45 leading-relaxed font-light">{e.desc}</p>
                 </div>
               </StaggerItem>
             ))}

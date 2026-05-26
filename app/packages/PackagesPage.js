@@ -120,38 +120,41 @@ export default function PackagesPage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {expeditions.map((exp) => (
               <StaggerItem key={exp.title}>
-                <div className="editorial-card h-full flex flex-col hover:border-white/20 transition-all duration-300 group">
+                <div className="editorial-card h-full flex flex-col group">
                   {/* Image Area */}
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={exp.img}
                       alt={exp.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-102"
+                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
 
                   {/* Content Area */}
-                  <div className="p-6 flex-1 flex flex-col">
+                  <div className="p-5 md:p-6 flex-1 flex flex-col">
                     {/* Badge & Duration */}
                     <div className="flex items-center justify-between mb-3">
-                      <span className="px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] bg-white/[0.04] text-forest-glow rounded border border-white/[0.04]">
+                      <span className="px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] bg-white/[0.04] text-forest-glow/80 rounded border border-white/[0.04]">
                         {exp.badge}
                       </span>
-                      <span className="text-[11px] text-parchment-dim font-light tracking-wide">{exp.duration}</span>
+                      <span className="text-[11px] text-parchment-dim/80 font-light tracking-wide mono-number">{exp.duration}</span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg font-semibold text-[#F5F5F5] mb-2 leading-tight">
+                    <h3
+                      className="text-base md:text-lg font-semibold text-snow/90 mb-2 leading-tight"
+                      style={{ fontFamily: "var(--font-outfit)" }}
+                    >
                       {exp.title}
                     </h3>
 
                     {/* Route */}
-                    <p className="text-[11px] text-parchment-dim mb-4 tracking-wide font-light">{exp.route}</p>
+                    <p className="text-[11px] text-parchment/45 mb-4 tracking-wide font-light">{exp.route}</p>
 
                     {/* Metadata (Season, Difficulty, Group) */}
-                    <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-stone-light/80 mb-4 font-light">
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-stone-light/50 mb-4 font-light mono-number">
                       <span>{exp.season}</span>
                       <span>·</span>
                       <span>{exp.difficulty}</span>
@@ -162,7 +165,7 @@ export default function PackagesPage() {
                     {/* Includes Badges */}
                     <div className="flex flex-wrap gap-1 mb-6">
                       {exp.includes.map((inc) => (
-                        <span key={inc} className="px-2 py-0.5 text-[10px] bg-white/[0.02] text-stone-light/70 rounded border border-white/[0.02] font-light">
+                        <span key={inc} className="px-2 py-0.5 text-[10px] bg-white/[0.02] text-stone-light/45 rounded border border-white/[0.02] font-light">
                           {inc}
                         </span>
                       ))}
@@ -171,14 +174,14 @@ export default function PackagesPage() {
                     {/* Footer Row */}
                     <div className="mt-auto pt-4 border-t border-white/[0.04] flex items-center justify-between">
                       <div>
-                        <span className="text-lg font-semibold text-[#F5F5F5]">
+                        <span className="text-lg font-semibold text-snow/90 mono-number">
                           {exp.price}
                         </span>
-                        <span className="text-[11px] text-stone-light/60 ml-1.5">/{exp.priceNote}</span>
+                        <span className="text-[11px] text-stone-light/45 ml-1.5">/{exp.priceNote}</span>
                       </div>
                       <Link
                         href={exp.slug ? `/packages/${exp.slug}` : "/contact"}
-                        className="px-4 py-2 border border-white/15 hover:bg-white/[0.04] text-white hover:border-white/35 text-[10px] font-medium tracking-widest uppercase rounded-full transition-all duration-300 text-center"
+                        className="btn-outline text-[10px] tracking-widest py-2 px-4"
                       >
                         {exp.slug ? "View Expedition" : "Inquire"}
                       </Link>

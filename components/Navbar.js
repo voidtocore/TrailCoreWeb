@@ -19,6 +19,19 @@ const menuData = {
       { label: "international", status: "coming soon" },
     ]
   },
+  offgrid: {
+    label: "offgrid",
+    items: [
+      { label: "hidden escapes", href: "/packages" },
+      { label: "remote stays", status: "launching soon" },
+      { label: "cabin retreats", status: "coming soon" },
+      { label: "slow travel", status: "currently crafting" },
+      { label: "scenic routes", status: "coming soon" },
+      { label: "untouched places", status: "launching soon" },
+      { label: "digital detox", status: "coming soon" },
+      { label: "private escapes", status: "currently crafting" },
+    ]
+  },
   stays: {
     label: "stays",
     items: [
