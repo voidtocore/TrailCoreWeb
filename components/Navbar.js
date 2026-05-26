@@ -305,21 +305,29 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
+
+      // DO NOT lock html scrolling
+      document.documentElement.style.overflow = "";
+
+      // Destroy lenis influence temporarily
       if (window.lenis) {
         window.lenis.stop();
       }
     } else {
       setAnimationCompleted(false);
+
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+
       if (window.lenis) {
         window.lenis.start();
       }
     }
+
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+
       if (window.lenis) {
         window.lenis.start();
       }
@@ -510,10 +518,10 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Layout container */}
-        <div className="w-full flex-1 flex-shrink-0 px-6 pt-32 pb-8 relative z-10 flex flex-col">
+        <div className="w-full min-h-full px-6 pt-32 pb-8 relative z-10 flex flex-col overflow-y-scroll">
           <motion.div
             variants={mobileContainerVariants}
-            className="w-full flex flex-col space-y-4 flex-shrink-0"
+            className="w-full flex flex-col space-y-4"
           >
             {Object.keys(menuData).map((key, idx) => {
               const isExpanded = expandedSection === key;
