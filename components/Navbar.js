@@ -147,16 +147,16 @@ const menuTaglines = {
 };
 
 const desktopDropdownVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: -12,
     transition: {
       duration: 0.4,
       ease: [0.77, 0, 0.175, 1],
     }
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.55,
@@ -168,13 +168,13 @@ const desktopDropdownVariants = {
 };
 
 const dropdownItemVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 10,
     filter: "blur(4px)"
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
@@ -246,10 +246,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [animationCompleted, setAnimationCompleted] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  
+
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -260,7 +261,7 @@ export default function Navbar() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 30);
-      
+
       if (currentScrollY > 120) {
         if (currentScrollY > lastScrollY.current) {
           setVisible(false);
@@ -270,7 +271,7 @@ export default function Navbar() {
       } else {
         setVisible(true);
       }
-      
+
       lastScrollY.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -309,6 +310,7 @@ export default function Navbar() {
         window.lenis.stop();
       }
     } else {
+      setAnimationCompleted(false);
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
       if (window.lenis) {
@@ -331,11 +333,10 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={isLoaded ? { y: visible || mobileOpen ? 0 : -100, opacity: 1 } : { y: -100, opacity: 0 }}
         transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-colors duration-500 ${
-          scrolled || activeMenu
-            ? "bg-[#0c0d0c]/90 backdrop-blur-xl border-b border-white/[0.04] py-3"
-            : "bg-transparent py-5 sm:py-7"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-colors duration-500 ${scrolled || activeMenu
+          ? "bg-[#0c0d0c]/90 backdrop-blur-xl border-b border-white/[0.04] py-3"
+          : "bg-transparent py-5 sm:py-7"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
@@ -437,7 +438,7 @@ export default function Navbar() {
 
                 <div className="max-w-7xl mx-auto grid grid-cols-12 gap-16 relative z-10">
                   {/* Left Column: Editorial Tagline & Info */}
-                  <motion.div 
+                  <motion.div
                     variants={dropdownItemVariants}
                     className="col-span-4 flex flex-col justify-between border-r border-white/[0.03] pr-12"
                   >
@@ -490,9 +491,14 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={mobileOverlayVariants}
-        className="fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-full flex flex-col lg:hidden overscroll-contain"
-        style={{ 
-          clipPath: "circle(0px at 93% 40px)", 
+        onAnimationComplete={(definition) => {
+          if (definition === "open" && mobileOpen) {
+            setAnimationCompleted(true);
+          }
+        }}
+        className="fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
+        style={{
+          clipPath: animationCompleted ? "none" : undefined,
           willChange: "clip-path, opacity",
           WebkitOverflowScrolling: "touch",
           touchAction: "pan-y"
@@ -505,15 +511,15 @@ export default function Navbar() {
 
         {/* Mobile Menu Layout container */}
         <div className="w-full flex-1 flex-shrink-0 px-6 pt-32 pb-8 relative z-10 flex flex-col">
-          <motion.div 
+          <motion.div
             variants={mobileContainerVariants}
             className="w-full flex flex-col space-y-4 flex-shrink-0"
           >
             {Object.keys(menuData).map((key, idx) => {
               const isExpanded = expandedSection === key;
               return (
-                <motion.div 
-                  key={key} 
+                <motion.div
+                  key={key}
                   variants={mobileItemVariants}
                   className="border-b border-white/[0.02] pb-3.5 last:border-0"
                   style={{ willChange: "transform, opacity" }}
@@ -534,9 +540,8 @@ export default function Navbar() {
                   </button>
 
                   <div
-                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden ${
-                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                    }`}
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      }`}
                   >
                     <div className="overflow-hidden pl-6">
                       <div className="mt-3 pb-2 flex flex-col space-y-3">
