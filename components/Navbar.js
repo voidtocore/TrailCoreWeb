@@ -492,7 +492,7 @@ export default function Navbar() {
         initial="closed"
         animate={mobileOpen ? "open" : "closed"}
         variants={mobileOverlayVariants}
-        className="fixed inset-0 z-[990] bg-[#0c0d0c]/98 backdrop-blur-2xl flex flex-col justify-between pt-32 px-6 pb-8 overflow-y-auto lg:hidden"
+        className="fixed inset-0 z-[990] bg-[#0c0d0c]/98 backdrop-blur-2xl flex flex-col lg:hidden"
         style={{ clipPath: "circle(0px at 93% 40px)", willChange: "clip-path, opacity" }}
       >
         {/* Ambient radial background */}
@@ -501,11 +501,13 @@ export default function Navbar() {
         </div>
 
         {/* Scrollable Mobile Menu container */}
-        <div className="w-full flex-1 flex flex-col justify-between pt-6 relative z-10">
-          
+        <div 
+          className="w-full flex-1 overflow-y-auto overscroll-contain px-6 pt-32 pb-8 relative z-10 flex flex-col"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           <motion.div 
             variants={mobileContainerVariants}
-            className="w-full flex flex-col space-y-4"
+            className="w-full flex flex-col space-y-4 flex-shrink-0"
           >
             {Object.keys(menuData).map((key, idx) => {
               const isExpanded = expandedSection === key;
@@ -571,8 +573,11 @@ export default function Navbar() {
             })}
           </motion.div>
 
+          {/* Spacer that pushes content to bottom if it fits, but maintains minimal gap when content overflows */}
+          <div className="h-12 flex-shrink-0 mt-auto" />
+
           {/* Bottom Actions & Info (Mobile only) */}
-          <div className="mt-8 pt-6 border-t border-white/[0.03] w-full space-y-6">
+          <div className="pt-6 border-t border-white/[0.03] w-full space-y-6 flex-shrink-0">
             <a
               href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
               target="_blank"
