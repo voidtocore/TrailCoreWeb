@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 // Editorial easing — smooth cinematic feel (Lando Norris / Terminal Industries inspired)
 const EDITORIAL_EASE = [0.65, 0.05, 0, 1];
@@ -198,5 +199,74 @@ export function EditorialReveal({ children, delay = 0, className = "" }) {
     >
       {children}
     </motion.div>
+  );
+}
+
+/* ─── Premium Scroll-Linked Spatial Motion Components ─── */
+
+export function ParallaxText({ children, speed = 1, direction = 1, className = "" }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [-120 * speed * direction, 120 * speed * direction]);
+  const springY = useSpring(y, { stiffness: 45, damping: 25, restDelta: 0.001 });
+  
+  return (
+    <motion.div ref={ref} style={{ y: springY }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+export function ParallaxImage({ src, alt, speed = 0.5, className = "", aspect = "aspect-[16/10]" }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [-70 * speed, 70 * speed]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.06, 0.98]);
+  
+  const springY = useSpring(y, { stiffness: 50, damping: 25 });
+  const springScale = useSpring(scale, { stiffness: 50, damping: 25 });
+  
+  return (
+    <div ref={ref} className={`relative overflow-hidden ${aspect} ${className}`}>
+      <motion.div 
+        style={{ y: springY, scale: springScale }} 
+        className="absolute inset-0 w-full h-[120%] -top-[10%]"
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover cinematic-image"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+export function DriftTypography({ text, speed = 1, direction = 1, className = "" }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  
+  const x = useTransform(scrollYProgress, [0, 1], [-220 * speed * direction, 220 * speed * direction]);
+  const springX = useSpring(x, { stiffness: 45, damping: 25 });
+  
+  return (
+    <div ref={ref} className="overflow-hidden w-full whitespace-nowrap select-none pointer-events-none">
+      <motion.div style={{ x: springX }} className={`inline-block ${className}`}>
+        {text}
+      </motion.div>
+    </div>
   );
 }

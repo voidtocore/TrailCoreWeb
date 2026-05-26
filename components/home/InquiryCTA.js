@@ -1,24 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { FadeIn } from "../Animations";
+import { ParallaxText, DriftTypography } from "../Animations";
 
 export default function InquiryCTA() {
   return (
-    <section className="relative py-28 md:py-36 px-6 overflow-hidden bg-[#0c0d0c] border-t border-white/[0.03]">
+    <section className="relative py-32 md:py-44 px-6 overflow-hidden bg-[#0c0d0c] border-t border-white/[0.03]">
       {/* Subtle glowing radial accent */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[30%] left-[20%] right-[20%] w-[60%] h-[40%] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[120px] rounded-full mx-auto" />
       </div>
 
+      {/* Background kinetic text */}
+      <div className="absolute top-[35%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
+        <DriftTypography 
+          text="J O U R N E Y" 
+          speed={0.7} 
+          direction={1} 
+          className="text-[12vw] font-bold text-snow tracking-[0.2em] uppercase select-none" 
+        />
+      </div>
+
       <div className="max-w-3xl mx-auto text-center relative z-10">
-        <FadeIn>
+        <ParallaxText speed={0.1} direction={1}>
           <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-accent-warm mb-6">
             Begin Your Journey
           </span>
-        </FadeIn>
-        
-        <FadeIn delay={0.1}>
+          
           <h2
             className="text-[clamp(2.25rem,5.5vw,4.25rem)] font-semibold text-snow leading-[0.95] tracking-tight"
             style={{ fontFamily: "var(--font-outfit)" }}
@@ -27,16 +35,12 @@ export default function InquiryCTA() {
             <br />
             <span className="text-gradient-green">the Himalayas?</span>
           </h2>
-        </FadeIn>
 
-        <FadeIn delay={0.2}>
           <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed font-light max-w-lg mx-auto mt-6">
             Tell us about your expedition plans. Our mountain specialists will
             craft a journey tailored to your pace, interests, and season.
           </p>
-        </FadeIn>
 
-        <FadeIn delay={0.3}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <a
               href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
@@ -56,7 +60,7 @@ export default function InquiryCTA() {
               send an inquiry
             </Link>
           </div>
-        </FadeIn>
+        </ParallaxText>
       </div>
     </section>
   );

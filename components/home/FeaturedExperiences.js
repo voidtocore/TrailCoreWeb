@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "../SectionHeading";
-import { StaggerContainer, StaggerItem } from "../Animations";
+import { StaggerContainer, StaggerItem, ParallaxImage, ParallaxText, DriftTypography } from "../Animations";
 
 const expeditions = [
   {
@@ -17,6 +17,7 @@ const expeditions = [
     difficulty: "Moderate",
     badge: "Signature",
     alignOffset: "", // Default alignment
+    parallaxSpeed: 0.25,
   },
   {
     title: "Kinnaur Odyssey",
@@ -28,7 +29,8 @@ const expeditions = [
     season: "Mar — Nov",
     difficulty: "Easy",
     badge: "Scenic",
-    alignOffset: "md:mt-24", // Subtle offset
+    alignOffset: "md:mt-32", // Pushed further down for asymmetry
+    parallaxSpeed: 0.35,
   },
   {
     title: "Himalayan Escape",
@@ -41,6 +43,7 @@ const expeditions = [
     difficulty: "Challenging",
     badge: "Adventure",
     alignOffset: "",
+    parallaxSpeed: 0.2,
   },
   {
     title: "Winter Spiti Expedition",
@@ -52,21 +55,32 @@ const expeditions = [
     season: "Dec — Mar",
     difficulty: "Moderate",
     badge: "Limited",
-    alignOffset: "md:mt-24", // Subtle offset
+    alignOffset: "md:mt-32", // Pushed further down
+    parallaxSpeed: 0.3,
   },
 ];
 
 export default function FeaturedExperiences() {
   return (
-    <section className="section-editorial px-6 bg-[#0c0d0c]">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative section-editorial px-6 bg-[#0c0d0c] overflow-hidden">
+      {/* Background kinetic text */}
+      <div className="absolute top-[45%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
+        <DriftTypography 
+          text="E X P E D I T I O N S" 
+          speed={0.8} 
+          direction={-1} 
+          className="text-[12vw] font-bold text-snow tracking-[0.2em] uppercase select-none" 
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading
           label="Featured Expeditions"
           title="Journeys Worth Taking"
           description="Each route is curated for depth — slow paced, safe, and deeply immersive."
         />
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-0">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16 md:gap-y-0 mt-16">
           {expeditions.map((exp, idx) => (
             <StaggerItem 
               key={exp.title} 
@@ -77,52 +91,54 @@ export default function FeaturedExperiences() {
                 className="group block"
               >
                 <div className="flex flex-col">
-                  {/* Image container - Borderless, clean photographic frame */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#121413] rounded-[4px] border border-white/[0.03]">
-                    <Image
+                  {/* Visual Frame - drifting image using ParallaxImage */}
+                  <div className="rounded-[4px] border border-white/[0.03]">
+                    <ParallaxImage
                       src={exp.img}
                       alt={exp.title}
-                      fill
-                      className="object-cover cinematic-image transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      speed={0.25}
+                      aspect="aspect-[16/10]"
+                      className="rounded-[4px]"
                     />
                   </div>
 
-                  {/* Content Area - Stacked cleanly below image */}
-                  <div className="pt-6 flex flex-col">
-                    {/* Category Label */}
-                    <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-2.5">
-                      {exp.badge}
-                    </span>
-
-                    {/* Title */}
-                    <h3
-                      className="text-base sm:text-lg font-medium text-snow mb-2.5 tracking-tight"
-                      style={{ fontFamily: "var(--font-outfit)" }}
-                    >
-                      {exp.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed mb-4 max-w-md font-light">
-                      {exp.desc}
-                    </p>
-
-                    {/* Metadata Row */}
-                    <div className="flex items-center gap-x-4 text-[0.6875rem] text-parchment-dim font-light tracking-wide mono-number">
-                      <span className="flex items-center gap-1">
-                        {exp.duration}
+                  {/* Content Area - Stacked and drifting separately */}
+                  <ParallaxText speed={0.15} direction={idx % 2 === 0 ? 1 : -1}>
+                    <div className="pt-8 flex flex-col items-start">
+                      {/* Category Label */}
+                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-3">
+                        {exp.badge}
                       </span>
-                      <span className="text-white/10">|</span>
-                      <span>
-                        {exp.season}
-                      </span>
-                      <span className="text-white/10">|</span>
-                      <span className="text-stone">
-                        {exp.difficulty}
-                      </span>
+
+                      {/* Title */}
+                      <h3
+                        className="text-base sm:text-lg font-medium text-snow mb-3 tracking-tight"
+                        style={{ fontFamily: "var(--font-outfit)" }}
+                      >
+                        {exp.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed mb-5 max-w-md font-light">
+                        {exp.desc}
+                      </p>
+
+                      {/* Metadata Row */}
+                      <div className="flex items-center gap-x-4 text-[0.6875rem] text-parchment-dim font-light tracking-wide mono-number">
+                        <span>
+                          {exp.duration}
+                        </span>
+                        <span className="text-white/10">|</span>
+                        <span>
+                          {exp.route.split("→")[0]} to {exp.route.split("→").pop()}
+                        </span>
+                        <span className="text-white/10">|</span>
+                        <span className="text-stone">
+                          {exp.difficulty}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </ParallaxText>
                 </div>
               </Link>
             </StaggerItem>

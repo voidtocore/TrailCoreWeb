@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import SectionHeading from "../SectionHeading";
+import { ParallaxText, DriftTypography } from "../Animations";
 
 const departures = [
   {
@@ -36,16 +37,26 @@ const departures = [
 
 export default function AdventureSection() {
   return (
-    <section className="section-cinematic px-6 bg-[#0c0d0c]">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative section-cinematic px-6 bg-[#0c0d0c] overflow-hidden">
+      {/* Background kinetic text */}
+      <div className="absolute top-[40%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
+        <DriftTypography 
+          text="R O U T E S" 
+          speed={0.7} 
+          direction={-1} 
+          className="text-[12vw] font-bold text-snow tracking-[0.2em] uppercase select-none" 
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading
           label="Upcoming Departures"
           title="Join an Expedition"
           description="Fixed-date departures with small groups. Every route is curated, every experience is intentional."
         />
 
-        {/* Typographic Log Table - Stark Architectural Composition */}
-        <div className="mt-12 md:mt-20 overflow-x-auto">
+        {/* Typographic Log Table - stark editorial composition with drifting layout */}
+        <ParallaxText speed={0.08} direction={1} className="mt-12 md:mt-20 overflow-x-auto">
           <div className="min-w-[800px] w-full border-t border-b border-white/10 divide-y divide-white/[0.06]">
             {/* Table Header */}
             <div className="grid grid-cols-12 py-4 text-[0.625rem] font-bold uppercase tracking-[0.25em] text-stone-light/40">
@@ -102,9 +113,9 @@ export default function AdventureSection() {
               </div>
             ))}
           </div>
-        </div>
+        </ParallaxText>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <p className="text-[9px] text-stone tracking-[0.25em] uppercase font-light">
             Small Groups · Curated Routes · Meaningful Experiences
           </p>
