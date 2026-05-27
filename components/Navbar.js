@@ -482,17 +482,19 @@ export default function Navbar() {
           {/* Mobile Hamburger menu - visible ONLY below lg breakpoint */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden relative w-11 h-11 flex items-center justify-center rounded-lg z-[1001] text-snow cursor-pointer"
+            className={`mobile-menu-toggle ${mobileOpen ? "mobile-menu-close" : ""} lg:hidden relative w-11 h-11 flex items-center justify-center rounded-lg z-[1001] cursor-pointer`}
             aria-label="Toggle menu"
           >
             <div className="relative w-5 h-3 flex items-center justify-center">
               <span
-                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${mobileOpen ? "rotate-45" : "-translate-y-[4px]"
-                  }`}
+                className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
+                  mobileOpen ? "rotate-45 bg-black" : "-translate-y-[4px] bg-snow"
+                }`}
               />
               <span
-                className={`absolute block h-[1px] w-5 bg-snow transition-transform duration-300 ease-out ${mobileOpen ? "-rotate-45" : "translate-y-[4px]"
-                  }`}
+                className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
+                  mobileOpen ? "-rotate-45 bg-black" : "translate-y-[4px] bg-snow"
+                }`}
               />
             </div>
           </button>
@@ -566,7 +568,7 @@ export default function Navbar() {
       {/* Mobile-only Fullscreen Circular Overlay Menu */}
       <div
         ref={mobileOverlayRef}
-        className="fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
+        className="mobile-menu-overlay fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
         style={{
           clipPath: "circle(0% at 90% 5%)",
           willChange: "clip-path",
@@ -589,7 +591,7 @@ export default function Navbar() {
               return (
                 <div
                   key={key}
-                  className="mobile-nav-link border-b border-white/[0.02] pb-3.5 last:border-0"
+                  className="mobile-nav-link menu-link border-b border-white/[0.02] pb-3.5 last:border-0"
                   style={{ willChange: "transform, opacity" }}
                 >
                   <button

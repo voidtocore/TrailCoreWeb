@@ -325,3 +325,32 @@ img {
 .mobile-menu-scroll::-webkit-scrollbar {
   display: none;
 }
+
+@media screen and (max-width: 768px) {
+  /* Target the primary full-screen mobile menu wrapper */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff; /* Premium white background */
+    color: #000000;    /* Dark typography */
+    z-index: 9999;     /* Layered securely above all content */
+    
+    /* Starting configuration: Masked out completely at top-right click target */
+    clip-path: circle(0% at 90% 5%);
+    visibility: hidden;
+    pointer-events: none;
+    
+    /* Hardware acceleration optimization for mobile rendering engines */
+    will-change: clip-path;
+  }
+
+  /* Target the semantic link elements inside the mobile panel */
+  .mobile-menu-overlay .menu-link {
+    opacity: 0;
+    transform: translateY(40px);
+    display: block;
+  }
+}
