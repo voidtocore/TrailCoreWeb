@@ -266,6 +266,12 @@ export default function Navbar() {
     setScrollTop(e.currentTarget.scrollTop);
   };
 
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget || e.target.classList.contains('mobile-menu-layout-container')) {
+      setMobileOpen(false);
+    }
+  };
+
   const lastScrollY = useRef(0);
   const menuTimeline = useRef(null);
   const mobileOverlayRef = useRef(null);
@@ -597,6 +603,9 @@ export default function Navbar() {
           pointerEvents: "none"
         }}
       >
+        {/* Subtle noise/grain overlay */}
+        <div className="mobile-noise-overlay absolute inset-0 pointer-events-none z-10" />
+
         {/* Dynamic Image Preview Panel */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           {Object.keys(categoryImages).map((key) => {
@@ -607,7 +616,7 @@ export default function Navbar() {
                 key={key}
                 className="absolute inset-0 transition-opacity duration-[1200ms] ease-[cubic-bezier(0.65,0.05,0,1)]"
                 style={{
-                  opacity: isActive && mobileOpen ? 0.12 : 0,
+                  opacity: isActive && mobileOpen ? 0.08 : 0,
                   transform: `translateY(${translateY}px) scale(${isActive ? 1.05 : 1.1})`,
                   transitionProperty: "opacity, transform",
                   willChange: "opacity, transform"
@@ -618,7 +627,7 @@ export default function Navbar() {
                   alt="Destination preview"
                   fill
                   priority
-                  className="object-cover filter saturate-50 contrast-125 brightness-75"
+                  className="object-cover filter saturate-50 contrast-125 brightness-50"
                 />
               </div>
             );
@@ -634,31 +643,81 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Layout container */}
-        <div className="w-full min-h-full px-6 pt-36 pb-12 relative z-10 flex flex-col justify-between">
-          <div className="w-full flex flex-col space-y-4">
+        <div 
+          onClick={handleOverlayClick}
+          className="mobile-menu-layout-container w-full min-h-full px-6 pt-36 pb-12 relative z-10 flex flex-col justify-between"
+        >
+          {/* Layered 3D Floating Cards Stack */}
+          <div className="w-full flex flex-col space-y-6 max-w-md mx-auto" style={{ transformStyle: "preserve-3d" }}>
             {Object.keys(menuData).map((key, idx) => {
               const isExpanded = expandedSection === key;
+              const xOffset = isExpanded ? 0 : (idx % 3 === 0 ? -10 : idx % 3 === 1 ? 10 : 0);
+              const zDepth = isExpanded ? 35 : (idx % 2 === 0 ? 15 : -15);
+
               return (
-                <div
+                <motion.div
                   key={key}
-                  className="mobile-nav-link menu-link border-b border-white/[0.03] pb-4 last:border-0"
-                  style={{ willChange: "transform, opacity" }}
+                  className="mobile-nav-link menu-link w-full border rounded-xl overflow-hidden bg-black/45 backdrop-blur-md relative flex flex-col transition-colors duration-500"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    willChange: "transform, opacity",
+                    boxShadow: isExpanded 
+                      ? "0 25px 50px -12px rgba(0, 0, 0, 0.85)" 
+                      : "0 12px 30px -8px rgba(0, 0, 0, 0.5)",
+                    borderColor: isExpanded 
+                      ? "rgba(189, 159, 118, 0.25)" 
+                      : "rgba(255, 255, 255, 0.04)"
+                  }}
+                  animate={{
+                    x: xOffset,
+                    z: zDepth,
+                    y: isExpanded ? 0 : [0, -8, 0],
+                    rotateX: isExpanded ? 0 : [0, 1.2, 0],
+                    rotateY: isExpanded ? 0 : [0, -1.2, 0],
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 20,
+                    y: isExpanded 
+                      ? { duration: 0.3 } 
+                      : { duration: 6 + idx * 1.2, repeat: Infinity, ease: "easeInOut" },
+                    rotateX: isExpanded 
+                      ? { duration: 0.3 } 
+                      : { duration: 8 + idx * 1.5, repeat: Infinity, ease: "easeInOut" },
+                    rotateY: isExpanded 
+                      ? { duration: 0.3 } 
+                      : { duration: 7 + idx * 1.1, repeat: Infinity, ease: "easeInOut" }
+                  }}
                 >
+                  {/* Card Background Preview Image */}
+                  <div className="absolute inset-0 z-0 opacity-[0.14] filter grayscale saturate-0 contrast-125 transition-opacity duration-700">
+                    <Image
+                      src={categoryImages[key]}
+                      alt=""
+                      fill
+                      priority
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  </div>
+
+                  {/* Card Header Trigger */}
                   <button
                     onClick={() => setExpandedSection(isExpanded ? null : key)}
                     onMouseEnter={() => setHoveredCategory(key)}
                     onMouseLeave={() => setHoveredCategory(null)}
-                    className="w-full flex justify-between items-center py-4 focus:outline-none cursor-pointer"
+                    className="w-full flex justify-between items-center p-5 focus:outline-none cursor-pointer relative z-10 text-left"
                   >
                     <div className="flex items-start gap-4">
                       <span className="text-[9px] font-mono text-accent-warm/40 mt-1 select-none tabular-nums">
                         {String(idx + 1).padStart(2, "0")}
                       </span>
                       <div className="flex flex-col items-start text-left">
-                        <span className="text-[8px] font-mono tracking-[0.22em] text-accent-warm/50 mb-0.5 uppercase">
+                        <span className="text-[8px] font-mono tracking-[0.22em] text-accent-warm/60 mb-0.5 uppercase">
                           {menuTaglines[key]?.tag}
                         </span>
-                        <span className="text-2xl font-light tracking-[0.06em] text-snow/90 uppercase font-display transition-colors duration-300">
+                        <span className="text-xl font-light tracking-[0.06em] text-snow/90 uppercase font-display">
                           {menuData[key].label}
                         </span>
                       </div>
@@ -670,12 +729,14 @@ export default function Navbar() {
                     </span>
                   </button>
 
+                  {/* Card Expanded Content */}
                   <div
-                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                      }`}
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden relative z-10 ${
+                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
                   >
-                    <div className="overflow-hidden pl-6">
-                      <div className="mt-3 pb-3 flex flex-col space-y-3.5">
+                    <div className="overflow-hidden px-5 pb-5">
+                      <div className="border-t border-white/5 pt-4 flex flex-col space-y-3">
                         {menuData[key].items.map((item) => (
                           <div key={item.label}>
                             {item.href ? (
@@ -683,16 +744,16 @@ export default function Navbar() {
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
                                 tabIndex={isExpanded ? 0 : -1}
-                                className="group/mob-link flex items-center gap-3.5 py-1.5 text-[11px] font-medium tracking-[0.12em] text-parchment/60 active:text-snow hover:text-snow transition-all duration-300 uppercase"
+                                className="group/mob-link flex items-center gap-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-parchment/60 active:text-snow hover:text-snow transition-all duration-300 uppercase"
                               >
-                                <span className="w-1 h-1 rounded-full bg-accent-warm/40 group-hover/mob-link:bg-accent-warm transition-all duration-300 scale-75 group-hover/mob-link:scale-100" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent-warm/40 group-hover/mob-link:bg-accent-warm transition-all duration-300 scale-75 group-hover/mob-link:scale-100" />
                                 {item.label}
                               </Link>
                             ) : (
-                              <div className="py-1.5 flex items-center gap-3.5 opacity-30 select-none">
-                                <span className="w-1 h-1 rounded-full bg-white/15" />
+                              <div className="py-1.5 flex items-center gap-3 opacity-30 select-none">
+                                <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
                                 <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/40 uppercase">{item.label}</span>
-                                <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase">
+                                <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase ml-1">
                                   {item.status || "SOON"}
                                 </span>
                               </div>
@@ -702,7 +763,7 @@ export default function Navbar() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

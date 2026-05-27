@@ -307,15 +307,19 @@ h6 {
     color: var(--color-foreground);
     z-index: 9999;
     
+    /* Spacious 3D perspective for card depth */
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    
     /* Subtle blur/glass background mix */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     
     clip-path: circle(0% at 90% 5%);
     visibility: hidden;
     pointer-events: none;
     
-    will-change: clip-path, opacity, visibility;
+    will-change: clip-path, opacity, visibility, transform;
     transform: translateZ(0);
     backface-visibility: hidden;
     
@@ -348,6 +352,17 @@ h6 {
     opacity: 0;
     transform: translateY(40px);
     display: block;
+    transform-style: preserve-3d;
+  }
+
+  /* Subtle noise/grain overlay */
+  .mobile-noise-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.02;
+    z-index: 5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   }
 
   /* Typography / color overrides inside the dark menu */
