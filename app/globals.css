@@ -53,15 +53,14 @@
   --container-max: 1280px;
 }
 
-/* ─── Smooth Scrolling ─── */
+/* ─── Base Styles & Reset ─── */
 html[data-scroll-behavior="smooth"] {
   scroll-behavior: smooth;
 }
 
-/* ─── Base Body ─── */
 body {
-  background: #0c0d0c;
-  color: rgba(255, 255, 255, 0.82);
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   font-weight: 400;
   line-height: 1.7;
@@ -76,77 +75,73 @@ h3,
 h4,
 h5,
 h6 {
-  color: #F5F5F5;
+  color: var(--color-snow);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1.05;
 }
 
-/* ─── Custom Scrollbar ─── */
+/* ─── Scrollbar & Selection Customization ─── */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0c0d0c;
+  background: var(--color-background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #191b1a;
+  background: var(--color-mountain-800);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #383c39;
+  background: var(--color-mountain-600);
 }
 
-/* ─── Selection ─── */
 ::selection {
   background: rgba(72, 135, 96, 0.25);
-  color: #F5F5F5;
+  color: var(--color-snow);
 }
 
-/* ─── Editorial Surface ─── */
+/* ─── Component Styles ─── */
 .editorial-surface {
-  background: #121413;
+  background-color: var(--color-mountain-900);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 4px;
   transition: border-color var(--duration-fast) ease,
-    background var(--duration-fast) ease;
+              background-color var(--duration-fast) ease;
 }
 
 .editorial-surface:hover {
   border-color: rgba(255, 255, 255, 0.08);
-  background: #151817;
+  background-color: var(--color-mountain-800);
 }
 
-/* ─── Editorial Card ─── */
 .editorial-card {
-  background: #121413;
+  background-color: var(--color-mountain-900);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 4px;
   overflow: hidden;
   transition: border-color var(--duration-fast) ease,
-    background var(--duration-fast) ease;
+              background-color var(--duration-fast) ease;
 }
 
 .editorial-card:hover {
   border-color: rgba(255, 255, 255, 0.08);
-  background: #151817;
+  background-color: var(--color-mountain-800);
 }
 
-/* ─── Programmatic Cinematic Image Filter ─── */
 .cinematic-image {
   filter: saturate(0.68) brightness(0.85) contrast(0.96) sepia(0.04) hue-rotate(6deg);
   transition: filter var(--duration-default) var(--ease-editorial),
-    transform var(--duration-default) var(--ease-editorial);
+              transform var(--duration-default) var(--ease-editorial);
 }
 
 .group:hover .cinematic-image {
   filter: saturate(0.78) brightness(0.92) contrast(0.98) sepia(0.02) hue-rotate(3deg);
 }
 
-/* ─── Editorial Divider ─── */
 .editorial-divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.03);
@@ -154,7 +149,7 @@ h6 {
   margin: 0;
 }
 
-/* ─── Outline Button System ─── */
+/* ─── Button & Link Utility Systems ─── */
 .btn-outline {
   display: inline-flex;
   align-items: center;
@@ -162,19 +157,21 @@ h6 {
   padding: 0.7rem 1.75rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: transparent;
-  color: #FFFFFF;
+  color: var(--color-snow);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 9999px;
-  transition: all var(--duration-fast) ease;
+  transition: background-color var(--duration-fast) ease,
+              border-color var(--duration-fast) ease,
+              transform var(--duration-fast) ease;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -182,22 +179,20 @@ h6 {
   transform: scale(0.98);
 }
 
-/* ─── Text Gradients ─── */
 .text-gradient {
-  background: linear-gradient(135deg, #F5F5F5 0%, #a09a8e 100%);
+  background: linear-gradient(135deg, var(--color-snow) 0%, var(--color-stone) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-green {
-  background: linear-gradient(135deg, #4a9a6a 0%, #2d5a3f 100%);
+  background: linear-gradient(135deg, var(--color-forest-glow) 0%, var(--color-expedition-green) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ─── Animated Link Underline ─── */
 .link-underline {
   position: relative;
   display: inline-block;
@@ -222,19 +217,17 @@ h6 {
   transform-origin: left;
 }
 
-/* ─── Smooth Image Loading ─── */
-img {
+.smooth-image {
   transition: opacity 0.4s ease;
 }
 
-/* ─── Mono Number Styling (Terminal Industries) ─── */
 .mono-number {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
 }
 
-/* ─── Section Spacing ─── */
+/* ─── Layout & Spacing Utilities ─── */
 .section-editorial {
   padding-top: clamp(5rem, 10vw, 9rem);
   padding-bottom: clamp(5rem, 10vw, 9rem);
@@ -245,13 +238,11 @@ img {
   padding-bottom: clamp(4rem, 10vw, 10rem);
 }
 
-/* ─── Section Divider (Legacy) ─── */
 .section-divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.03);
 }
 
-/* ─── Alpine Radial Glow ─── */
 .alpine-glow {
   position: absolute;
   top: -30%;
@@ -262,7 +253,11 @@ img {
   pointer-events: none;
   filter: blur(150px);
   border-radius: 9999px;
-  background: radial-gradient(circle, #2d5a3f 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-expedition-green) 0%, transparent 70%);
+}
+
+.tracking-expedition {
+  letter-spacing: 0.2em;
 }
 
 /* ─── Animation Keyframes ─── */
@@ -271,7 +266,6 @@ img {
     opacity: 0;
     transform: translateY(24px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -282,29 +276,25 @@ img {
   from {
     transform: scale(1);
   }
-
   to {
     transform: scale(1.03);
   }
 }
 
-/* ─── Mobile Menu Scroll ─── */
+/* ─── Mobile Scrollbar and Touch Config ─── */
+.mobile-menu-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 .mobile-menu-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.mobile-menu-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* ─── Premium Letter Spacing ─── */
-.tracking-expedition {
-  letter-spacing: 0.2em;
-}
-
-/* ─── Mobile Refinements ─── */
-@media (max-width: 768px) {
+/* ─── Mobile Viewport Overrides ─── */
+@media screen and (max-width: 768px) {
   .section-cinematic {
     padding-top: clamp(3.5rem, 8vw, 6rem);
     padding-bottom: clamp(3.5rem, 8vw, 6rem);
@@ -314,43 +304,80 @@ img {
     padding-top: clamp(3rem, 7vw, 5rem);
     padding-bottom: clamp(3rem, 7vw, 5rem);
   }
-}
 
-.mobile-menu-scroll {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  scrollbar-width: none;
-}
-
-.mobile-menu-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
-  /* Target the primary full-screen mobile menu wrapper */
+  /* Fullscreen mobile overlay */
   .mobile-menu-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #ffffff; /* Premium white background */
-    color: #000000;    /* Dark typography */
-    z-index: 9999;     /* Layered securely above all content */
+    inset: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background: #ffffff;
+    color: #000000;
+    z-index: 9999;
     
-    /* Starting configuration: Masked out completely at top-right click target */
     clip-path: circle(0% at 90% 5%);
     visibility: hidden;
     pointer-events: none;
     
-    /* Hardware acceleration optimization for mobile rendering engines */
-    will-change: clip-path;
+    will-change: clip-path, opacity, visibility;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    
+    transition: clip-path 0.85s var(--ease-editorial),
+                opacity 0.85s var(--ease-editorial),
+                visibility 0.85s var(--ease-editorial);
   }
 
-  /* Target the semantic link elements inside the mobile panel */
+  /* Overlay open state */
+  .mobile-menu-overlay.is-active {
+    clip-path: circle(150% at 90% 5%);
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  /* Stagger link items starting state */
   .mobile-menu-overlay .menu-link {
     opacity: 0;
     transform: translateY(40px);
     display: block;
+  }
+
+  /* Color overrides inside the white menu */
+  .mobile-menu-overlay button,
+  .mobile-menu-overlay a,
+  .mobile-menu-overlay span,
+  .mobile-menu-overlay div {
+    color: #000000 !important;
+  }
+
+  .mobile-menu-overlay .text-accent-warm\/40,
+  .mobile-menu-overlay .text-accent-warm {
+    color: var(--color-accent-warm) !important;
+  }
+
+  .mobile-menu-overlay .border-b,
+  .mobile-menu-overlay .border-t {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+  }
+}
+
+/* ─── Accessibility Support ─── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .mobile-menu-overlay {
+    transition: opacity 0.1s ease, visibility 0.1s ease !important;
+    clip-path: none !important;
+  }
+  
+  .mobile-menu-overlay.is-active {
+    clip-path: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
