@@ -37,6 +37,10 @@
   --color-accent-warm: #bd9f76;
   --color-accent-gold: #b39969;
 
+  /* ─── Base Absolute Colors ─── */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
   /* ─── Typography ─── */
   --font-sans: var(--font-inter);
   --font-display: var(--font-outfit);
@@ -100,27 +104,27 @@ h6 {
 }
 
 ::selection {
-  background: rgba(72, 135, 96, 0.25);
+  background: color-mix(in srgb, var(--color-forest-glow) 25%, transparent);
   color: var(--color-snow);
 }
 
 /* ─── Component Styles ─── */
 .editorial-surface {
   background-color: var(--color-mountain-900);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid color-mix(in srgb, var(--color-white) 4%, transparent);
   border-radius: 4px;
   transition: border-color var(--duration-fast) ease,
               background-color var(--duration-fast) ease;
 }
 
 .editorial-surface:hover {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: color-mix(in srgb, var(--color-white) 8%, transparent);
   background-color: var(--color-mountain-800);
 }
 
 .editorial-card {
   background-color: var(--color-mountain-900);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid color-mix(in srgb, var(--color-white) 4%, transparent);
   border-radius: 4px;
   overflow: hidden;
   transition: border-color var(--duration-fast) ease,
@@ -128,7 +132,7 @@ h6 {
 }
 
 .editorial-card:hover {
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: color-mix(in srgb, var(--color-white) 8%, transparent);
   background-color: var(--color-mountain-800);
 }
 
@@ -144,7 +148,7 @@ h6 {
 
 .editorial-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.03);
+  background: color-mix(in srgb, var(--color-white) 3%, transparent);
   border: none;
   margin: 0;
 }
@@ -155,7 +159,7 @@ h6 {
   align-items: center;
   justify-content: center;
   padding: 0.7rem 1.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid color-mix(in srgb, var(--color-white) 15%, transparent);
   background: transparent;
   color: var(--color-snow);
   font-size: 0.6875rem;
@@ -171,8 +175,8 @@ h6 {
 }
 
 .btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: color-mix(in srgb, var(--color-white) 5%, transparent);
+  border-color: color-mix(in srgb, var(--color-white) 30%, transparent);
 }
 
 .btn-outline:active {
@@ -240,7 +244,7 @@ h6 {
 
 .section-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.03);
+  background: color-mix(in srgb, var(--color-white) 3%, transparent);
 }
 
 .alpine-glow {
@@ -281,18 +285,6 @@ h6 {
   }
 }
 
-/* ─── Mobile Scrollbar and Touch Config ─── */
-.mobile-menu-scroll {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.mobile-menu-scroll::-webkit-scrollbar {
-  display: none;
-}
-
 /* ─── Mobile Viewport Overrides ─── */
 @media screen and (max-width: 768px) {
   .section-cinematic {
@@ -311,8 +303,8 @@ h6 {
     inset: 0;
     width: 100dvw;
     height: 100dvh;
-    background: #ffffff;
-    color: #000000;
+    background: var(--color-white);
+    color: var(--color-black);
     z-index: 9999;
     
     clip-path: circle(0% at 90% 5%);
@@ -323,16 +315,28 @@ h6 {
     transform: translateZ(0);
     backface-visibility: hidden;
     
-    transition: clip-path 0.85s var(--ease-editorial),
-                opacity 0.85s var(--ease-editorial),
-                visibility 0.85s var(--ease-editorial);
+    /* Touch scrolling and stability config */
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    
+    transition: clip-path var(--duration-default) var(--ease-editorial),
+                opacity var(--duration-default) var(--ease-editorial),
+                visibility var(--duration-default) var(--ease-editorial);
+  }
+
+  .mobile-menu-overlay::-webkit-scrollbar {
+    display: none;
   }
 
   /* Overlay open state */
   .mobile-menu-overlay.is-active {
     clip-path: circle(150% at 90% 5%);
     visibility: visible;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   /* Stagger link items starting state */
@@ -347,7 +351,7 @@ h6 {
   .mobile-menu-overlay a,
   .mobile-menu-overlay span,
   .mobile-menu-overlay div {
-    color: #000000 !important;
+    color: var(--color-black) !important;
   }
 
   .mobile-menu-overlay .text-accent-warm\/40,
@@ -357,7 +361,7 @@ h6 {
 
   .mobile-menu-overlay .border-b,
   .mobile-menu-overlay .border-t {
-    border-color: rgba(0, 0, 0, 0.06) !important;
+    border-color: color-mix(in srgb, var(--color-black) 6%, transparent) !important;
   }
 }
 
