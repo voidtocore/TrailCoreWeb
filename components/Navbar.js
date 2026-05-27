@@ -488,12 +488,12 @@ export default function Navbar() {
             <div className="relative w-5 h-3 flex items-center justify-center">
               <span
                 className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "rotate-45 bg-black" : "-translate-y-[4px] bg-snow"
+                  mobileOpen ? "rotate-45 bg-snow" : "-translate-y-[4px] bg-snow"
                 }`}
               />
               <span
                 className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "-rotate-45 bg-black" : "translate-y-[4px] bg-snow"
+                  mobileOpen ? "-rotate-45 bg-snow" : "translate-y-[4px] bg-snow"
                 }`}
               />
             </div>
@@ -568,7 +568,7 @@ export default function Navbar() {
       {/* Mobile-only Fullscreen Circular Overlay Menu */}
       <div
         ref={mobileOverlayRef}
-        className="mobile-menu-overlay fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
+        className="mobile-menu-overlay fixed inset-0 z-[990] bg-[#050505]/95 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
         style={{
           clipPath: "circle(0% at 90% 5%)",
           willChange: "clip-path",

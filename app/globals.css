@@ -303,9 +303,13 @@ h6 {
     inset: 0;
     width: 100dvw;
     height: 100dvh;
-    background: var(--color-white);
-    color: var(--color-black);
+    background: #050505;
+    color: var(--color-foreground);
     z-index: 9999;
+    
+    /* Subtle blur/glass background mix */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     
     clip-path: circle(0% at 90% 5%);
     visibility: hidden;
@@ -346,22 +350,33 @@ h6 {
     display: block;
   }
 
-  /* Color overrides inside the white menu */
+  /* Typography / color overrides inside the dark menu */
   .mobile-menu-overlay button,
   .mobile-menu-overlay a,
   .mobile-menu-overlay span,
   .mobile-menu-overlay div {
-    color: var(--color-black) !important;
+    /* Let Tailwind colors shine, only override to fit dark mode layout */
+    transition: color var(--duration-fast) ease, opacity var(--duration-fast) ease;
   }
 
-  .mobile-menu-overlay .text-accent-warm\/40,
+  /* Active states & typography hover highlights */
+  .mobile-menu-overlay a:hover,
+  .mobile-menu-overlay button:hover {
+    color: var(--color-snow) !important;
+  }
+
+  .mobile-menu-overlay .text-accent-warm\/40 {
+    color: color-mix(in srgb, var(--color-accent-warm) 40%, transparent) !important;
+  }
+
   .mobile-menu-overlay .text-accent-warm {
     color: var(--color-accent-warm) !important;
   }
 
+  /* Subtle translucent white borders */
   .mobile-menu-overlay .border-b,
   .mobile-menu-overlay .border-t {
-    border-color: color-mix(in srgb, var(--color-black) 6%, transparent) !important;
+    border-color: color-mix(in srgb, var(--color-white) 3%, transparent) !important;
   }
 }
 
