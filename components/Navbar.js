@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
 import { useLoading } from "./home/LoadingOrchestrator";
 
 const menuData = {
@@ -246,12 +247,13 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [animationCompleted, setAnimationCompleted] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const lastScrollY = useRef(0);
+  const menuTimeline = useRef(null);
+  const mobileOverlayRef = useRef(null);
 
   useEffect(() => {
     setHoveredIndex(null);
@@ -314,8 +316,6 @@ export default function Navbar() {
         window.lenis.stop();
       }
     } else {
-      setAnimationCompleted(false);
-
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
 
@@ -332,6 +332,75 @@ export default function Navbar() {
         window.lenis.start();
       }
     };
+  }, [mobileOpen]);
+
+  // GSAP Mobile Menu Animation system
+  useEffect(() => {
+    let mm = gsap.matchMedia();
+
+    mm.add("(max-width: 1023px)", () => {
+      const tl = gsap.timeline({
+        paused: true,
+        onComplete: () => {
+          gsap.set(mobileOverlayRef.current, { clipPath: "none" });
+        }
+      });
+
+      // Initial setup of overlay
+      gsap.set(mobileOverlayRef.current, {
+        clipPath: "circle(0% at 90% 5%)",
+        visibility: "hidden",
+        pointerEvents: "none"
+      });
+
+      // Overlay Reveal circle transition
+      tl.to(mobileOverlayRef.current, {
+        clipPath: "circle(150% at 90% 5%)",
+        visibility: "visible",
+        pointerEvents: "all",
+        duration: 0.85,
+        ease: "power4.inOut"
+      });
+
+      // Text Stagger of mobile links
+      const links = mobileOverlayRef.current.querySelectorAll(".mobile-nav-link");
+      if (links.length > 0) {
+        tl.fromTo(links,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.08 },
+          "-=0.3"
+        );
+      }
+
+      menuTimeline.current = tl;
+
+      if (mobileOpen) {
+        tl.progress(1);
+        gsap.set(mobileOverlayRef.current, { clipPath: "none" });
+      }
+
+      return () => {
+        if (menuTimeline.current) {
+          menuTimeline.current.kill();
+          menuTimeline.current = null;
+        }
+      };
+    });
+
+    return () => mm.revert();
+  }, []);
+
+  // Sync mobileOpen state changes with GSAP timeline
+  useEffect(() => {
+    if (menuTimeline.current) {
+      if (mobileOpen) {
+        menuTimeline.current.play();
+      } else {
+        // First reset clipPath back to circle shape so GSAP can animate the reverse sequence
+        gsap.set(mobileOverlayRef.current, { clipPath: "circle(150% at 90% 5%)" });
+        menuTimeline.current.reverse();
+      }
+    }
   }, [mobileOpen]);
 
   return (
@@ -495,21 +564,16 @@ export default function Navbar() {
       </motion.nav>
 
       {/* Mobile-only Fullscreen Circular Overlay Menu */}
-      <motion.div
-        initial="closed"
-        animate={mobileOpen ? "open" : "closed"}
-        variants={mobileOverlayVariants}
-        onAnimationComplete={(definition) => {
-          if (definition === "open" && mobileOpen) {
-            setAnimationCompleted(true);
-          }
-        }}
+      <div
+        ref={mobileOverlayRef}
         className="fixed inset-0 z-[990] bg-[#0c0d0c] overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
         style={{
-          clipPath: animationCompleted ? "none" : undefined,
-          willChange: "clip-path, opacity",
+          clipPath: "circle(0% at 90% 5%)",
+          willChange: "clip-path",
           WebkitOverflowScrolling: "touch",
-          touchAction: "pan-y"
+          touchAction: "pan-y",
+          visibility: "hidden",
+          pointerEvents: "none"
         }}
       >
         {/* Ambient radial background */}
@@ -519,17 +583,13 @@ export default function Navbar() {
 
         {/* Mobile Menu Layout container */}
         <div className="w-full min-h-full px-6 pt-32 pb-8 relative z-10 flex flex-col overflow-y-scroll">
-          <motion.div
-            variants={mobileContainerVariants}
-            className="w-full flex flex-col space-y-4"
-          >
+          <div className="w-full flex flex-col space-y-4">
             {Object.keys(menuData).map((key, idx) => {
               const isExpanded = expandedSection === key;
               return (
-                <motion.div
+                <div
                   key={key}
-                  variants={mobileItemVariants}
-                  className="border-b border-white/[0.02] pb-3.5 last:border-0"
+                  className="mobile-nav-link border-b border-white/[0.02] pb-3.5 last:border-0"
                   style={{ willChange: "transform, opacity" }}
                 >
                   <button
@@ -579,10 +639,10 @@ export default function Navbar() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
 
           {/* Spacer that pushes content to bottom if it fits, but maintains minimal gap when content overflows */}
           <div className="h-12 flex-shrink-0 mt-auto" />
@@ -605,7 +665,7 @@ export default function Navbar() {
           </div>
 
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }
