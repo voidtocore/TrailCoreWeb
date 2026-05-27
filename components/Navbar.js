@@ -147,6 +147,15 @@ const menuTaglines = {
   }
 };
 
+const categoryImages = {
+  discover: "/images/spiti-valley.png",
+  offgrid: "/images/camping.png",
+  stays: "/images/kalpa.png",
+  editions: "/images/road-trip.png",
+  reserve: "/images/river.png",
+  studio: "/images/kaza.png"
+};
+
 const desktopDropdownVariants = {
   hidden: {
     opacity: 0,
@@ -250,6 +259,12 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const handleMobileScroll = (e) => {
+    setScrollTop(e.currentTarget.scrollTop);
+  };
 
   const lastScrollY = useRef(0);
   const menuTimeline = useRef(null);
@@ -322,6 +337,9 @@ export default function Navbar() {
       if (window.lenis) {
         window.lenis.start();
       }
+      setHoveredCategory(null);
+      setExpandedSection(null);
+      setScrollTop(0);
     }
 
     return () => {
@@ -568,6 +586,7 @@ export default function Navbar() {
       {/* Mobile-only Fullscreen Circular Overlay Menu */}
       <div
         ref={mobileOverlayRef}
+        onScroll={handleMobileScroll}
         className="mobile-menu-overlay fixed inset-0 z-[990] bg-[#050505]/95 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
         style={{
           clipPath: "circle(0% at 90% 5%)",
@@ -578,32 +597,74 @@ export default function Navbar() {
           pointerEvents: "none"
         }}
       >
-        {/* Ambient radial background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[20%] left-[30%] right-[30%] w-[40%] h-[40%] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[120px] rounded-full mx-auto" />
+        {/* Dynamic Image Preview Panel */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {Object.keys(categoryImages).map((key) => {
+            const isActive = (expandedSection || hoveredCategory || 'discover') === key;
+            const translateY = scrollTop * 0.15;
+            return (
+              <div
+                key={key}
+                className="absolute inset-0 transition-opacity duration-[1200ms] ease-[cubic-bezier(0.65,0.05,0,1)]"
+                style={{
+                  opacity: isActive && mobileOpen ? 0.12 : 0,
+                  transform: `translateY(${translateY}px) scale(${isActive ? 1.05 : 1.1})`,
+                  transitionProperty: "opacity, transform",
+                  willChange: "opacity, transform"
+                }}
+              >
+                <Image
+                  src={categoryImages[key]}
+                  alt="Destination preview"
+                  fill
+                  priority
+                  className="object-cover filter saturate-50 contrast-125 brightness-75"
+                />
+              </div>
+            );
+          })}
+          {/* Atmospheric soft overlay gradient for depth and readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/98 via-[#050505]/92 to-[#050505]/98" />
+        </div>
+
+        {/* Ambient radial background lighting / cinematic glow */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-[10%] left-[20%] w-[80vw] h-[80vw] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[130px] rounded-full" />
+          <div className="absolute bottom-[20%] right-[-10%] w-[70vw] h-[70vw] opacity-[0.02] bg-radial from-accent-warm to-transparent blur-[110px] rounded-full" />
         </div>
 
         {/* Mobile Menu Layout container */}
-        <div className="w-full min-h-full px-6 pt-32 pb-8 relative z-10 flex flex-col overflow-y-scroll">
+        <div className="w-full min-h-full px-6 pt-36 pb-12 relative z-10 flex flex-col justify-between">
           <div className="w-full flex flex-col space-y-4">
             {Object.keys(menuData).map((key, idx) => {
               const isExpanded = expandedSection === key;
               return (
                 <div
                   key={key}
-                  className="mobile-nav-link menu-link border-b border-white/[0.02] pb-3.5 last:border-0"
+                  className="mobile-nav-link menu-link border-b border-white/[0.03] pb-4 last:border-0"
                   style={{ willChange: "transform, opacity" }}
                 >
                   <button
                     onClick={() => setExpandedSection(isExpanded ? null : key)}
-                    className="w-full flex justify-between items-center text-xl font-medium tracking-[0.06em] text-snow/85 uppercase py-3 focus:outline-none font-display cursor-pointer hover:text-snow transition-colors duration-300"
+                    onMouseEnter={() => setHoveredCategory(key)}
+                    onMouseLeave={() => setHoveredCategory(null)}
+                    className="w-full flex justify-between items-center py-4 focus:outline-none cursor-pointer"
                   >
-                    <div className="flex items-center gap-4">
-                      <span className="text-[9px] font-mono text-accent-warm/40 select-none tabular-nums">{String(idx + 1).padStart(2, "0")}</span>
-                      <span>{menuData[key].label}</span>
+                    <div className="flex items-start gap-4">
+                      <span className="text-[9px] font-mono text-accent-warm/40 mt-1 select-none tabular-nums">
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <div className="flex flex-col items-start text-left">
+                        <span className="text-[8px] font-mono tracking-[0.22em] text-accent-warm/50 mb-0.5 uppercase">
+                          {menuTaglines[key]?.tag}
+                        </span>
+                        <span className="text-2xl font-light tracking-[0.06em] text-snow/90 uppercase font-display transition-colors duration-300">
+                          {menuData[key].label}
+                        </span>
+                      </div>
                     </div>
-                    <span className={`text-stone/40 text-xs transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+                    <span className={`text-stone/40 text-xs transition-transform duration-500 ${isExpanded ? "rotate-180 text-accent-warm" : ""}`}>
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </span>
@@ -614,7 +675,7 @@ export default function Navbar() {
                       }`}
                   >
                     <div className="overflow-hidden pl-6">
-                      <div className="mt-3 pb-2 flex flex-col space-y-3">
+                      <div className="mt-3 pb-3 flex flex-col space-y-3.5">
                         {menuData[key].items.map((item) => (
                           <div key={item.label}>
                             {item.href ? (
@@ -622,15 +683,15 @@ export default function Navbar() {
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
                                 tabIndex={isExpanded ? 0 : -1}
-                                className="group/mob-link flex items-center gap-3 py-2 text-[11px] font-medium tracking-[0.1em] text-parchment/55 active:text-snow hover:text-snow transition-all duration-300 uppercase"
+                                className="group/mob-link flex items-center gap-3.5 py-1.5 text-[11px] font-medium tracking-[0.12em] text-parchment/60 active:text-snow hover:text-snow transition-all duration-300 uppercase"
                               >
-                                <span className="w-1 h-1 rounded-full bg-accent-warm/50 group-hover/mob-link:bg-accent-warm transition-all duration-300" />
+                                <span className="w-1 h-1 rounded-full bg-accent-warm/40 group-hover/mob-link:bg-accent-warm transition-all duration-300 scale-75 group-hover/mob-link:scale-100" />
                                 {item.label}
                               </Link>
                             ) : (
-                              <div className="py-2 flex items-center gap-3 opacity-30 select-none">
+                              <div className="py-1.5 flex items-center gap-3.5 opacity-30 select-none">
                                 <span className="w-1 h-1 rounded-full bg-white/15" />
-                                <span className="text-[11px] font-medium tracking-[0.1em] text-parchment/40 uppercase">{item.label}</span>
+                                <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/40 uppercase">{item.label}</span>
                                 <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase">
                                   {item.status || "SOON"}
                                 </span>
@@ -646,13 +707,10 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Spacer that pushes content to bottom if it fits, but maintains minimal gap when content overflows */}
-          <div className="h-12 flex-shrink-0 mt-auto" />
-
           {/* Bottom Actions & Info (Mobile only) */}
-          <div className="pt-6 border-t border-white/[0.03] w-full space-y-6 flex-shrink-0">
+          <div className="pt-8 border-t border-white/[0.04] w-full space-y-6 flex-shrink-0 mt-12 relative z-10">
             <a
-              href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
+              href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20know%20more%20about%20your%20Himalayan%20expeditions."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
