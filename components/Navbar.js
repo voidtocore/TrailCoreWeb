@@ -556,11 +556,11 @@ export default function Navbar() {
             animate="visible"
             exit="hidden"
             variants={mobileOverlayVariants}
-            className="fixed inset-0 z-[990] bg-background/98 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden px-6 pt-24 pb-8"
+            className="fixed inset-0 z-[990] bg-background/98 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] lg:hidden"
           >
-            <div className="flex-1 flex flex-col justify-between min-h-0">
+            <div className="w-full max-w-md mx-auto flex flex-col min-h-full justify-between px-6 pt-28 pb-8">
               {/* Category Accordion List */}
-              <div className="w-full max-w-md mx-auto py-6">
+              <div className="py-2">
                 {Object.keys(menuData).map((key) => (
                   <MobileAccordionSection
                     key={key}
@@ -575,7 +575,7 @@ export default function Navbar() {
               </div>
 
               {/* Bottom Actions */}
-              <div className="w-full max-w-md mx-auto pt-6 border-t border-mountain-700 mt-6 space-y-6 flex-shrink-0">
+              <div className="pt-6 border-t border-mountain-700 mt-8 space-y-6 flex-shrink-0">
                 <a
                   href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
                   target="_blank"
