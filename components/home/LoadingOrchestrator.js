@@ -54,7 +54,7 @@ export default function LoadingOrchestrator({ children }) {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
-            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0c0d0c]"
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background"
           >
             <div className="relative overflow-hidden py-4 px-8 text-center flex flex-col items-center">
               {/* Premium Logo fade-in & slow scale */}
@@ -70,7 +70,7 @@ export default function LoadingOrchestrator({ children }) {
               >
                 <Image
                   src="/images/logo-tc.png"
-                  alt="Trail Core"
+                  alt="TrailCore"
                   fill
                   priority
                   className="object-contain"

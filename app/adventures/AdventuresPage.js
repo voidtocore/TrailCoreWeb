@@ -54,7 +54,7 @@ const activities = [
 export default function AdventuresPage() {
   return (
     <>
-      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+      <section className="relative pt-36 pb-20 px-6 bg-background">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0d110e]/[0.03] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading 
@@ -66,7 +66,7 @@ export default function AdventuresPage() {
       </section>
 
       {/* Treks */}
-      <section className="pb-32 px-6 bg-[#0c0d0c]">
+      <section className="pb-32 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-0">
             {treks.map((trek) => (
@@ -77,7 +77,7 @@ export default function AdventuresPage() {
                 <div className="group block">
                   <div className="flex flex-col">
                     {/* Image container - Borderless, clean photographic frame */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#121413] rounded-[4px] border border-white/[0.03]">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-mountain-900 rounded-[4px] border border-white/[0.03]">
                       <Image
                         src={trek.img}
                         alt={trek.name}
@@ -90,7 +90,7 @@ export default function AdventuresPage() {
                     {/* Content Area - Stacked cleanly below image */}
                     <div className="pt-6 flex flex-col items-start">
                       {/* Alt/Duration Label */}
-                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-2.5 mono-number">
+                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-forest-glow mb-2.5 mono-number">
                         ALTITUDE: {trek.altitude}
                       </span>
 
@@ -132,11 +132,11 @@ export default function AdventuresPage() {
       </section>
 
       {/* Activities */}
-      <section className="py-24 px-6 border-t border-white/[0.03] bg-[#0c0d0c]">
+      <section className="py-24 px-6 border-t border-white/[0.03] bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-1">
-              <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-3 block">
+              <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-forest-glow mb-3 block">
                 Activities
               </span>
               <h2 className="text-2xl sm:text-3xl font-medium text-snow mb-4 tracking-tight" style={{ fontFamily: "var(--font-outfit)" }}>
@@ -151,7 +151,7 @@ export default function AdventuresPage() {
               {activities.map((a, idx) => (
                 <div key={a.name} className="border-t border-white/[0.05] pt-6 group">
                   <div className="flex items-start gap-4">
-                    <span className="text-[10px] font-mono text-accent-warm/60 mono-number pt-1">
+                    <span className="text-[10px] font-mono text-forest-glow/60 mono-number pt-1">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                     <div>

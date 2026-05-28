@@ -5,7 +5,7 @@ import { ParallaxText, DriftTypography } from "../Animations";
 
 export default function InquiryCTA() {
   return (
-    <section className="relative py-32 md:py-44 px-6 overflow-hidden bg-[#0c0d0c] border-t border-white/[0.03]">
+    <section className="relative py-32 md:py-44 px-6 overflow-hidden bg-background border-t border-white/[0.03]">
       {/* Subtle glowing radial accent */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[30%] left-[20%] right-[20%] w-[60%] h-[40%] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[120px] rounded-full mx-auto" />
@@ -23,7 +23,7 @@ export default function InquiryCTA() {
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
         <ParallaxText speed={0.1} direction={1}>
-          <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-accent-warm mb-6">
+          <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-forest-glow mb-6">
             Begin Your Journey
           </span>
           

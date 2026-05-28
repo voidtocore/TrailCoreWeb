@@ -37,7 +37,7 @@ const departures = [
 
 export default function AdventureSection() {
   return (
-    <section className="relative section-cinematic px-6 bg-[#0c0d0c] overflow-hidden">
+    <section className="relative section-cinematic px-6 bg-background overflow-hidden">
       {/* Background kinetic text */}
       <div className="absolute top-[40%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
         <DriftTypography 
@@ -75,7 +75,7 @@ export default function AdventureSection() {
               >
                 {/* Destination */}
                 <div className="col-span-3">
-                  <span className="block text-[0.55rem] font-bold uppercase tracking-[0.2em] text-accent-warm mb-1">
+                  <span className="block text-[0.55rem] font-bold uppercase tracking-[0.2em] text-forest-glow mb-1">
                     {dep.category}
                   </span>
                   <h4 

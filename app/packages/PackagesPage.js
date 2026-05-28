@@ -117,7 +117,7 @@ const expeditions = [
 export default function PackagesPage() {
   return (
     <>
-      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+      <section className="relative pt-36 pb-20 px-6 bg-background">
         <div className="absolute inset-0 bg-gradient-to-b from-forest/[0.02] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading
@@ -128,7 +128,7 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <section className="pb-24 px-6 bg-[#0c0d0c]">
+      <section className="pb-24 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 md:gap-y-0">
             {expeditions.map((exp) => (
@@ -138,7 +138,7 @@ export default function PackagesPage() {
               >
                 <div className="flex flex-col group">
                   {/* Image Area - Borderless frame */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#121413] rounded-[4px] border border-white/[0.03]">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-mountain-900 rounded-[4px] border border-white/[0.03]">
                     <Image
                       src={exp.img}
                       alt={exp.title}
@@ -152,7 +152,7 @@ export default function PackagesPage() {
                   <div className="pt-6 flex flex-col">
                     {/* Badge & Duration */}
                     <div className="flex items-center justify-between mb-3 text-[0.6875rem] text-parchment-dim font-light tracking-wide mono-number">
-                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm">
+                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-forest-glow">
                         {exp.badge}
                       </span>
                       <span>{exp.duration}</span>

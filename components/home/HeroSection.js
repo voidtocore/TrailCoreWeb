@@ -11,7 +11,7 @@ export default function HeroSection() {
   const { isLoaded } = useLoading();
 
   return (
-    <section className="relative min-h-[110vh] flex items-center bg-[#0c0d0c] overflow-hidden px-6 md:px-16 pt-28 pb-16">
+    <section className="relative min-h-[110vh] flex items-center bg-background overflow-hidden px-6 md:px-16 pt-28 pb-16">
       {/* Alpine radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -20,7 +20,7 @@ export default function HeroSection() {
           transition={{ duration: 2.2, delay: 0.6, ease: EASE }}
           className="alpine-glow"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0c0d0c]/70 to-[#0c0d0c]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/70 to-background" />
       </div>
 
       {/* Giant background typography layer (Kinetic architecture) */}
@@ -42,7 +42,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={isLoaded ? { opacity: 0.5, y: 0 } : {}}
               transition={{ delay: 0.1, duration: 1.2, ease: EASE }}
-              className="text-[0.625rem] font-mono uppercase tracking-[0.3em] text-accent-warm flex items-center gap-4 mono-number"
+              className="text-[0.625rem] font-mono uppercase tracking-[0.3em] text-forest-glow flex items-center gap-4 mono-number"
             >
               <span>32.2396° N, 77.1887° E</span>
               <span className="text-white/20">//</span>
@@ -130,8 +130,8 @@ export default function HeroSection() {
           </motion.div>
           
           {/* Floating altitude details tag */}
-          <div className="absolute -bottom-6 -left-6 bg-[#121413] border border-white/[0.05] p-4 rounded-[2px] shadow-2xl hidden md:block">
-            <span className="text-[9px] uppercase tracking-widest text-accent-warm block mb-1">Pass Elevation</span>
+          <div className="absolute -bottom-6 -left-6 bg-mountain-900 border border-white/[0.05] p-4 rounded-[2px] shadow-2xl hidden md:block">
+            <span className="text-[9px] uppercase tracking-widest text-forest-glow block mb-1">Pass Elevation</span>
             <span className="text-xs font-semibold text-snow mono-number">4,270M — 5,319M</span>
           </div>
         </div>

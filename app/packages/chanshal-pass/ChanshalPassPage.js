@@ -323,7 +323,7 @@ export default function ChanshalPassPage() {
                       className="p-5 sm:p-6 flex justify-between items-center cursor-pointer select-none"
                     >
                       <div className="pr-4">
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-accent-warm mono-number">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-forest-glow mono-number">
                           Day 0{day.day}
                         </span>
                         <h3
@@ -418,7 +418,7 @@ export default function ChanshalPassPage() {
                       >
                         {stay.name}
                       </h3>
-                      <span className="text-[8px] uppercase tracking-[0.2em] text-accent-warm bg-white/[0.02] px-2 py-0.5 rounded border border-white/[0.04]">
+                      <span className="text-[8px] uppercase tracking-[0.2em] text-forest-glow bg-white/[0.02] px-2 py-0.5 rounded border border-white/[0.04]">
                         {stay.location}
                       </span>
                     </div>
@@ -602,7 +602,7 @@ export default function ChanshalPassPage() {
         </div>
 
         <div className="relative z-20 max-w-4xl mx-auto text-center space-y-6">
-          <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.2em] text-forest-glow">
             Begin the Journey
           </span>
           <h2

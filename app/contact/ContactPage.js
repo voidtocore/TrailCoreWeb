@@ -16,7 +16,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+      <section className="relative pt-36 pb-20 px-6 bg-background">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0d110e]/[0.03] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading 
@@ -27,7 +27,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="pb-32 px-6 bg-[#0c0d0c]">
+      <section className="pb-32 px-6 bg-background">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Contact Methods */}
           <FadeIn direction="right" className="lg:col-span-2 space-y-4">
@@ -61,7 +61,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-snow font-medium text-xs tracking-wide uppercase">Phone</h3>
                 <p className="text-[11px] text-parchment-dim mt-1.5 font-light leading-relaxed">Talk to our expedition specialist</p>
-                <p className="text-[11px] text-accent-warm/80 mt-1 mono-number font-medium">+91 75600 65963</p>
+                <p className="text-[11px] text-forest-glow/80 mt-1 mono-number font-medium">+91 75600 65963</p>
               </div>
             </a>
 
@@ -74,7 +74,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-snow font-medium text-xs tracking-wide uppercase">Email</h3>
                 <p className="text-[11px] text-parchment-dim mt-1.5 font-light leading-relaxed">For detailed inquiries</p>
-                <p className="text-[11px] text-accent-warm/80 mt-1 font-medium">hello@trailcore.in</p>
+                <p className="text-[11px] text-forest-glow/80 mt-1 font-medium">hello@trailcore.in</p>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div>
-                      <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Full Name *</label>
+                      <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Full Name *</label>
                       <input 
                         type="text" 
                         required 
@@ -129,7 +129,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Email *</label>
+                      <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Email *</label>
                       <input 
                         type="email" 
                         required 
@@ -143,7 +143,7 @@ export default function ContactPage() {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div>
-                      <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Phone</label>
+                      <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Phone</label>
                       <input 
                         type="tel" 
                         value={formData.phone} 
@@ -153,7 +153,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">No. of Travelers</label>
+                      <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">No. of Travelers</label>
                       <input 
                         type="number" 
                         min="1" 
@@ -166,16 +166,16 @@ export default function ContactPage() {
                   </div>
                   
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1.5 tracking-widest uppercase font-medium">Preferred Expedition</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1.5 tracking-widest uppercase font-medium">Preferred Expedition</label>
                     <div className="relative">
                       <select 
                         value={formData.destination} 
                         onChange={(e) => setFormData({ ...formData, destination: e.target.value })} 
                         className="w-full bg-transparent border-b border-white/[0.08] focus:border-accent-warm focus:outline-none transition-colors duration-500 rounded-none px-0 py-2 text-snow text-sm appearance-none cursor-pointer"
                       >
-                        <option value="" className="bg-[#121413]">Select expedition</option>
+                        <option value="" className="bg-mountain-900">Select expedition</option>
                         {["Spiti Circuit Expedition", "Kinnaur Odyssey", "Winter Spiti Expedition", "Himalayan Escape", "Grand Traverse", "Custom / Not Sure"].map((d) => (
-                          <option key={d} value={d} className="bg-[#121413]">{d}</option>
+                          <option key={d} value={d} className="bg-mountain-900">{d}</option>
                         ))}
                       </select>
                       <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
@@ -187,7 +187,7 @@ export default function ContactPage() {
                   </div>
                   
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Message</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Message</label>
                     <textarea 
                       rows={4} 
                       value={formData.message} 

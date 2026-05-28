@@ -261,6 +261,19 @@ export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const [scrollTop, setScrollTop] = useState(0);
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("trailcore-theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  const handleThemeChange = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem("trailcore-theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   const handleMobileScroll = (e) => {
     setScrollTop(e.currentTarget.scrollTop);
@@ -435,7 +448,7 @@ export default function Navbar() {
         animate={isLoaded ? { y: visible || mobileOpen ? 0 : -100, opacity: 1 } : { y: -100, opacity: 0 }}
         transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
         className={`fixed top-0 left-0 right-0 z-[1000] transition-colors duration-500 ${scrolled || activeMenu
-          ? "bg-[#0c0d0c]/90 backdrop-blur-xl border-b border-white/[0.04] py-3"
+          ? "bg-background/90 backdrop-blur-xl border-b border-mountain-700 py-3"
           : "bg-transparent py-5 sm:py-7"
           }`}
       >
@@ -491,8 +504,21 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop CTA / WhatsApp */}
-          <div className="hidden lg:flex items-center">
+          {/* Desktop CTA / WhatsApp with Theme Selector Swatches */}
+          <div className="hidden lg:flex items-center gap-6">
+            <div className="flex items-center gap-2 border border-mountain-700 p-1.5 rounded-full bg-background/50">
+              <button 
+                onClick={() => handleThemeChange("light")}
+                className={`w-3.5 h-3.5 rounded-full bg-[#ede4dd] border border-[#111111]/20 cursor-pointer transition-transform duration-300 ${theme === "light" ? "scale-125 ring-1 ring-[#111111]" : "opacity-50 hover:opacity-100"}`}
+                aria-label="Light theme"
+              />
+              <button 
+                onClick={() => handleThemeChange("dark")}
+                className={`w-3.5 h-3.5 rounded-full bg-[#050505] border border-[#ede4dd]/20 cursor-pointer transition-transform duration-300 ${theme === "dark" ? "scale-125 ring-1 ring-[#ede4dd]" : "opacity-50 hover:opacity-100"}`}
+                aria-label="Dark theme"
+              />
+            </div>
+
             <a
               href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
               target="_blank"
@@ -546,7 +572,7 @@ export default function Navbar() {
                     className="col-span-4 flex flex-col justify-between border-r border-white/[0.03] pr-12"
                   >
                     <div className="space-y-4">
-                      <span className="text-[9px] font-mono text-accent-warm/80 uppercase tracking-[0.2em] block">
+                      <span className="text-[9px] font-mono text-forest-glow/80 uppercase tracking-[0.2em] block">
                         {menuTaglines[activeMenu]?.tag}
                       </span>
                       <h3 className="font-display font-light text-2xl text-snow/90 leading-tight" style={{ letterSpacing: "-0.02em" }}>
@@ -779,9 +805,25 @@ export default function Navbar() {
             >
               RESERVE VIA WHATSAPP
             </a>
-            <div className="flex justify-between">
-              <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors text-[10px] tracking-[0.12em] text-parchment/35 font-light uppercase">HELLO@TRAILCORE.IN</a>
-              <a href="tel:+917560065963" className="hover:text-snow transition-colors text-[10px] tracking-[0.12em] text-parchment/35 font-light uppercase">+91 75600 65963</a>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <span className="text-[8px] font-mono tracking-wider text-parchment/40 uppercase">THEME:</span>
+                <div className="flex items-center gap-2 border border-white/10 p-1 rounded-full bg-black/30">
+                  <button 
+                    onClick={() => handleThemeChange("light")}
+                    className={`w-3 h-3 rounded-full bg-[#ede4dd] border border-[#111111]/20 cursor-pointer transition-all ${theme === "light" ? "scale-110 ring-1 ring-white" : "opacity-40"}`}
+                    aria-label="Light theme"
+                  />
+                  <button 
+                    onClick={() => handleThemeChange("dark")}
+                    className={`w-3 h-3 rounded-full bg-[#050505] border border-[#ede4dd]/20 cursor-pointer transition-all ${theme === "dark" ? "scale-110 ring-1 ring-white" : "opacity-40"}`}
+                    aria-label="Dark theme"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors text-[10px] tracking-[0.12em] text-parchment/35 font-light uppercase">HELLO@TRAILCORE.IN</a>
+              </div>
             </div>
           </div>
 

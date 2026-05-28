@@ -4,7 +4,7 @@ import { FadeIn, ParallaxImage, ParallaxText, DriftTypography } from "../Animati
 
 export default function ExpeditionPhilosophy() {
   return (
-    <section className="relative py-28 md:py-40 px-6 overflow-hidden bg-[#0c0d0c] border-t border-b border-white/[0.03]">
+    <section className="relative py-28 md:py-40 px-6 overflow-hidden bg-background border-t border-b border-white/[0.03]">
       {/* Soft Green undertone glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] opacity-[0.04] bg-radial from-forest-glow to-transparent blur-[120px] rounded-full" />
@@ -25,7 +25,7 @@ export default function ExpeditionPhilosophy() {
           {/* Left Column: Asymmetric text & stats */}
           <div className="lg:col-span-7 z-10">
             <ParallaxText speed={0.12} direction={-1}>
-              <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-accent-warm mb-6">
+              <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-forest-glow mb-6">
                 Our Philosophy
               </span>
             </ParallaxText>
@@ -63,7 +63,7 @@ export default function ExpeditionPhilosophy() {
                 { num: "Zero", label: "Rushed itineraries" },
               ].map((stat, idx) => (
                 <div key={stat.label} className="group">
-                  <p className="text-xl md:text-2.5xl font-light text-accent-warm mono-number">
+                  <p className="text-xl md:text-2.5xl font-light text-forest-glow mono-number">
                     {stat.num}
                   </p>
                   <p className="text-[9px] text-stone mt-2 tracking-[0.18em] uppercase font-medium">

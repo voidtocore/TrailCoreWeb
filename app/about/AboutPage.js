@@ -21,7 +21,7 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+      <section className="relative pt-36 pb-20 px-6 bg-background">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0d110e]/[0.03] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading 
@@ -33,10 +33,10 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="pb-32 px-6 bg-[#0c0d0c]">
+      <section className="pb-32 px-6 bg-background">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <FadeIn direction="right">
-            <div className="relative rounded-[4px] border border-white/[0.03] bg-[#121413] overflow-hidden aspect-[4/3] w-full">
+            <div className="relative rounded-[4px] border border-white/[0.03] bg-mountain-900 overflow-hidden aspect-[4/3] w-full">
               <Image 
                 src="/images/camping.png" 
                 alt="Trail Core expedition camp" 
@@ -65,13 +65,13 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-20 px-6 border-t border-b border-white/[0.03] bg-[#121413]">
+      <section className="py-20 px-6 border-t border-b border-white/[0.03] bg-mountain-900">
         <div className="max-w-5xl mx-auto">
           <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {stats.map((s) => (
               <StaggerItem key={s.label}>
                 <div className="text-center md:text-left">
-                  <p className="text-3xl md:text-4xl font-light text-accent-warm tracking-tight mono-number">
+                  <p className="text-3xl md:text-4xl font-light text-forest-glow tracking-tight mono-number">
                     {s.value}
                   </p>
                   <p className="text-[10px] text-parchment-dim mt-3 uppercase tracking-[0.2em] font-medium">
@@ -85,10 +85,10 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-28 px-6 bg-[#0c0d0c]">
+      <section className="py-28 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-3 block">
+            <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-forest-glow mb-3 block">
               Our Values
             </span>
             <h2 className="text-2xl sm:text-3xl font-medium text-snow tracking-tight" style={{ fontFamily: "var(--font-outfit)" }}>
@@ -100,7 +100,7 @@ export default function AboutPage() {
             {values.map((v, idx) => (
               <StaggerItem key={v.title}>
                 <div className="border-t border-white/[0.05] pt-6">
-                  <span className="text-[10px] font-mono text-accent-warm/60 mono-number block mb-4">
+                  <span className="text-[10px] font-mono text-forest-glow/60 mono-number block mb-4">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
                   <h3 className="text-sm font-medium text-snow mb-2 tracking-tight">

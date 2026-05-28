@@ -1,4 +1,4 @@
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,8 +11,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-outfit", // Maps --font-outfit to Space Grotesk for backward layout compatibility
   subsets: ["latin"],
   display: "swap",
 });
@@ -37,9 +37,20 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${outfit.variable} h-full antialiased overflow-x-hidden`}
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col bg-mountain-black text-foreground overflow-x-hidden">
+      <head>
+        <script dangerouslySetInnerHTML={{__html: `
+          (function() {
+            var theme = localStorage.getItem("trailcore-theme") || "light";
+            document.documentElement.setAttribute("data-theme", theme);
+          })()
+        `}} />
+      </head>
+      <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden relative transition-colors duration-300">
+        {/* Procedural Film Grain Noise Layer */}
+        <div className="mobile-noise-overlay fixed inset-0 pointer-events-none z-[9998]" />
+        
         <SmoothScroll />
         <LoadingOrchestrator>
           <Navbar />

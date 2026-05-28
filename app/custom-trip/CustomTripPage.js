@@ -28,7 +28,7 @@ export default function CustomTripPage() {
 
   return (
     <>
-      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+      <section className="relative pt-36 pb-20 px-6 bg-background">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0d110e]/[0.03] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading 
@@ -40,7 +40,7 @@ export default function CustomTripPage() {
       </section>
 
       {/* How it works */}
-      <section className="pb-24 px-6 bg-[#0c0d0c]">
+      <section className="pb-24 px-6 bg-background">
         <div className="max-w-5xl mx-auto">
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-12">
             {[
@@ -50,7 +50,7 @@ export default function CustomTripPage() {
             ].map((s) => (
               <StaggerItem key={s.step}>
                 <div className="border-t border-white/[0.05] pt-6">
-                  <span className="text-[10px] font-mono text-accent-warm/60 mono-number block mb-4">
+                  <span className="text-[10px] font-mono text-forest-glow/60 mono-number block mb-4">
                     {s.step}
                   </span>
                   <h3 className="text-sm font-medium text-snow mb-2 tracking-tight">
@@ -67,7 +67,7 @@ export default function CustomTripPage() {
       </section>
 
       {/* Form */}
-      <section className="pb-32 px-6 bg-[#0c0d0c]">
+      <section className="pb-32 px-6 bg-background">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <div className="editorial-surface p-8 sm:p-10">
@@ -78,7 +78,7 @@ export default function CustomTripPage() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Full Name *</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Full Name *</label>
                     <input 
                       type="text" 
                       required 
@@ -89,7 +89,7 @@ export default function CustomTripPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Phone *</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Phone *</label>
                     <input 
                       type="tel" 
                       required 
@@ -102,15 +102,15 @@ export default function CustomTripPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] text-accent-warm/70 mb-1.5 tracking-widest uppercase font-medium">Expedition Type</label>
+                  <label className="block text-[9px] text-forest-glow/70 mb-1.5 tracking-widest uppercase font-medium">Expedition Type</label>
                   <div className="relative">
                     <select 
                       value={form.tripType} 
                       onChange={(e) => setForm({ ...form, tripType: e.target.value })} 
                       className="w-full bg-transparent border-b border-white/[0.08] focus:border-accent-warm focus:outline-none transition-colors duration-500 rounded-none px-0 py-2 text-snow text-sm appearance-none cursor-pointer"
                     >
-                      <option value="" className="bg-[#121413]">Select type</option>
-                      {tripTypes.map((t) => <option key={t} value={t} className="bg-[#121413]">{t}</option>)}
+                      <option value="" className="bg-mountain-900">Select type</option>
+                      {tripTypes.map((t) => <option key={t} value={t} className="bg-mountain-900">{t}</option>)}
                     </select>
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
@@ -122,7 +122,7 @@ export default function CustomTripPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Duration (days)</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Duration (days)</label>
                     <input 
                       type="number" 
                       min="1" 
@@ -133,15 +133,15 @@ export default function CustomTripPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1.5 tracking-widest uppercase font-medium">Budget Range</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1.5 tracking-widest uppercase font-medium">Budget Range</label>
                     <div className="relative">
                       <select 
                         value={form.budget} 
                         onChange={(e) => setForm({ ...form, budget: e.target.value })} 
                         className="w-full bg-transparent border-b border-white/[0.08] focus:border-accent-warm focus:outline-none transition-colors duration-500 rounded-none px-0 py-2 text-snow text-sm appearance-none cursor-pointer"
                       >
-                        <option value="" className="bg-[#121413]">Select budget</option>
-                        {["₹10,000 – ₹20,000", "₹20,000 – ₹35,000", "₹35,000 – ₹50,000", "₹50,000+"].map((b) => <option key={b} value={b} className="bg-[#121413]">{b}</option>)}
+                        <option value="" className="bg-mountain-900">Select budget</option>
+                        {["₹10,000 – ₹20,000", "₹20,000 – ₹35,000", "₹35,000 – ₹50,000", "₹50,000+"].map((b) => <option key={b} value={b} className="bg-mountain-900">{b}</option>)}
                       </select>
                       <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
@@ -151,7 +151,7 @@ export default function CustomTripPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Start Date</label>
+                    <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Start Date</label>
                     <input 
                       type="date" 
                       value={form.startDate} 
@@ -163,7 +163,7 @@ export default function CustomTripPage() {
 
                 {/* Interests */}
                 <div>
-                  <label className="block text-[9px] text-accent-warm/70 mb-3 tracking-widest uppercase font-medium">Interests</label>
+                  <label className="block text-[9px] text-forest-glow/70 mb-3 tracking-widest uppercase font-medium">Interests</label>
                   <div className="flex flex-wrap gap-2">
                     {interestOptions.map((interest) => (
                       <button
@@ -183,7 +183,7 @@ export default function CustomTripPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] text-accent-warm/70 mb-1 tracking-widest uppercase font-medium">Additional Notes</label>
+                  <label className="block text-[9px] text-forest-glow/70 mb-1 tracking-widest uppercase font-medium">Additional Notes</label>
                   <textarea 
                     rows={3} 
                     value={form.notes} 

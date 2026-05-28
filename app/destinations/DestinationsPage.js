@@ -19,7 +19,7 @@ export default function DestinationsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-36 pb-20 px-6 bg-[#0c0d0c]">
+      <section className="relative pt-36 pb-20 px-6 bg-background">
         <div className="absolute inset-0 bg-gradient-to-b from-forest/[0.02] to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeading label="Destinations" title="Where We Journey" description="The landscapes, villages, and mountain passes that define our expeditions across the Indian Himalayas." />
@@ -27,7 +27,7 @@ export default function DestinationsPage() {
       </section>
 
       {/* Destinations */}
-      <section className="pb-24 px-6 bg-[#0c0d0c]">
+      <section className="pb-24 px-6 bg-background">
         <div className="max-w-7xl mx-auto space-y-32">
           {destinations.map((dest, i) => (
             <FadeIn key={dest.id} delay={0.1}>
@@ -41,7 +41,7 @@ export default function DestinationsPage() {
                     className="object-cover cinematic-image transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]" 
                     sizes="(max-width: 768px) 100vw, 50vw" 
                   />
-                  <div className="absolute top-4 right-4 bg-[#121413]/90 border border-white/[0.04] px-3.5 py-1.5 rounded-[2px] text-[10px] text-snow/90 font-medium tracking-widest uppercase mono-number shadow-lg shadow-black/20">
+                  <div className="absolute top-4 right-4 bg-mountain-900/90 border border-white/[0.04] px-3.5 py-1.5 rounded-[2px] text-[10px] text-snow/90 font-medium tracking-widest uppercase mono-number shadow-lg shadow-black/20">
                     {dest.alt}
                   </div>
                 </div>

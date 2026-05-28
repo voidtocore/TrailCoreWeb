@@ -62,7 +62,7 @@ const expeditions = [
 
 export default function FeaturedExperiences() {
   return (
-    <section className="relative section-editorial px-6 bg-[#0c0d0c] overflow-hidden">
+    <section className="relative section-editorial px-6 bg-background overflow-hidden">
       {/* Background kinetic text */}
       <div className="absolute top-[45%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
         <DriftTypography 
@@ -106,7 +106,7 @@ export default function FeaturedExperiences() {
                   <ParallaxText speed={0.15} direction={idx % 2 === 0 ? 1 : -1}>
                     <div className="pt-8 flex flex-col items-start">
                       {/* Category Label */}
-                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-accent-warm mb-3">
+                      <span className="text-[0.625rem] font-medium uppercase tracking-[0.2em] text-forest-glow mb-3">
                         {exp.badge}
                       </span>
 

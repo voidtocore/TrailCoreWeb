@@ -4,7 +4,7 @@ import { ParallaxImage, ParallaxText, DriftTypography } from "../Animations";
 
 export default function HoneymoonSection() {
   return (
-    <section className="relative section-cinematic px-6 bg-[#0c0d0c] overflow-hidden">
+    <section className="relative section-cinematic px-6 bg-background overflow-hidden">
       {/* Background kinetic text */}
       <div className="absolute top-[35%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
         <DriftTypography 
@@ -20,7 +20,7 @@ export default function HoneymoonSection() {
           {/* Left Column: Floating sticky title */}
           <div className="lg:col-span-5 lg:sticky lg:top-24 z-10">
             <ParallaxText speed={0.1} direction={1}>
-              <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-accent-warm mb-5">
+              <span className="inline-block text-[0.625rem] font-medium uppercase tracking-[0.25em] text-forest-glow mb-5">
                 Food & Stay Experience
               </span>
             </ParallaxText>

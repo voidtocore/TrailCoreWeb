@@ -16,7 +16,7 @@ const images = [
 
 export default function GallerySection() {
   return (
-    <section className="relative section-cinematic px-6 bg-[#0c0d0c] overflow-hidden">
+    <section className="relative section-cinematic px-6 bg-background overflow-hidden">
       {/* Background kinetic text */}
       <div className="absolute top-[40%] left-0 w-full z-0 opacity-[0.02] pointer-events-none">
         <DriftTypography 
@@ -50,7 +50,7 @@ export default function GallerySection() {
                 />
                 
                 {/* Floating caption overlay on hover */}
-                <div className="absolute inset-0 bg-[#0c0d0c]/0 group-hover:bg-[#0c0d0c]/50 transition-all duration-[600ms] ease-out flex items-end p-4 z-10">
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/50 transition-all duration-[600ms] ease-out flex items-end p-4 z-10">
                   <span className="text-[9px] text-snow/90 font-light tracking-widest uppercase opacity-0 group-hover:opacity-100 translate-y-1.5 group-hover:translate-y-0 transition-all duration-[600ms] ease-out">
                     {img.alt}
                   </span>
