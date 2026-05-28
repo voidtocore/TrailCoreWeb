@@ -11,52 +11,33 @@ const menuData = {
     label: "DISCOVER",
     items: [
       { label: "MOUNTAINS", href: "/destinations" },
-      { label: "FORESTS", status: "COMING SOON" },
-      { label: "COASTAL", status: "LAUNCHING SOON" },
-      { label: "HERITAGE", status: "CRAFTING" },
-      { label: "SNOW", status: "COMING SOON" },
-      { label: "WEEKEND ESCAPES", status: "LAUNCHING SOON" },
-      { label: "HIDDEN TOWNS", status: "CRAFTING" },
-      { label: "INTERNATIONAL", status: "COMING SOON" },
+      { label: "FOREST ESCAPES", status: "COMING SOON" },
+      { label: "WEEKEND ESCAPES", status: "COMING SOON" },
+      { label: "SNOW JOURNEYS", status: "COMING SOON" },
     ]
   },
   offgrid: {
     label: "OFFGRID",
     items: [
       { label: "HIDDEN ESCAPES", href: "/packages" },
-      { label: "REMOTE STAYS", status: "LAUNCHING SOON" },
-      { label: "CABIN RETREATS", status: "COMING SOON" },
-      { label: "SLOW TRAVEL", status: "CRAFTING" },
+      { label: "REMOTE STAYS", status: "COMING SOON" },
       { label: "SCENIC ROUTES", status: "COMING SOON" },
-      { label: "UNTOUCHED PLACES", status: "LAUNCHING SOON" },
-      { label: "DIGITAL DETOX", status: "COMING SOON" },
-      { label: "PRIVATE ESCAPES", status: "CRAFTING" },
     ]
   },
   stays: {
     label: "STAYS",
     items: [
-      { label: "BOUTIQUE HOTELS", status: "COMING SOON" },
-      { label: "LUXURY CABINS", status: "LAUNCHING SOON" },
-      { label: "VILLAS", status: "CRAFTING" },
-      { label: "MOUNTAIN RETREATS", href: "/honeymoon" },
-      { label: "GLASS HOUSES", status: "COMING SOON" },
-      { label: "HOMESTAYS", status: "CRAFTING" },
-      { label: "WELLNESS STAYS", status: "LAUNCHING SOON" },
-      { label: "CURATED STAYS", status: "COMING SOON" },
+      { label: "BOUTIQUE STAYS", status: "COMING SOON" },
+      { label: "LUXURY CABINS", status: "COMING SOON" },
+      { label: "HOMESTAYS", status: "COMING SOON" },
     ]
   },
   editions: {
     label: "EDITIONS",
     items: [
-      { label: "SUMMER EDITION", status: "LAUNCHING SOON" },
-      { label: "SNOWFALL EDITION", status: "COMING SOON" },
       { label: "HONEYMOON EDITION", href: "/honeymoon" },
-      { label: "WORKATION EDITION", status: "CRAFTING" },
-      { label: "48 HOUR ESCAPES", status: "COMING SOON" },
       { label: "LUXURY ROADTRIPS", href: "/packages" },
-      { label: "CAFÉ TRAILS", status: "LAUNCHING SOON" },
-      { label: "WELLNESS ESCAPES", status: "CRAFTING" },
+      { label: "48 HOUR ESCAPES", status: "COMING SOON" },
     ]
   },
   reserve: {
@@ -64,20 +45,13 @@ const menuData = {
     items: [
       { label: "CUSTOM PLANNING", href: "/custom-trip" },
       { label: "PRIVATE BOOKINGS", status: "COMING SOON" },
-      { label: "GROUP JOURNEYS", status: "LAUNCHING SOON" },
-      { label: "TRANSPORT", status: "CRAFTING" },
-      { label: "CONCIERGE", status: "COMING SOON" },
-      { label: "EXCLUSIVE ACCESS", status: "LAUNCHING SOON" },
     ]
   },
   studio: {
     label: "STUDIO",
     items: [
       { label: "PHILOSOPHY", href: "/about" },
-      { label: "PARTNERSHIPS", status: "LAUNCHING SOON" },
-      { label: "CAREERS", status: "CRAFTING" },
       { label: "CONTACT", href: "/contact" },
-      { label: "PRESS", status: "COMING SOON" },
     ]
   }
 };
@@ -144,15 +118,6 @@ const menuTaglines = {
     title: "About Trail Core",
     desc: "Our approach to slow travel, our network of field partners, and how to get in touch with the team."
   }
-};
-
-const categoryImages = {
-  discover: "/images/spiti-valley.png",
-  offgrid: "/images/camping.png",
-  stays: "/images/kalpa.png",
-  editions: "/images/road-trip.png",
-  reserve: "/images/river.png",
-  studio: "/images/kaza.png"
 };
 
 const desktopDropdownVariants = {
