@@ -37,16 +37,10 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
+      data-theme="dark"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased overflow-x-hidden`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{__html: `
-          (function() {
-            var theme = localStorage.getItem("trailcore-theme") || "light";
-            document.documentElement.setAttribute("data-theme", theme);
-          })()
-        `}} />
-      </head>
+      <head />
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden relative transition-colors duration-300">
         {/* Procedural Film Grain Noise Layer */}
         <div className="mobile-noise-overlay fixed inset-0 pointer-events-none z-[9998]" />

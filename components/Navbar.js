@@ -281,19 +281,6 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("trailcore-theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
-
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-    localStorage.setItem("trailcore-theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
 
   const lastScrollY = useRef(0);
 
@@ -437,21 +424,8 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Desktop CTA / WhatsApp with Theme Selector Swatches */}
+          {/* Desktop CTA / WhatsApp */}
           <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-2 border border-mountain-700 p-1.5 rounded-full bg-background/50">
-              <button 
-                onClick={() => handleThemeChange("light")}
-                className={`w-3.5 h-3.5 rounded-full bg-[#ede4dd] border border-[#111111]/20 cursor-pointer transition-transform duration-300 ${theme === "light" ? "scale-125 ring-1 ring-[#111111]" : "opacity-50 hover:opacity-100"}`}
-                aria-label="Light theme"
-              />
-              <button 
-                onClick={() => handleThemeChange("dark")}
-                className={`w-3.5 h-3.5 rounded-full bg-[#050505] border border-[#ede4dd]/20 cursor-pointer transition-transform duration-300 ${theme === "dark" ? "scale-125 ring-1 ring-[#ede4dd]" : "opacity-50 hover:opacity-100"}`}
-                aria-label="Dark theme"
-              />
-            </div>
-
             <a
               href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
               target="_blank"
@@ -587,21 +561,9 @@ export default function Navbar() {
                 </a>
 
                 <div className="flex justify-between items-center text-[10px]">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono tracking-wider text-parchment/40 uppercase">THEME:</span>
-                    <div className="flex items-center gap-2 border border-mountain-700 p-1 bg-mountain-900/50">
-                      <button 
-                        onClick={() => handleThemeChange("light")}
-                        className={`w-3.5 h-3.5 bg-[#ede4dd] border border-[#111111]/20 cursor-pointer transition-transform duration-200 ${theme === "light" ? "scale-110 ring-1 ring-forest-glow" : "opacity-40"}`}
-                        aria-label="Light theme"
-                      />
-                      <button 
-                        onClick={() => handleThemeChange("dark")}
-                        className={`w-3.5 h-3.5 bg-[#050505] border border-[#ede4dd]/20 cursor-pointer transition-transform duration-200 ${theme === "dark" ? "scale-110 ring-1 ring-[#ede4dd]" : "opacity-40"}`}
-                        aria-label="Dark theme"
-                      />
-                    </div>
-                  </div>
+                  <span className="font-mono tracking-wider text-parchment/40 uppercase">
+                    SLOW TRAVEL THROUGH THE HIMALAYAS
+                  </span>
                   <a href="mailto:hello@trailcore.in" className="hover:text-accent-warm transition-colors tracking-[0.12em] text-parchment/50 font-light uppercase">
                     hello@trailcore.in
                   </a>

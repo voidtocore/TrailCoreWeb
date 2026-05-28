@@ -57,50 +57,7 @@
 
 /* ─── Design System Variables ─── */
 :root {
-  /* Default light theme (Cream default) */
-  --bg-val: #ede4dd;
-  --fg-val: #111111;
-  --midnight-val: #e7ded7;
-  --mountain-black-val: #ede4dd;
-  --mountain-900-val: #e0d7cf;
-  --mountain-800-val: #d5cbc2;
-  --mountain-700-val: #c9beb5;
-  --mountain-600-val: #bfaea0;
-
-  --stone-val: #6e6960;
-  --stone-light-val: #555048;
-  --stone-dark-val: #8c8579;
-  --parchment-val: rgba(17, 17, 17, 0.85);
-  --parchment-dim-val: rgba(17, 17, 17, 0.65);
-
-  --slate-400-val: #55585d;
-  --slate-300-val: #333538;
-
-  --snow-val: #111111;
-  --snow-dim-val: #333333;
-
-  --forest-val: #ede4dd;
-  --forest-light-val: #e0d7cf;
-  --forest-dark-val: #d5cbc2;
-  --forest-glow-val: #488760;
-  --expedition-green-val: #376348;
-
-  --accent-warm-val: #d64545; /* secondary accent red */
-  --accent-gold-val: #488760;
-
-  --white-val: #111111;
-  --black-val: #ffffff;
-
-  --ease-editorial: cubic-bezier(0.65, 0.05, 0, 1);
-  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-default: 0.85s;
-  --duration-fast: 0.35s;
-  --duration-slow: 1.2s;
-  --container-max: 1280px;
-}
-
-[data-theme="dark"] {
+  /* Default dark theme variables */
   --bg-val: #050505;
   --fg-val: rgba(255, 255, 255, 0.82);
   --midnight-val: #080908;
@@ -133,6 +90,14 @@
 
   --white-val: #ffffff;
   --black-val: #000000;
+
+  --ease-editorial: cubic-bezier(0.65, 0.05, 0, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-default: 0.85s;
+  --duration-fast: 0.35s;
+  --duration-slow: 1.2s;
+  --container-max: 1280px;
 }
 
 /* ─── Base Styles & Reset ─── */
@@ -390,10 +355,7 @@ h6 {
   }
 }
 
-/* ─── Light Mode Brand Inversion & compiled class overrides ─── */
-[data-theme="light"] img[alt="TrailCore"] {
-  filter: invert(1) brightness(0.1) !important;
-}
+/* ─── Compiled class overrides ─── */
 
 /* Override compiled Tailwind arbitrary backgrounds for dynamic themes */
 .bg-\[\#0c0d0c\] {
