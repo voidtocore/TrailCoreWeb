@@ -378,126 +378,6 @@ h6 {
     padding-bottom: clamp(3rem, 7vw, 5rem);
   }
 
-  /* Fullscreen mobile overlay */
-  .mobile-menu-overlay {
-    position: fixed;
-    inset: 0;
-    width: 100dvw;
-    height: 100dvh;
-    background: #050505 !important;
-    color: rgba(255, 255, 255, 0.82);
-    z-index: 990;
-    
-    /* Variable overrides to keep mobile menu dark in Light Theme */
-    --bg-val: #050505;
-    --fg-val: rgba(255, 255, 255, 0.82);
-    --midnight-val: #080908;
-    --mountain-black-val: #0c0d0c;
-    --mountain-900-val: #0c0c0c;
-    --mountain-800-val: #121212;
-    --mountain-700-val: #1a1a1a;
-    --mountain-600-val: #2a2a2a;
-    --stone-val: #a69f94;
-    --stone-light-val: #c8c4bc;
-    --stone-dark-val: #6e6960;
-    --parchment-val: rgba(255, 255, 255, 0.85);
-    --parchment-dim-val: rgba(255, 255, 255, 0.72);
-    --slate-400-val: #9da0a5;
-    --slate-300-val: #e2e4e9;
-    --snow-val: #ede4dd;
-    --snow-dim-val: #d1d5db;
-    --forest-val: #0d110e;
-    --forest-light-val: #1b261f;
-    --forest-dark-val: #070a08;
-    --forest-glow-val: #488760;
-    --expedition-green-val: #376348;
-    --accent-warm-val: #d64545;
-    --accent-gold-val: #b39969;
-    --white-val: #ffffff;
-    --black-val: #000000;
-    
-    /* Spacious 3D perspective for card depth */
-    perspective: 1200px;
-    transform-style: preserve-3d;
-    
-    /* Subtle blur/glass background mix */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    
-    clip-path: circle(0% at 90% 5%);
-    visibility: hidden;
-    pointer-events: none;
-    
-    will-change: clip-path, opacity, visibility, transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    
-    /* Touch scrolling and stability config */
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .mobile-menu-overlay::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Overlay open state */
-  .mobile-menu-overlay.is-active {
-    clip-path: circle(150% at 90% 5%);
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  /* Stagger link items starting state */
-  .mobile-menu-overlay .menu-link {
-    opacity: 0;
-    transform: translateY(40px);
-    display: block;
-    transform-style: preserve-3d;
-  }
-
-  /* Subtle noise/grain overlay */
-  .mobile-noise-overlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.02;
-    z-index: 5;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  }
-
-  /* Typography / color overrides inside the dark menu */
-  .mobile-menu-overlay button,
-  .mobile-menu-overlay a,
-  .mobile-menu-overlay span,
-  .mobile-menu-overlay div {
-    /* Let Tailwind colors shine, only override to fit dark mode layout */
-    transition: color var(--duration-fast) ease, opacity var(--duration-fast) ease;
-  }
-
-  /* Active states & typography hover highlights */
-  .mobile-menu-overlay a:hover,
-  .mobile-menu-overlay button:hover {
-    color: var(--color-snow) !important;
-  }
-
-  .mobile-menu-overlay .text-accent-warm\/40 {
-    color: color-mix(in srgb, var(--color-accent-warm) 40%, transparent) !important;
-  }
-
-  .mobile-menu-overlay .text-accent-warm {
-    color: var(--color-accent-warm) !important;
-  }
-
-  /* Subtle translucent white borders */
-  .mobile-menu-overlay .border-b,
-  .mobile-menu-overlay .border-t {
-    border-color: color-mix(in srgb, var(--color-white) 3%, transparent) !important;
-  }
 }
 
 /* ─── Accessibility Support ─── */
@@ -508,26 +388,11 @@ h6 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
-  .mobile-menu-overlay {
-    transition: opacity 0.1s ease, visibility 0.1s ease !important;
-    clip-path: none !important;
-  }
-  
-  .mobile-menu-overlay.is-active {
-    clip-path: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
 }
 
 /* ─── Light Mode Brand Inversion & compiled class overrides ─── */
 [data-theme="light"] img[alt="TrailCore"] {
   filter: invert(1) brightness(0.1) !important;
-}
-
-body.mobile-menu-active img[alt="TrailCore"] {
-  filter: none !important;
 }
 
 /* Override compiled Tailwind arbitrary backgrounds for dynamic themes */

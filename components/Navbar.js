@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { gsap } from "gsap";
 import { useLoading } from "./home/LoadingOrchestrator";
 
 const menuData = {
@@ -195,61 +194,84 @@ const dropdownItemVariants = {
 };
 
 const mobileOverlayVariants = {
-  open: {
-    clipPath: "circle(150% at 93% 40px)",
+  hidden: { opacity: 0, y: -12 },
+  visible: {
     opacity: 1,
-    visibility: "visible",
-    transition: {
-      duration: 0.9,
-      ease: [0.77, 0, 0.175, 1],
-    }
-  },
-  closed: {
-    clipPath: "circle(0px at 93% 40px)",
-    opacity: 0,
-    transitionEnd: {
-      visibility: "hidden"
-    },
-    transition: {
-      duration: 0.8,
-      ease: [0.77, 0, 0.175, 1],
-    }
-  }
-};
-
-const mobileContainerVariants = {
-  open: {
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.15,
-    }
-  },
-  closed: {
-    transition: {
-      staggerChildren: 0.03,
-      staggerDirection: -1,
-    }
-  }
-};
-
-const mobileItemVariants = {
-  open: {
     y: 0,
-    opacity: 1,
     transition: {
-      duration: 0.55,
-      ease: [0.77, 0, 0.175, 1]
+      duration: 0.4,
+      ease: [0.77, 0, 0.175, 1],
     }
   },
-  closed: {
-    y: 16,
+  exit: {
     opacity: 0,
+    y: -12,
     transition: {
-      duration: 0.45,
-      ease: [0.77, 0, 0.175, 1]
+      duration: 0.3,
+      ease: [0.77, 0, 0.175, 1],
     }
   }
 };
+
+function MobileAccordionSection({ title, items, tag, isExpanded, onToggle, onLinkClick }) {
+  return (
+    <div className="border-b border-mountain-700 py-3">
+      <button
+        onClick={onToggle}
+        className="w-full flex justify-between items-center py-2 text-left cursor-pointer focus:outline-none"
+      >
+        <div className="flex flex-col">
+          {tag && (
+            <span className="text-[8px] font-mono tracking-widest text-forest-glow uppercase mb-0.5">
+              {tag}
+            </span>
+          )}
+          <span className="text-base font-light tracking-[0.06em] text-snow uppercase font-display">
+            {title}
+          </span>
+        </div>
+        <span className={`text-stone-light/50 transition-transform duration-300 ${isExpanded ? "rotate-180 text-forest-glow" : ""}`}>
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+      
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out overflow-hidden ${
+          isExpanded ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden pl-2 flex flex-col space-y-2 pb-2">
+          {items.map((item) => (
+            <div key={item.label}>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  onClick={onLinkClick}
+                  className="flex items-center gap-2.5 py-1.5 text-[10px] font-medium tracking-[0.1em] text-parchment/70 active:text-accent-warm hover:text-accent-warm transition-colors duration-200 uppercase"
+                >
+                  <span className="w-1 h-1 rounded-full bg-forest-glow" />
+                  {item.label}
+                </Link>
+              ) : (
+                <div className="flex items-center justify-between py-1.5 opacity-40 select-none">
+                  <span className="text-[10px] font-medium tracking-[0.1em] text-parchment/60 uppercase flex items-center gap-2.5">
+                    <span className="w-1 h-1 rounded-full bg-mountain-700" />
+                    {item.label}
+                  </span>
+                  <span className="text-[7px] font-mono bg-mountain-800 px-1.5 py-0.5 tracking-[0.1em] uppercase">
+                    {item.status || "SOON"}
+                  </span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Navbar() {
   const { isLoaded } = useLoading();
@@ -259,14 +281,7 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [expandedSection, setExpandedSection] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [hoveredCategory, setHoveredCategory] = useState(null);
   const [theme, setTheme] = useState("light");
-  const isFirstRender = useRef(true);
-  const mobileOpenRef = useRef(mobileOpen);
-
-  useEffect(() => {
-    mobileOpenRef.current = mobileOpen;
-  }, [mobileOpen]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("trailcore-theme") || "light";
@@ -280,19 +295,7 @@ export default function Navbar() {
     document.documentElement.setAttribute("data-theme", newTheme);
   };
 
-  const handleMobileScroll = (e) => {
-    e.currentTarget.style.setProperty('--scroll-top', `${e.currentTarget.scrollTop}px`);
-  };
-
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget || e.target.classList.contains('mobile-menu-layout-container')) {
-      setMobileOpen(false);
-    }
-  };
-
   const lastScrollY = useRef(0);
-  const menuTimeline = useRef(null);
-  const mobileOverlayRef = useRef(null);
 
   useEffect(() => {
     setHoveredIndex(null);
@@ -346,10 +349,6 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
-      document.body.classList.add("mobile-menu-active");
-
-      // DO NOT lock html scrolling
-      document.documentElement.style.overflow = "";
 
       // Destroy lenis influence temporarily
       if (window.lenis) {
@@ -357,103 +356,18 @@ export default function Navbar() {
       }
     } else {
       document.body.style.overflow = "";
-      document.body.classList.remove("mobile-menu-active");
-      document.documentElement.style.overflow = "";
-
       if (window.lenis) {
         window.lenis.start();
       }
-      setHoveredCategory(null);
       setExpandedSection(null);
-      
-      // Reset the CSS variable on the overlay
-      if (mobileOverlayRef.current) {
-        mobileOverlayRef.current.style.setProperty('--scroll-top', '0px');
-      }
     }
 
     return () => {
       document.body.style.overflow = "";
-      document.body.classList.remove("mobile-menu-active");
-      document.documentElement.style.overflow = "";
-
       if (window.lenis) {
         window.lenis.start();
       }
     };
-  }, [mobileOpen]);
-
-  // GSAP Mobile Menu Animation system
-  useEffect(() => {
-    let mm = gsap.matchMedia();
-
-    mm.add("(max-width: 1023px)", () => {
-      const tl = gsap.timeline({
-        paused: true,
-        onComplete: () => {
-          gsap.set(mobileOverlayRef.current, { clipPath: "none" });
-        }
-      });
-
-      // Initial setup of overlay
-      gsap.set(mobileOverlayRef.current, {
-        clipPath: "circle(0% at 90% 5%)",
-        visibility: "hidden",
-        pointerEvents: "none"
-      });
-
-      // Overlay Reveal circle transition
-      tl.to(mobileOverlayRef.current, {
-        clipPath: "circle(150% at 90% 5%)",
-        visibility: "visible",
-        pointerEvents: "all",
-        duration: 0.85,
-        ease: "power4.inOut"
-      });
-
-      // Text Stagger of mobile links
-      const links = mobileOverlayRef.current.querySelectorAll(".mobile-nav-link");
-      if (links.length > 0) {
-        tl.fromTo(links,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.08 },
-          "-=0.3"
-        );
-      }
-
-      menuTimeline.current = tl;
-
-      if (mobileOpenRef.current) {
-        tl.progress(1);
-        gsap.set(mobileOverlayRef.current, { clipPath: "none" });
-      }
-
-      return () => {
-        if (menuTimeline.current) {
-          menuTimeline.current.kill();
-          menuTimeline.current = null;
-        }
-      };
-    });
-
-    return () => mm.revert();
-  }, []);
-
-  // Sync mobileOpen state changes with GSAP timeline
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (menuTimeline.current) {
-      if (mobileOpen) {
-        menuTimeline.current.play();
-      } else {
-        // First reset clipPath back to circle shape so GSAP can animate the reverse sequence
-        gsap.set(mobileOverlayRef.current, { clipPath: "circle(150% at 90% 5%)" });
-        menuTimeline.current.reverse();
-      }
-    }
   }, [mobileOpen]);
 
   return (
@@ -556,13 +470,13 @@ export default function Navbar() {
           >
             <div className="relative w-5 h-3 flex items-center justify-center">
               <span
-                className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "rotate-45 bg-[#ede4dd]" : "-translate-y-[4px] bg-snow"
+                className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out bg-snow ${
+                  mobileOpen ? "rotate-45" : "-translate-y-[4px]"
                 }`}
               />
               <span
-                className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "-rotate-45 bg-[#ede4dd]" : "translate-y-[4px] bg-snow"
+                className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out bg-snow ${
+                  mobileOpen ? "-rotate-45" : "translate-y-[4px]"
                 }`}
               />
             </div>
@@ -634,224 +548,69 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile-only Fullscreen Circular Overlay Menu */}
-      <div
-        ref={mobileOverlayRef}
-        onScroll={handleMobileScroll}
-        className="mobile-menu-overlay fixed inset-0 z-[990] bg-[#050505]/95 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden overscroll-contain mobile-menu-scroll"
-        style={{
-          clipPath: "circle(0% at 90% 5%)",
-          willChange: "clip-path",
-          WebkitOverflowScrolling: "touch",
-          touchAction: "pan-y",
-          visibility: "hidden",
-          pointerEvents: "none"
-        }}
-      >
-        {/* Subtle noise/grain overlay */}
-        <div className="mobile-noise-overlay absolute inset-0 pointer-events-none z-10" />
-
-        {/* Dynamic Image Preview Panel */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-          {Object.keys(categoryImages).map((key) => {
-            const isActive = (expandedSection || hoveredCategory || 'discover') === key;
-            return (
-              <div
-                key={key}
-                className="absolute inset-0 transition-opacity duration-[1200ms] ease-[cubic-bezier(0.65,0.05,0,1)]"
-                style={{
-                  opacity: isActive && mobileOpen ? 0.08 : 0,
-                  transform: `translateY(calc(var(--scroll-top, 0px) * 0.15)) scale(${isActive ? 1.05 : 1.1})`,
-                  transitionProperty: "opacity, transform",
-                  willChange: "opacity, transform"
-                }}
-              >
-                <Image
-                  src={categoryImages[key]}
-                  alt="Destination preview"
-                  fill
-                  priority
-                  className="object-cover filter saturate-50 contrast-125 brightness-50"
-                />
+      {/* Mobile-only Fullscreen Overlay Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={mobileOverlayVariants}
+            className="fixed inset-0 z-[990] bg-background/98 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] flex flex-col lg:hidden px-6 pt-24 pb-8"
+          >
+            <div className="flex-1 flex flex-col justify-between min-h-0">
+              {/* Category Accordion List */}
+              <div className="w-full max-w-md mx-auto py-6">
+                {Object.keys(menuData).map((key) => (
+                  <MobileAccordionSection
+                    key={key}
+                    title={menuData[key].label}
+                    tag={menuTaglines[key]?.tag}
+                    items={menuData[key].items}
+                    isExpanded={expandedSection === key}
+                    onToggle={() => setExpandedSection(expandedSection === key ? null : key)}
+                    onLinkClick={() => setMobileOpen(false)}
+                  />
+                ))}
               </div>
-            );
-          })}
-          {/* Atmospheric soft overlay gradient for depth and readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/98 via-[#050505]/92 to-[#050505]/98" />
-        </div>
 
-        {/* Ambient radial background lighting / cinematic glow */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[10%] left-[20%] w-[80vw] h-[80vw] opacity-[0.03] bg-radial from-forest-glow to-transparent blur-[130px] rounded-full" />
-          <div className="absolute bottom-[20%] right-[-10%] w-[70vw] h-[70vw] opacity-[0.02] bg-radial from-accent-warm to-transparent blur-[110px] rounded-full" />
-        </div>
-
-        {/* Mobile Menu Layout container */}
-        <div 
-          onClick={handleOverlayClick}
-          className="mobile-menu-layout-container w-full min-h-full px-6 pt-36 pb-12 relative z-10 flex flex-col justify-between"
-        >
-          {/* Layered 3D Floating Cards Stack */}
-          <div className="w-full flex flex-col space-y-6 max-w-md mx-auto" style={{ transformStyle: "preserve-3d" }}>
-            {Object.keys(menuData).map((key, idx) => {
-              const isExpanded = expandedSection === key;
-              const xOffset = isExpanded ? 0 : (idx % 3 === 0 ? -10 : idx % 3 === 1 ? 10 : 0);
-              const zDepth = isExpanded ? 35 : (idx % 2 === 0 ? 15 : -15);
-
-              return (
-                <div
-                  key={key}
-                  className="mobile-nav-link menu-link w-full"
-                  style={{ transformStyle: "preserve-3d" }}
+              {/* Bottom Actions */}
+              <div className="w-full max-w-md mx-auto pt-6 border-t border-mountain-700 mt-6 space-y-6 flex-shrink-0">
+                <a
+                  href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center w-full py-3 bg-mountain-900 hover:bg-mountain-800 text-snow text-[10px] font-medium tracking-[0.2em] border border-mountain-700 hover:border-mountain-600 transition-all duration-300 uppercase"
                 >
-                  <motion.div
-                    className="w-full border rounded-xl overflow-hidden bg-black/45 backdrop-blur-md relative flex flex-col transition-colors duration-500"
-                    style={{
-                      transformStyle: "preserve-3d",
-                      willChange: "transform, opacity",
-                      boxShadow: isExpanded 
-                        ? "0 25px 50px -12px rgba(0, 0, 0, 0.85)" 
-                        : "0 12px 30px -8px rgba(0, 0, 0, 0.5)",
-                      borderColor: isExpanded 
-                        ? "rgba(189, 159, 118, 0.25)" 
-                        : "rgba(255, 255, 255, 0.04)"
-                    }}
-                    animate={{
-                      x: xOffset,
-                      z: zDepth,
-                      y: isExpanded ? 0 : [0, -8, 0],
-                      rotateX: isExpanded ? 0 : [0, 1.2, 0],
-                      rotateY: isExpanded ? 0 : [0, -1.2, 0],
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 80,
-                      damping: 20,
-                      y: isExpanded 
-                        ? { duration: 0.3 } 
-                        : { duration: 6 + idx * 1.2, repeat: Infinity, ease: "easeInOut" },
-                      rotateX: isExpanded 
-                        ? { duration: 0.3 } 
-                        : { duration: 8 + idx * 1.5, repeat: Infinity, ease: "easeInOut" },
-                      rotateY: isExpanded 
-                        ? { duration: 0.3 } 
-                        : { duration: 7 + idx * 1.1, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                  >
-                    {/* Card Background Preview Image */}
-                    <div className="absolute inset-0 z-0 opacity-[0.14] filter grayscale saturate-0 contrast-125 transition-opacity duration-700">
-                      <Image
-                        src={categoryImages[key]}
-                        alt=""
-                        fill
-                        priority
-                        className="object-cover"
+                  RESERVE VIA WHATSAPP
+                </a>
+
+                <div className="flex justify-between items-center text-[10px]">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono tracking-wider text-parchment/40 uppercase">THEME:</span>
+                    <div className="flex items-center gap-2 border border-mountain-700 p-1 bg-mountain-900/50">
+                      <button 
+                        onClick={() => handleThemeChange("light")}
+                        className={`w-3.5 h-3.5 bg-[#ede4dd] border border-[#111111]/20 cursor-pointer transition-transform duration-200 ${theme === "light" ? "scale-110 ring-1 ring-forest-glow" : "opacity-40"}`}
+                        aria-label="Light theme"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                      <button 
+                        onClick={() => handleThemeChange("dark")}
+                        className={`w-3.5 h-3.5 bg-[#050505] border border-[#ede4dd]/20 cursor-pointer transition-transform duration-200 ${theme === "dark" ? "scale-110 ring-1 ring-[#ede4dd]" : "opacity-40"}`}
+                        aria-label="Dark theme"
+                      />
                     </div>
-
-                    {/* Card Header Trigger */}
-                    <button
-                      onClick={() => setExpandedSection(isExpanded ? null : key)}
-                      onMouseEnter={() => setHoveredCategory(key)}
-                      onMouseLeave={() => setHoveredCategory(null)}
-                      className="w-full flex justify-between items-center p-5 focus:outline-none cursor-pointer relative z-10 text-left"
-                    >
-                      <div className="flex items-start gap-4">
-                        <span className="text-[9px] font-mono text-accent-warm/40 mt-1 select-none tabular-nums">
-                          {String(idx + 1).padStart(2, "0")}
-                        </span>
-                        <div className="flex flex-col items-start text-left">
-                          <span className="text-[8px] font-mono tracking-[0.22em] text-accent-warm/60 mb-0.5 uppercase">
-                            {menuTaglines[key]?.tag}
-                          </span>
-                          <span className="text-xl font-light tracking-[0.06em] text-snow/90 uppercase font-display">
-                            {menuData[key].label}
-                          </span>
-                        </div>
-                      </div>
-                      <span className={`text-stone/40 text-xs transition-transform duration-500 ${isExpanded ? "rotate-180 text-accent-warm" : ""}`}>
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </span>
-                    </button>
-
-                    {/* Card Expanded Content */}
-                    <div
-                      className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden relative z-10 ${
-                        isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                      }`}
-                    >
-                      <div className="overflow-hidden px-5 pb-5">
-                        <div className="border-t border-white/5 pt-4 flex flex-col space-y-3">
-                          {menuData[key].items.map((item) => (
-                            <div key={item.label}>
-                              {item.href ? (
-                                <Link
-                                  href={item.href}
-                                  onClick={() => setMobileOpen(false)}
-                                  tabIndex={isExpanded ? 0 : -1}
-                                  className="group/mob-link flex items-center gap-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-parchment/60 active:text-snow hover:text-snow transition-all duration-300 uppercase"
-                                >
-                                  <span className="w-1.5 h-1.5 rounded-full bg-accent-warm/40 group-hover/mob-link:bg-accent-warm transition-all duration-300 scale-75 group-hover/mob-link:scale-100" />
-                                  {item.label}
-                                </Link>
-                              ) : (
-                                <div className="py-1.5 flex items-center gap-3 opacity-30 select-none">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                                  <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/40 uppercase">{item.label}</span>
-                                  <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase ml-1">
-                                    {item.status || "SOON"}
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
+                  </div>
+                  <a href="mailto:hello@trailcore.in" className="hover:text-accent-warm transition-colors tracking-[0.12em] text-parchment/50 font-light uppercase">
+                    hello@trailcore.in
+                  </a>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Bottom Actions & Info (Mobile only) */}
-          <div className="pt-8 border-t border-white/[0.04] w-full space-y-6 flex-shrink-0 mt-12 relative z-10">
-            <a
-              href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20know%20more%20about%20your%20Himalayan%20expeditions."
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center w-full py-3.5 bg-white/[0.02] hover:bg-white/[0.05] text-snow text-[10px] font-medium tracking-[0.2em] rounded-full border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 uppercase"
-            >
-              RESERVE VIA WHATSAPP
-            </a>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-3">
-                <span className="text-[8px] font-mono tracking-wider text-parchment/40 uppercase">THEME:</span>
-                <div className="flex items-center gap-2 border border-white/10 p-1 rounded-full bg-black/30">
-                  <button 
-                    onClick={() => handleThemeChange("light")}
-                    className={`w-3 h-3 rounded-full bg-[#ede4dd] border border-[#111111]/20 cursor-pointer transition-all ${theme === "light" ? "scale-110 ring-1 ring-white" : "opacity-40"}`}
-                    aria-label="Light theme"
-                  />
-                  <button 
-                    onClick={() => handleThemeChange("dark")}
-                    className={`w-3 h-3 rounded-full bg-[#050505] border border-[#ede4dd]/20 cursor-pointer transition-all ${theme === "dark" ? "scale-110 ring-1 ring-white" : "opacity-40"}`}
-                    aria-label="Dark theme"
-                  />
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <a href="mailto:hello@trailcore.in" className="hover:text-snow transition-colors text-[10px] tracking-[0.12em] text-parchment/35 font-light uppercase">HELLO@TRAILCORE.IN</a>
               </div>
             </div>
-          </div>
-
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
