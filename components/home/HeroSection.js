@@ -45,7 +45,7 @@ export default function HeroSection() {
               className="text-[0.625rem] font-mono uppercase tracking-[0.3em] text-forest-glow flex items-center gap-4 mono-number"
             >
               <span>32.2396° N, 77.1887° E</span>
-              <span className="text-white/20">//</span>
+              <span className="text-white/20">{"//"}</span>
               <span>ALTITUDE 2,276M</span>
             </motion.div>
           </ParallaxText>

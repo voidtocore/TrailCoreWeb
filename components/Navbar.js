@@ -284,9 +284,16 @@ export default function Navbar() {
 
   const lastScrollY = useRef(0);
 
-  useEffect(() => {
+  // Reset state during render phase when dependent state changes to avoid useEffect cascading renders
+  const [prevActiveMenu, setPrevActiveMenu] = useState(null);
+  if (activeMenu !== prevActiveMenu) {
+    setPrevActiveMenu(activeMenu);
     setHoveredIndex(null);
-  }, [activeMenu]);
+  }
+
+  if (!mobileOpen && expandedSection !== null) {
+    setExpandedSection(null);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -346,7 +353,6 @@ export default function Navbar() {
       if (window.lenis) {
         window.lenis.start();
       }
-      setExpandedSection(null);
     }
 
     return () => {
