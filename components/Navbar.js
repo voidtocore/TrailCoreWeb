@@ -260,8 +260,13 @@ export default function Navbar() {
   const [expandedSection, setExpandedSection] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredCategory, setHoveredCategory] = useState(null);
-  const [scrollTop, setScrollTop] = useState(0);
   const [theme, setTheme] = useState("light");
+  const isFirstRender = useRef(true);
+  const mobileOpenRef = useRef(mobileOpen);
+
+  useEffect(() => {
+    mobileOpenRef.current = mobileOpen;
+  }, [mobileOpen]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("trailcore-theme") || "light";
@@ -276,7 +281,7 @@ export default function Navbar() {
   };
 
   const handleMobileScroll = (e) => {
-    setScrollTop(e.currentTarget.scrollTop);
+    e.currentTarget.style.setProperty('--scroll-top', `${e.currentTarget.scrollTop}px`);
   };
 
   const handleOverlayClick = (e) => {
@@ -341,6 +346,7 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add("mobile-menu-active");
 
       // DO NOT lock html scrolling
       document.documentElement.style.overflow = "";
@@ -351,6 +357,7 @@ export default function Navbar() {
       }
     } else {
       document.body.style.overflow = "";
+      document.body.classList.remove("mobile-menu-active");
       document.documentElement.style.overflow = "";
 
       if (window.lenis) {
@@ -358,11 +365,16 @@ export default function Navbar() {
       }
       setHoveredCategory(null);
       setExpandedSection(null);
-      setScrollTop(0);
+      
+      // Reset the CSS variable on the overlay
+      if (mobileOverlayRef.current) {
+        mobileOverlayRef.current.style.setProperty('--scroll-top', '0px');
+      }
     }
 
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("mobile-menu-active");
       document.documentElement.style.overflow = "";
 
       if (window.lenis) {
@@ -411,7 +423,7 @@ export default function Navbar() {
 
       menuTimeline.current = tl;
 
-      if (mobileOpen) {
+      if (mobileOpenRef.current) {
         tl.progress(1);
         gsap.set(mobileOverlayRef.current, { clipPath: "none" });
       }
@@ -429,6 +441,10 @@ export default function Navbar() {
 
   // Sync mobileOpen state changes with GSAP timeline
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     if (menuTimeline.current) {
       if (mobileOpen) {
         menuTimeline.current.play();
@@ -447,10 +463,13 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={isLoaded ? { y: visible || mobileOpen ? 0 : -100, opacity: 1 } : { y: -100, opacity: 0 }}
         transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-colors duration-500 ${scrolled || activeMenu
-          ? "bg-background/90 backdrop-blur-xl border-b border-mountain-700 py-3"
-          : "bg-transparent py-5 sm:py-7"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-colors duration-500 ${
+          (scrolled || activeMenu) && !mobileOpen
+            ? "bg-background/90 backdrop-blur-xl border-b border-mountain-700 py-3"
+            : mobileOpen
+            ? "bg-transparent py-3"
+            : "bg-transparent py-5 sm:py-7"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
@@ -538,12 +557,12 @@ export default function Navbar() {
             <div className="relative w-5 h-3 flex items-center justify-center">
               <span
                 className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "rotate-45 bg-snow" : "-translate-y-[4px] bg-snow"
+                  mobileOpen ? "rotate-45 bg-[#ede4dd]" : "-translate-y-[4px] bg-snow"
                 }`}
               />
               <span
                 className={`absolute block h-[1px] w-5 transition-transform duration-300 ease-out ${
-                  mobileOpen ? "-rotate-45 bg-snow" : "translate-y-[4px] bg-snow"
+                  mobileOpen ? "-rotate-45 bg-[#ede4dd]" : "translate-y-[4px] bg-snow"
                 }`}
               />
             </div>
@@ -636,14 +655,13 @@ export default function Navbar() {
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           {Object.keys(categoryImages).map((key) => {
             const isActive = (expandedSection || hoveredCategory || 'discover') === key;
-            const translateY = scrollTop * 0.15;
             return (
               <div
                 key={key}
                 className="absolute inset-0 transition-opacity duration-[1200ms] ease-[cubic-bezier(0.65,0.05,0,1)]"
                 style={{
                   opacity: isActive && mobileOpen ? 0.08 : 0,
-                  transform: `translateY(${translateY}px) scale(${isActive ? 1.05 : 1.1})`,
+                  transform: `translateY(calc(var(--scroll-top, 0px) * 0.15)) scale(${isActive ? 1.05 : 1.1})`,
                   transitionProperty: "opacity, transform",
                   willChange: "opacity, transform"
                 }}
@@ -681,115 +699,120 @@ export default function Navbar() {
               const zDepth = isExpanded ? 35 : (idx % 2 === 0 ? 15 : -15);
 
               return (
-                <motion.div
+                <div
                   key={key}
-                  className="mobile-nav-link menu-link w-full border rounded-xl overflow-hidden bg-black/45 backdrop-blur-md relative flex flex-col transition-colors duration-500"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    willChange: "transform, opacity",
-                    boxShadow: isExpanded 
-                      ? "0 25px 50px -12px rgba(0, 0, 0, 0.85)" 
-                      : "0 12px 30px -8px rgba(0, 0, 0, 0.5)",
-                    borderColor: isExpanded 
-                      ? "rgba(189, 159, 118, 0.25)" 
-                      : "rgba(255, 255, 255, 0.04)"
-                  }}
-                  animate={{
-                    x: xOffset,
-                    z: zDepth,
-                    y: isExpanded ? 0 : [0, -8, 0],
-                    rotateX: isExpanded ? 0 : [0, 1.2, 0],
-                    rotateY: isExpanded ? 0 : [0, -1.2, 0],
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 80,
-                    damping: 20,
-                    y: isExpanded 
-                      ? { duration: 0.3 } 
-                      : { duration: 6 + idx * 1.2, repeat: Infinity, ease: "easeInOut" },
-                    rotateX: isExpanded 
-                      ? { duration: 0.3 } 
-                      : { duration: 8 + idx * 1.5, repeat: Infinity, ease: "easeInOut" },
-                    rotateY: isExpanded 
-                      ? { duration: 0.3 } 
-                      : { duration: 7 + idx * 1.1, repeat: Infinity, ease: "easeInOut" }
-                  }}
+                  className="mobile-nav-link menu-link w-full"
+                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Card Background Preview Image */}
-                  <div className="absolute inset-0 z-0 opacity-[0.14] filter grayscale saturate-0 contrast-125 transition-opacity duration-700">
-                    <Image
-                      src={categoryImages[key]}
-                      alt=""
-                      fill
-                      priority
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  </div>
-
-                  {/* Card Header Trigger */}
-                  <button
-                    onClick={() => setExpandedSection(isExpanded ? null : key)}
-                    onMouseEnter={() => setHoveredCategory(key)}
-                    onMouseLeave={() => setHoveredCategory(null)}
-                    className="w-full flex justify-between items-center p-5 focus:outline-none cursor-pointer relative z-10 text-left"
+                  <motion.div
+                    className="w-full border rounded-xl overflow-hidden bg-black/45 backdrop-blur-md relative flex flex-col transition-colors duration-500"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      willChange: "transform, opacity",
+                      boxShadow: isExpanded 
+                        ? "0 25px 50px -12px rgba(0, 0, 0, 0.85)" 
+                        : "0 12px 30px -8px rgba(0, 0, 0, 0.5)",
+                      borderColor: isExpanded 
+                        ? "rgba(189, 159, 118, 0.25)" 
+                        : "rgba(255, 255, 255, 0.04)"
+                    }}
+                    animate={{
+                      x: xOffset,
+                      z: zDepth,
+                      y: isExpanded ? 0 : [0, -8, 0],
+                      rotateX: isExpanded ? 0 : [0, 1.2, 0],
+                      rotateY: isExpanded ? 0 : [0, -1.2, 0],
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 20,
+                      y: isExpanded 
+                        ? { duration: 0.3 } 
+                        : { duration: 6 + idx * 1.2, repeat: Infinity, ease: "easeInOut" },
+                      rotateX: isExpanded 
+                        ? { duration: 0.3 } 
+                        : { duration: 8 + idx * 1.5, repeat: Infinity, ease: "easeInOut" },
+                      rotateY: isExpanded 
+                        ? { duration: 0.3 } 
+                        : { duration: 7 + idx * 1.1, repeat: Infinity, ease: "easeInOut" }
+                    }}
                   >
-                    <div className="flex items-start gap-4">
-                      <span className="text-[9px] font-mono text-accent-warm/40 mt-1 select-none tabular-nums">
-                        {String(idx + 1).padStart(2, "0")}
+                    {/* Card Background Preview Image */}
+                    <div className="absolute inset-0 z-0 opacity-[0.14] filter grayscale saturate-0 contrast-125 transition-opacity duration-700">
+                      <Image
+                        src={categoryImages[key]}
+                        alt=""
+                        fill
+                        priority
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                    </div>
+
+                    {/* Card Header Trigger */}
+                    <button
+                      onClick={() => setExpandedSection(isExpanded ? null : key)}
+                      onMouseEnter={() => setHoveredCategory(key)}
+                      onMouseLeave={() => setHoveredCategory(null)}
+                      className="w-full flex justify-between items-center p-5 focus:outline-none cursor-pointer relative z-10 text-left"
+                    >
+                      <div className="flex items-start gap-4">
+                        <span className="text-[9px] font-mono text-accent-warm/40 mt-1 select-none tabular-nums">
+                          {String(idx + 1).padStart(2, "0")}
+                        </span>
+                        <div className="flex flex-col items-start text-left">
+                          <span className="text-[8px] font-mono tracking-[0.22em] text-accent-warm/60 mb-0.5 uppercase">
+                            {menuTaglines[key]?.tag}
+                          </span>
+                          <span className="text-xl font-light tracking-[0.06em] text-snow/90 uppercase font-display">
+                            {menuData[key].label}
+                          </span>
+                        </div>
+                      </div>
+                      <span className={`text-stone/40 text-xs transition-transform duration-500 ${isExpanded ? "rotate-180 text-accent-warm" : ""}`}>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                       </span>
-                      <div className="flex flex-col items-start text-left">
-                        <span className="text-[8px] font-mono tracking-[0.22em] text-accent-warm/60 mb-0.5 uppercase">
-                          {menuTaglines[key]?.tag}
-                        </span>
-                        <span className="text-xl font-light tracking-[0.06em] text-snow/90 uppercase font-display">
-                          {menuData[key].label}
-                        </span>
-                      </div>
-                    </div>
-                    <span className={`text-stone/40 text-xs transition-transform duration-500 ${isExpanded ? "rotate-180 text-accent-warm" : ""}`}>
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                  </button>
+                    </button>
 
-                  {/* Card Expanded Content */}
-                  <div
-                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden relative z-10 ${
-                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden px-5 pb-5">
-                      <div className="border-t border-white/5 pt-4 flex flex-col space-y-3">
-                        {menuData[key].items.map((item) => (
-                          <div key={item.label}>
-                            {item.href ? (
-                              <Link
-                                href={item.href}
-                                onClick={() => setMobileOpen(false)}
-                                tabIndex={isExpanded ? 0 : -1}
-                                className="group/mob-link flex items-center gap-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-parchment/60 active:text-snow hover:text-snow transition-all duration-300 uppercase"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent-warm/40 group-hover/mob-link:bg-accent-warm transition-all duration-300 scale-75 group-hover/mob-link:scale-100" />
-                                {item.label}
-                              </Link>
-                            ) : (
-                              <div className="py-1.5 flex items-center gap-3 opacity-30 select-none">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                                <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/40 uppercase">{item.label}</span>
-                                <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase ml-1">
-                                  {item.status || "SOON"}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        ))}
+                    {/* Card Expanded Content */}
+                    <div
+                      className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden relative z-10 ${
+                        isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <div className="overflow-hidden px-5 pb-5">
+                        <div className="border-t border-white/5 pt-4 flex flex-col space-y-3">
+                          {menuData[key].items.map((item) => (
+                            <div key={item.label}>
+                              {item.href ? (
+                                <Link
+                                  href={item.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  tabIndex={isExpanded ? 0 : -1}
+                                  className="group/mob-link flex items-center gap-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-parchment/60 active:text-snow hover:text-snow transition-all duration-300 uppercase"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-accent-warm/40 group-hover/mob-link:bg-accent-warm transition-all duration-300 scale-75 group-hover/mob-link:scale-100" />
+                                  {item.label}
+                                </Link>
+                              ) : (
+                                <div className="py-1.5 flex items-center gap-3 opacity-30 select-none">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                                  <span className="text-[11px] font-medium tracking-[0.12em] text-parchment/40 uppercase">{item.label}</span>
+                                  <span className="text-[7px] tracking-[0.12em] text-stone-light/40 font-mono uppercase ml-1">
+                                    {item.status || "SOON"}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </div>
               );
             })}
           </div>

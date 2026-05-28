@@ -367,7 +367,7 @@ h6 {
 }
 
 /* ─── Mobile Viewport Overrides ─── */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .section-cinematic {
     padding-top: clamp(3.5rem, 8vw, 6rem);
     padding-bottom: clamp(3.5rem, 8vw, 6rem);
@@ -386,7 +386,7 @@ h6 {
     height: 100dvh;
     background: #050505 !important;
     color: rgba(255, 255, 255, 0.82);
-    z-index: 9999;
+    z-index: 990;
     
     /* Variable overrides to keep mobile menu dark in Light Theme */
     --bg-val: #050505;
@@ -439,10 +439,6 @@ h6 {
     overscroll-behavior-y: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    
-    transition: clip-path var(--duration-default) var(--ease-editorial),
-                opacity var(--duration-default) var(--ease-editorial),
-                visibility var(--duration-default) var(--ease-editorial);
   }
 
   .mobile-menu-overlay::-webkit-scrollbar {
@@ -528,6 +524,10 @@ h6 {
 /* ─── Light Mode Brand Inversion & compiled class overrides ─── */
 [data-theme="light"] img[alt="TrailCore"] {
   filter: invert(1) brightness(0.1) !important;
+}
+
+body.mobile-menu-active img[alt="TrailCore"] {
+  filter: none !important;
 }
 
 /* Override compiled Tailwind arbitrary backgrounds for dynamic themes */
