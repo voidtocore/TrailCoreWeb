@@ -339,13 +339,13 @@ export default function Navbar() {
           (scrolled || activeMenu) && !mobileOpen
             ? "bg-background/90 backdrop-blur-xl border-b border-mountain-700 py-3"
             : mobileOpen
-            ? "bg-transparent py-3"
+            ? "bg-transparent py-3 pointer-events-none"
             : "bg-transparent py-5 sm:py-7"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center group relative z-[1001]" onClick={() => setMobileOpen(false)}>
+          <Link href="/" className={`flex items-center group relative z-[1001] ${mobileOpen ? 'pointer-events-auto' : ''}`} onClick={() => setMobileOpen(false)}>
             {/* Desktop Wordmark */}
             <div className="hidden lg:block">
               <Image
@@ -410,7 +410,7 @@ export default function Navbar() {
           {/* Mobile Hamburger menu - visible ONLY below lg breakpoint */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`mobile-menu-toggle ${mobileOpen ? "mobile-menu-close" : ""} lg:hidden relative w-11 h-11 flex items-center justify-center rounded-lg z-[1001] cursor-pointer`}
+            className={`mobile-menu-toggle ${mobileOpen ? "mobile-menu-close" : ""} lg:hidden relative w-11 h-11 flex items-center justify-center rounded-lg z-[1001] cursor-pointer ${mobileOpen ? 'pointer-events-auto' : ''}`}
             aria-label="Toggle menu"
           >
             <div className="relative w-5 h-3 flex items-center justify-center">
@@ -501,11 +501,17 @@ export default function Navbar() {
             animate="visible"
             exit="hidden"
             variants={mobileOverlayVariants}
-            className="fixed inset-0 z-[990] bg-background/98 backdrop-blur-xl overflow-y-auto overflow-x-hidden w-full h-[100dvh] lg:hidden"
+            className="fixed inset-0 z-[990] bg-background/98 backdrop-blur-xl lg:hidden"
           >
-            <div className="w-full max-w-md mx-auto flex flex-col min-h-full justify-between px-6 pt-28 pb-8">
+            <div
+              className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain"
+              style={{ WebkitOverflowScrolling: 'touch' }}
+              onTouchStart={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+            >
+              <div className="w-full max-w-md mx-auto flex flex-col min-h-full px-6 pt-28 pb-8">
               {/* Category Accordion List */}
-              <div className="py-2">
+              <div className="py-2 flex-shrink-0">
                 {Object.keys(menuData).map((key) => (
                   <MobileAccordionSection
                     key={key}
@@ -520,7 +526,7 @@ export default function Navbar() {
               </div>
 
               {/* Bottom Actions */}
-              <div className="pt-6 border-t border-mountain-700 mt-8 space-y-6 flex-shrink-0">
+              <div className="pt-6 border-t border-mountain-700 mt-auto space-y-6 flex-shrink-0">
                 <a
                   href="https://wa.me/917560065963?text=Hi%20Trail%20Core!%20I%27d%20like%20to%20know%20more%20about%20your%20Himalayan%20expeditions."
                   target="_blank"
@@ -540,6 +546,7 @@ export default function Navbar() {
                   </a>
                 </div>
               </div>
+            </div>
             </div>
           </motion.div>
         )}
