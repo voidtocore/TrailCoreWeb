@@ -7,44 +7,44 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLoading } from "./home/LoadingOrchestrator";
 
 const menuData = {
-  discover: {
-    label: "DISCOVER",
+  explore: {
+    label: "EXPLORE",
     items: [
-      { label: "MOUNTAINS", href: "/destinations" },
+      { label: "VALLEYS", href: "/destinations" },
+      { label: "VILLAGES", status: "COMING SOON" },
       { label: "FOREST ESCAPES", status: "COMING SOON" },
-      { label: "WEEKEND ESCAPES", status: "COMING SOON" },
-      { label: "SNOW JOURNEYS", status: "COMING SOON" },
     ]
   },
-  offgrid: {
-    label: "OFFGRID",
+  journeys: {
+    label: "JOURNEYS",
     items: [
-      { label: "HIDDEN ESCAPES", href: "/packages" },
-      { label: "REMOTE STAYS", status: "COMING SOON" },
-      { label: "SCENIC ROUTES", status: "COMING SOON" },
+      { label: "ROAD TRIPS", href: "/packages" },
+      { label: "WEEKEND ESCAPES", status: "COMING SOON" },
+      { label: "SLOW TRAVEL", status: "COMING SOON" },
+      { label: "PHOTOGRAPHY", status: "COMING SOON" },
+      { label: "HONEYMOON JOURNEYS", href: "/honeymoon" },
     ]
   },
   stays: {
     label: "STAYS",
     items: [
-      { label: "BOUTIQUE STAYS", status: "COMING SOON" },
-      { label: "LUXURY CABINS", status: "COMING SOON" },
       { label: "HOMESTAYS", status: "COMING SOON" },
+      { label: "CABINS", status: "COMING SOON" },
+      { label: "GUESTHOUSES", status: "COMING SOON" },
     ]
   },
-  editions: {
-    label: "EDITIONS",
-    items: [
-      { label: "HONEYMOON EDITION", href: "/honeymoon" },
-      { label: "LUXURY ROADTRIPS", href: "/packages" },
-      { label: "48 HOUR ESCAPES", status: "COMING SOON" },
-    ]
-  },
-  reserve: {
-    label: "RESERVE",
+  plan: {
+    label: "PLAN",
     items: [
       { label: "CUSTOM PLANNING", href: "/custom-trip" },
       { label: "PRIVATE BOOKINGS", status: "COMING SOON" },
+    ]
+  },
+  journal: {
+    label: "JOURNAL",
+    items: [
+      { label: "ESSAYS", status: "COMING SOON" },
+      { label: "PHOTO DIARIES", status: "COMING SOON" },
     ]
   },
   studio: {
@@ -88,35 +88,35 @@ function MenuItem({ item }) {
 }
 
 const menuTaglines = {
-  discover: {
+  explore: {
     tag: "EXPLORE · PATHWAYS",
     title: "Walk the untamed edges",
-    desc: "Slow journeys through high-altitude Spiti, deep pine valleys, and raw Himalayan terrain — curated for deliberate travellers."
+    desc: "Discover remote villages, hidden valleys, and forest escapes across Himachal Pradesh."
   },
-  offgrid: {
-    tag: "SILENCE · ISOLATION",
-    title: "Dwellings of complete quiet",
-    desc: "Remote mountain retreats designed for digital detox, reflection, and stillness in places far beyond the signal line."
+  journeys: {
+    tag: "LIMITED · CURATED",
+    title: "Expeditions with intent",
+    desc: "Road trips, slow travel, photography, and honeymoon journeys designed around altitude and pacing."
   },
   stays: {
-    tag: "SHELTER · LUXURY",
-    title: "Alpine sanctuaries",
-    desc: "Boutique cabins, glass houses, and mountain retreats — each chosen for architectural character and Himalayan setting."
+    tag: "SHELTER · COMFORT",
+    title: "Alpine dwellings",
+    desc: "Handpicked homestays, remote cabins, and boutique guesthouses chosen for local character."
   },
-  editions: {
-    tag: "LIMITED · CURATED",
-    title: "Seasonal travel editions",
-    desc: "Time-specific journeys crafted around snowfall, bloom, and altitude — Trail Core's curated travel calendar."
-  },
-  reserve: {
+  plan: {
     tag: "BESPOKE · PRIVATE",
-    title: "Private expedition design",
-    desc: "Tailored itineraries built around your pace, group, and terrain preferences. Nothing template-made."
+    title: "Tailored mountain planning",
+    desc: "Collaborate with our team to design a custom private expedition around your timeline and comfort."
+  },
+  journal: {
+    tag: "ESSAYS · IMAGES",
+    title: "Mountain chronicles",
+    desc: "Documentary essays, photo journals, and field stories from local communities."
   },
   studio: {
-    tag: "PHILOSOPHY · CRAFT",
+    tag: "PHILOSOPHY · STORY",
     title: "About Trail Core",
-    desc: "Our approach to slow travel, our network of field partners, and how to get in touch with the team."
+    desc: "Our mission for slow travel, safety standards, and how to get in touch with our team."
   }
 };
 
