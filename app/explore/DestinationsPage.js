@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
@@ -27,6 +27,26 @@ export default function DestinationsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("ALL");
   const [selectedType, setSelectedType] = useState("ALL");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const typeParam = params.get("type");
+      if (typeParam) {
+        const found = typeOptions.find(opt => opt.id.toLowerCase() === typeParam.toLowerCase());
+        if (found) {
+          setSelectedType(found.id);
+        }
+      }
+      const districtParam = params.get("district");
+      if (districtParam) {
+        const found = districtOptions.find(opt => opt.id.toLowerCase() === districtParam.toLowerCase());
+        if (found) {
+          setSelectedDistrict(found.id);
+        }
+      }
+    }
+  }, []);
 
   // Filtering Logic
   const filteredDestinations = destinations.filter((dest) => {

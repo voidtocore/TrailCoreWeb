@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
@@ -34,6 +34,33 @@ export default function PackagesPage() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("ALL");
   const [selectedDuration, setSelectedDuration] = useState("ALL");
   const [selectedSeason, setSelectedSeason] = useState("ALL");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const difficultyParam = params.get("difficulty");
+      if (difficultyParam) {
+        const found = difficultyOptions.find(opt => opt.id.toLowerCase() === difficultyParam.toLowerCase());
+        if (found) {
+          setSelectedDifficulty(found.id);
+        }
+      }
+      const durationParam = params.get("duration");
+      if (durationParam) {
+        const found = durationOptions.find(opt => opt.id.toLowerCase() === durationParam.toLowerCase());
+        if (found) {
+          setSelectedDuration(found.id);
+        }
+      }
+      const seasonParam = params.get("season");
+      if (seasonParam) {
+        const found = seasonOptions.find(opt => opt.id.toLowerCase() === seasonParam.toLowerCase());
+        if (found) {
+          setSelectedSeason(found.id);
+        }
+      }
+    }
+  }, []);
 
   const getDurationDays = (durationStr) => {
     const match = durationStr.match(/^(\d+)\s*Days?/i);

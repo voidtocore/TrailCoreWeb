@@ -10,38 +10,34 @@ const menuData = {
   explore: {
     label: "EXPLORE",
     items: [
-      { label: "VALLEYS", href: "/explore" },
-      { label: "EXPERIENCE TAGS", status: "COMING SOON" },
+      { label: "ALL DESTINATIONS", href: "/explore" },
+      { label: "VALLEYS", href: "/explore?type=VALLEY" },
+      { label: "VILLAGES", href: "/explore?type=VILLAGE" },
+      { label: "FOREST ESCAPES", href: "/explore?type=FOREST_HUB" },
     ]
   },
   journeys: {
     label: "JOURNEYS",
     items: [
-      { label: "ROAD TRIPS", href: "/packages" },
+      { label: "ALL JOURNEYS", href: "/packages" },
       { label: "TREKS & ADVENTURES", href: "/adventures" },
-      { label: "SLOW TRAVEL", status: "COMING SOON" },
-      { label: "HONEYMOONS", href: "/honeymoon" },
+      { label: "HONEYMOON JOURNEYS", href: "/honeymoon" },
     ]
   },
   stays: {
     label: "STAYS",
     items: [
-      { label: "HOMESTAYS", status: "COMING SOON" },
-      { label: "CABINS", status: "COMING SOON" },
+      { label: "ALL SHELTERS", href: "/stays" },
+      { label: "HOMESTAYS", href: "/stays?type=homestay" },
+      { label: "CABINS", href: "/stays?type=cabin" },
+      { label: "GUESTHOUSES", href: "/stays?type=guesthouse" },
     ]
   },
   plan: {
     label: "PLAN",
     items: [
       { label: "CUSTOM PLANNING", href: "/custom-trip" },
-      { label: "FAQ", status: "COMING SOON" },
-    ]
-  },
-  journal: {
-    label: "JOURNAL",
-    items: [
-      { label: "ESSAYS", status: "COMING SOON" },
-      { label: "FIELD LOGS", status: "COMING SOON" },
+      { label: "PLANNING FAQ", href: "/custom-trip#faq" },
     ]
   },
   studio: {
@@ -104,11 +100,6 @@ const menuTaglines = {
     tag: "BESPOKE · PRIVATE",
     title: "Tailored mountain planning",
     desc: "Collaborate with our team to design custom private expeditions or get answers to key travel queries."
-  },
-  journal: {
-    tag: "ESSAYS · IMAGES",
-    title: "Mountain chronicles",
-    desc: "Documentary stories, photo essays, and local conservation voices from the field."
   },
   studio: {
     tag: "PHILOSOPHY · STORY",
