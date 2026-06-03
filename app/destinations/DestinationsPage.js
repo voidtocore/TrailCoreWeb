@@ -5,15 +5,7 @@ import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import { FadeIn } from "@/components/Animations";
 import InquiryCTA from "@/components/home/InquiryCTA";
-
-const destinations = [
-  { id: "spiti", name: "Spiti Valley", img: "/images/spiti-valley.png", alt: "3,650m", desc: "The cold desert — ancient monasteries, fossil-rich moonscapes, and high-altitude silence.", highlights: ["Key Monastery", "Chandratal Lake", "Pin Valley", "Kibber Village"] },
-  { id: "kalpa", name: "Kalpa", img: "/images/kalpa.png", alt: "2,960m", desc: "Kinnaur's crown — apple orchards with Kinner Kailash as the backdrop. A place where time slows to the rhythm of mountain winds.", highlights: ["Kinner Kailash Views", "Apple Orchards", "Reckong Peo", "Ancient Temples"] },
-  { id: "kaza", name: "Kaza", img: "/images/kaza.png", alt: "3,650m", desc: "Heart of Spiti Valley — the highest market town and base for exploring the region's ancient Buddhist heritage and moonscape terrain.", highlights: ["Key Gompa", "Hikkim Post Office", "Comic Village", "Langza"] },
-  { id: "manali", name: "Manali", img: "/images/manali.png", alt: "2,050m", desc: "Gateway to the high passes — river valleys, ancient temples, and the starting point for some of the Himalaya's greatest road journeys.", highlights: ["Old Manali", "Solang Valley", "Rohtang Pass", "Hadimba Temple"] },
-  { id: "shimla", name: "Shimla", img: "/images/shimla.png", alt: "2,276m", desc: "Colonial architecture meets mountain serenity — pine-clad slopes, heritage railways, and panoramic views that set the tone for every Himalayan journey.", highlights: ["Heritage Walk", "Jakhu Temple", "Kufri", "Toy Train"] },
-  { id: "narkanda", name: "Narkanda", img: "/images/road-trip.png", alt: "2,708m", desc: "A hidden gem on the Hindustan-Tibet Highway — skiing slopes in winter, apple blossoms in spring, and Hatu Peak year-round.", highlights: ["Hatu Peak", "Apple Orchards", "Tannu Jubbar Lake", "Skiing"] },
-];
+import { destinations } from "@/data/destinations";
 
 export default function DestinationsPage() {
   return (
@@ -42,7 +34,7 @@ export default function DestinationsPage() {
                     sizes="(max-width: 768px) 100vw, 50vw" 
                   />
                   <div className="absolute top-4 right-4 bg-mountain-900/90 border border-white/[0.04] px-3.5 py-1.5 rounded-[2px] text-[10px] text-snow/90 font-medium tracking-widest uppercase mono-number shadow-lg shadow-black/20">
-                    {dest.alt}
+                    {dest.altitude_text}
                   </div>
                 </div>
 
