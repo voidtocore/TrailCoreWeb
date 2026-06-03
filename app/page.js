@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import FeaturedExperiences from "@/components/home/FeaturedExperiences";
+import StaysSpotlight from "@/components/home/StaysSpotlight";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import ExpeditionPhilosophy from "@/components/home/ExpeditionPhilosophy";
 import GallerySection from "@/components/home/GallerySection";
@@ -14,6 +15,8 @@ export default function Home() {
       <hr className="editorial-divider" />
       <FeaturedExperiences />
       <hr className="editorial-divider" />
+      <StaysSpotlight />
+      <hr className="editorial-divider" />
       <WhyChooseUs />
       <ExpeditionPhilosophy />
       <hr className="editorial-divider" />
@@ -26,3 +29,4 @@ export default function Home() {
     </>
   );
 }
+
