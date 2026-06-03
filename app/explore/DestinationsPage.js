@@ -25,7 +25,10 @@ export default function DestinationsPage() {
             <FadeIn key={dest.id} delay={0.1}>
               <div id={dest.id} className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                 {/* Image Block */}
-                <div className={`relative rounded-[4px] overflow-hidden aspect-[4/3] lg:col-span-6 border border-white/[0.03] group ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                <Link 
+                  href={`/explore/${dest.slug}`}
+                  className={`relative rounded-[4px] overflow-hidden aspect-[4/3] lg:col-span-6 border border-white/[0.03] group ${i % 2 === 1 ? "lg:order-2" : ""}`}
+                >
                   <Image 
                     src={dest.img} 
                     alt={dest.name} 
@@ -36,16 +39,18 @@ export default function DestinationsPage() {
                   <div className="absolute top-4 right-4 bg-mountain-900/90 border border-white/[0.04] px-3.5 py-1.5 rounded-[2px] text-[10px] text-snow/90 font-medium tracking-widest uppercase mono-number shadow-lg shadow-black/20">
                     {dest.altitude_text}
                   </div>
-                </div>
+                </Link>
 
                 {/* Text Block */}
                 <div className={`lg:col-span-6 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <h2 
-                    className="text-2xl md:text-3.5xl font-medium text-snow" 
-                    style={{ fontFamily: "var(--font-outfit)" }}
-                  >
-                    {dest.name}
-                  </h2>
+                  <Link href={`/explore/${dest.slug}`}>
+                    <h2 
+                      className="text-2xl md:text-3.5xl font-medium text-snow hover:text-forest-glow transition-colors" 
+                      style={{ fontFamily: "var(--font-outfit)" }}
+                    >
+                      {dest.name}
+                    </h2>
+                  </Link>
                   <p className="text-xs sm:text-[0.8125rem] text-parchment leading-relaxed mt-5 font-light">
                     {dest.desc}
                   </p>
@@ -61,10 +66,10 @@ export default function DestinationsPage() {
                   </div>
 
                   <Link 
-                    href="/contact" 
-                    className="btn-outline gap-2 mt-10 text-[10px] tracking-widest uppercase"
+                    href={`/explore/${dest.slug}`} 
+                    className="btn-outline gap-2 mt-10 text-[10px] tracking-widest uppercase group"
                   >
-                    Inquire about {dest.name}
+                    Discover {dest.name}
                     <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>

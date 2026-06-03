@@ -10,7 +10,7 @@ const menuData = {
   explore: {
     label: "EXPLORE",
     items: [
-      { label: "VALLEYS", href: "/destinations" },
+      { label: "VALLEYS", href: "/explore" },
       { label: "EXPERIENCE TAGS", status: "COMING SOON" },
     ]
   },
