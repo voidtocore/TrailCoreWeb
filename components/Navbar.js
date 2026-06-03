@@ -11,18 +11,16 @@ const menuData = {
     label: "EXPLORE",
     items: [
       { label: "VALLEYS", href: "/destinations" },
-      { label: "VILLAGES", status: "COMING SOON" },
-      { label: "FOREST ESCAPES", status: "COMING SOON" },
+      { label: "EXPERIENCE TAGS", status: "COMING SOON" },
     ]
   },
   journeys: {
     label: "JOURNEYS",
     items: [
       { label: "ROAD TRIPS", href: "/packages" },
-      { label: "WEEKEND ESCAPES", status: "COMING SOON" },
+      { label: "TREKS & ADVENTURES", href: "/adventures" },
       { label: "SLOW TRAVEL", status: "COMING SOON" },
-      { label: "PHOTOGRAPHY", status: "COMING SOON" },
-      { label: "HONEYMOON JOURNEYS", href: "/honeymoon" },
+      { label: "HONEYMOONS", href: "/honeymoon" },
     ]
   },
   stays: {
@@ -30,27 +28,26 @@ const menuData = {
     items: [
       { label: "HOMESTAYS", status: "COMING SOON" },
       { label: "CABINS", status: "COMING SOON" },
-      { label: "GUESTHOUSES", status: "COMING SOON" },
     ]
   },
   plan: {
     label: "PLAN",
     items: [
       { label: "CUSTOM PLANNING", href: "/custom-trip" },
-      { label: "PRIVATE BOOKINGS", status: "COMING SOON" },
+      { label: "FAQ", status: "COMING SOON" },
     ]
   },
   journal: {
     label: "JOURNAL",
     items: [
       { label: "ESSAYS", status: "COMING SOON" },
-      { label: "PHOTO DIARIES", status: "COMING SOON" },
+      { label: "FIELD LOGS", status: "COMING SOON" },
     ]
   },
   studio: {
     label: "STUDIO",
     items: [
-      { label: "PHILOSOPHY", href: "/about" },
+      { label: "ABOUT US", href: "/about" },
       { label: "CONTACT", href: "/contact" },
     ]
   }
@@ -91,32 +88,32 @@ const menuTaglines = {
   explore: {
     tag: "EXPLORE · PATHWAYS",
     title: "Walk the untamed edges",
-    desc: "Discover remote villages, hidden valleys, and forest escapes across Himachal Pradesh."
+    desc: "Discover valleys, village hubs, and trails across Himachal Pradesh."
   },
   journeys: {
     tag: "LIMITED · CURATED",
     title: "Expeditions with intent",
-    desc: "Road trips, slow travel, photography, and honeymoon journeys designed around altitude and pacing."
+    desc: "Curated road trips, high-altitude treks, and honeymoon journeys designed around acclimatization and depth."
   },
   stays: {
     tag: "SHELTER · COMFORT",
     title: "Alpine dwellings",
-    desc: "Handpicked homestays, remote cabins, and boutique guesthouses chosen for local character."
+    desc: "Handpicked homestays and cabins chosen for local host connection and Himalayan views."
   },
   plan: {
     tag: "BESPOKE · PRIVATE",
     title: "Tailored mountain planning",
-    desc: "Collaborate with our team to design a custom private expedition around your timeline and comfort."
+    desc: "Collaborate with our team to design custom private expeditions or get answers to key travel queries."
   },
   journal: {
     tag: "ESSAYS · IMAGES",
     title: "Mountain chronicles",
-    desc: "Documentary essays, photo journals, and field stories from local communities."
+    desc: "Documentary stories, photo essays, and local conservation voices from the field."
   },
   studio: {
     tag: "PHILOSOPHY · STORY",
     title: "About Trail Core",
-    desc: "Our mission for slow travel, safety standards, and how to get in touch with our team."
+    desc: "Our vision for slow travel, local field partners, and how to get in touch with our studio team."
   }
 };
 
