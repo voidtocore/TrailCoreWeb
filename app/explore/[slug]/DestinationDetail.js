@@ -6,6 +6,8 @@ import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
 import InquiryCTA from "@/components/home/InquiryCTA";
+import { stays } from "@/data/stays";
+import { expeditions } from "@/data/expeditions";
 
 export default function DestinationDetail({ dest }) {
   const [activeTab, setActiveTab] = useState("overview");
@@ -13,7 +15,19 @@ export default function DestinationDetail({ dest }) {
 
   const overviewRef = useRef(null);
   const highlightsRef = useRef(null);
+  const staysRef = useRef(null);
+  const journeysRef = useRef(null);
   const reachRef = useRef(null);
+
+  // Filter stays and journeys for the active destination
+  const localStays = stays.filter(stay => stay.destination_id === dest.id);
+  const localJourneys = expeditions.filter(exp => exp.destination_ids && exp.destination_ids.includes(dest.id));
+
+  // Compute dynamic section indices
+  let sectionIndex = 2;
+  const staysIndex = localStays.length > 0 ? ++sectionIndex : null;
+  const journeysIndex = localJourneys.length > 0 ? ++sectionIndex : null;
+  const reachIndex = ++sectionIndex;
 
   // Simple scroll spy to set active tab
   useEffect(() => {
@@ -22,6 +36,10 @@ export default function DestinationDetail({ dest }) {
 
       if (reachRef.current && scrollPosition >= reachRef.current.offsetTop) {
         setActiveTab("reach");
+      } else if (journeysRef.current && scrollPosition >= journeysRef.current.offsetTop) {
+        setActiveTab("journeys");
+      } else if (staysRef.current && scrollPosition >= staysRef.current.offsetTop) {
+        setActiveTab("stays");
       } else if (highlightsRef.current && scrollPosition >= highlightsRef.current.offsetTop) {
         setActiveTab("highlights");
       } else {
@@ -31,7 +49,7 @@ export default function DestinationDetail({ dest }) {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [localStays.length, localJourneys.length]);
 
   const scrollToSection = (elementRef, tabName) => {
     if (elementRef.current) {
@@ -109,6 +127,22 @@ export default function DestinationDetail({ dest }) {
             >
               HIGHLIGHTS
             </button>
+            {localStays.length > 0 && (
+              <button
+                onClick={() => scrollToSection(staysRef, "stays")}
+                className={`py-4 border-b transition-colors cursor-pointer ${activeTab === "stays" ? "border-accent-warm text-snow" : "border-transparent text-parchment/40 hover:text-snow"}`}
+              >
+                STAYS
+              </button>
+            )}
+            {localJourneys.length > 0 && (
+              <button
+                onClick={() => scrollToSection(journeysRef, "journeys")}
+                className={`py-4 border-b transition-colors cursor-pointer ${activeTab === "journeys" ? "border-accent-warm text-snow" : "border-transparent text-parchment/40 hover:text-snow"}`}
+              >
+                JOURNEYS
+              </button>
+            )}
             <button
               onClick={() => scrollToSection(reachRef, "reach")}
               className={`py-4 border-b transition-colors cursor-pointer ${activeTab === "reach" ? "border-accent-warm text-snow" : "border-transparent text-parchment/40 hover:text-snow"}`}
@@ -277,10 +311,144 @@ export default function DestinationDetail({ dest }) {
               </div>
             </div>
 
+            {/* Stays Section */}
+            {localStays.length > 0 && (
+              <div ref={staysRef} className="space-y-8 border-t border-white/[0.04] pt-16">
+                <span className="text-[9px] font-mono text-forest-glow tracking-[0.25em] uppercase block">
+                  {String(staysIndex).padStart(2, "0")} / BESPOKE DWELLINGS
+                </span>
+                <h2 
+                  className="text-2xl sm:text-3.5xl font-medium text-snow leading-tight tracking-tight"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  Curated Stays in {dest.name}
+                </h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                  {localStays.map((stay) => (
+                    <div key={stay.id} className="border border-white/[0.03] bg-mountain-900/40 rounded-[2px] overflow-hidden flex flex-col group">
+                      <Link href={`/stays/${stay.slug}`} className="relative aspect-[16/10] w-full overflow-hidden bg-mountain-900 block">
+                        <Image
+                          src={stay.img}
+                          alt={stay.name}
+                          fill
+                          className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+                        />
+                        <div className="absolute top-3 left-3 bg-background/80 px-2 py-0.5 text-[8px] font-mono text-forest-glow tracking-widest uppercase rounded-[2px] border border-white/[0.04]">
+                          {stay.type}
+                        </div>
+                      </Link>
+                      
+                      <div className="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-start justify-between gap-4 mb-2">
+                            <Link href={`/stays/${stay.slug}`} className="hover:text-forest-glow transition-colors">
+                              <h3 className="text-sm font-medium text-snow" style={{ fontFamily: "var(--font-outfit)" }}>
+                                {stay.name}
+                              </h3>
+                            </Link>
+                            <span className="text-[10px] font-mono text-forest-glow/80 font-medium whitespace-nowrap mono-number">
+                              ₹{stay.base_price_per_night} <span className="text-[8px] text-stone">/ night</span>
+                            </span>
+                          </div>
+                          
+                          <p className="text-xs text-parchment-dim leading-relaxed font-light mb-4">
+                            {stay.summary}
+                          </p>
+                          
+                          <div className="flex flex-wrap gap-1.5 mb-4">
+                            {stay.vibe_tags.map(tag => (
+                              <span key={tag} className="text-[8px] font-mono tracking-wider uppercase text-stone bg-white/[0.02] border border-white/[0.03] px-2 py-0.5 rounded-[2px]">
+                                {tag.replace(/-/g, " ")}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="pt-4 border-t border-white/[0.03] flex items-center justify-between text-[10px] font-mono text-stone">
+                          <div>
+                            <span className="block text-[8px] uppercase tracking-widest text-stone-light/30 mb-0.5">Connectivity</span>
+                            <span>{stay.connectivity.mobile} {stay.connectivity.wifi ? "· Wifi" : ""}</span>
+                          </div>
+                          <div className="flex gap-2">
+                            <Link
+                              href={`/stays/${stay.slug}`}
+                              className="btn-outline px-3 py-1.5 text-[8px] tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 rounded-[2px]"
+                            >
+                              Details
+                            </Link>
+                            <a
+                              href={`https://wa.me/917560065963?text=Hi%20Trail%20Core%2C%20I%20am%20interested%20in%20inquiring%20about%20${encodeURIComponent(stay.name)}%20in%20${encodeURIComponent(dest.name)}.%20Is%20this%20available%3F`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn-outline px-3 py-1.5 text-[8px] tracking-widest uppercase hover:bg-forest-glow hover:text-white transition-all duration-300 rounded-[2px]"
+                            >
+                              Inquire
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Journeys Section */}
+            {localJourneys.length > 0 && (
+              <div ref={journeysRef} className="space-y-8 border-t border-white/[0.04] pt-16">
+                <span className="text-[9px] font-mono text-forest-glow tracking-[0.25em] uppercase block">
+                  {String(journeysIndex).padStart(2, "0")} / PASSING EXPEDITIONS
+                </span>
+                <h2 
+                  className="text-2xl sm:text-3.5xl font-medium text-snow leading-tight tracking-tight"
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  Expeditions crossing {dest.name}
+                </h2>
+                
+                <div className="space-y-4 mt-6">
+                  {localJourneys.map((journey) => (
+                    <div key={journey.title} className="border border-white/[0.03] bg-mountain-900/20 p-6 rounded-[2px] flex flex-col md:flex-row md:items-center md:justify-between gap-6 hover:border-white/[0.08] transition-all duration-500">
+                      <div className="space-y-2 flex-1">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[9px] font-mono text-forest-glow tracking-widest uppercase bg-white/[0.02] border border-white/[0.04] px-2 py-0.5 rounded-[2px]">
+                            {journey.badge}
+                          </span>
+                          <span className="text-[10px] font-mono text-stone-light/50 tracking-wider mono-number">
+                            {journey.duration}
+                          </span>
+                        </div>
+                        <h3 className="text-sm sm:text-base font-medium text-snow" style={{ fontFamily: "var(--font-outfit)" }}>
+                          {journey.title}
+                        </h3>
+                        <p className="text-xs text-stone font-light leading-relaxed">
+                          Route: {journey.route}
+                        </p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 border-white/[0.03] pt-4 md:pt-0">
+                        <div className="text-left md:text-right">
+                          <span className="block text-[8px] uppercase tracking-widest text-stone-light/30 mb-0.5">Price</span>
+                          <span className="text-xs font-mono text-snow font-medium mono-number">{journey.price}</span>
+                        </div>
+                        <Link
+                          href={journey.slug ? `/packages/${journey.slug}` : "/contact"}
+                          className="btn-outline px-4 py-2 text-[9px] tracking-widest uppercase hover:bg-forest-glow transition-all duration-300 rounded-[2px]"
+                        >
+                          {journey.slug ? "View Details" : "Inquire"}
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* How to Reach Section */}
             <div ref={reachRef} className="space-y-8 border-t border-white/[0.04] pt-16">
               <span className="text-[9px] font-mono text-forest-glow tracking-[0.25em] uppercase block">
-                03 / TRANSIT & LOGISTICS
+                {String(reachIndex).padStart(2, "0")} / TRANSIT & LOGISTICS
               </span>
               <h2 
                 className="text-2xl sm:text-3.5xl font-medium text-snow leading-tight tracking-tight"
@@ -292,7 +460,7 @@ export default function DestinationDetail({ dest }) {
               <div className="space-y-6">
                 {dest.how_to_reach.map((route, idx) => (
                   <div key={idx} className="border-l-2 border-forest-glow pl-6 space-y-3">
-                    <span className="text-[9px] font-mono text-stone-light/40 tracking-[0.2em] uppercase block">
+                    <span className="text-[9px] font-mono text-stone-light/40 tracking-[0.2em] uppercase block font-light">
                       BY {route.mode} · {route.distance_km} KM DISTANCE
                     </span>
                     <p className="text-xs sm:text-[0.8125rem] text-parchment/80 leading-relaxed font-light">
