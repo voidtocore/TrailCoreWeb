@@ -15,6 +15,7 @@ const menuItems = [
 
 export default function MenuDemoPage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [animateState, setAnimateState] = useState("closed");
   const [showContent, setShowContent] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [windowSize, setWindowSize] = useState({ width: 420, height: 580 });
@@ -44,23 +45,29 @@ export default function MenuDemoPage() {
   // Close menu on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape" && isOpen) {
+      if (e.key === "Escape" && animateState === "open") {
         handleClose();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [animateState]);
 
   const handleOpen = () => {
-    setIsOpen(true);
-    setShowContent(true);
+    setAnimateState("compress");
+    // Compression phase holds button state for 40ms before expansion
+    setTimeout(() => {
+      setAnimateState("open");
+      setIsOpen(true);
+      setShowContent(true);
+    }, 40);
   };
 
   const handleClose = () => {
     setShowContent(false);
     // Wait for content fade-out animation to finish before shrinking container
     setTimeout(() => {
+      setAnimateState("closed");
       setIsOpen(false);
     }, 280);
   };
@@ -68,17 +75,18 @@ export default function MenuDemoPage() {
   // Click outside to close when menu is open
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (isOpen && containerRef.current && !containerRef.current.contains(e.target)) {
+      if (animateState === "open" && containerRef.current && !containerRef.current.contains(e.target)) {
         handleClose();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
+  }, [animateState]);
 
   // Spring animations configs
   const containerVariants = {
     closed: {
+      scale: 1,
       width: "115px",
       height: "46px",
       borderRadius: "999px",
@@ -91,16 +99,29 @@ export default function MenuDemoPage() {
         duration: 0.5
       }
     },
+    compress: {
+      scale: 0.95,
+      width: "115px",
+      height: "46px",
+      borderRadius: "999px",
+      backgroundColor: "#ffffff",
+      boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+      transition: {
+        duration: 0.04, // 40ms compression transition
+        ease: "easeOut"
+      }
+    },
     open: {
+      scale: 1,
       width: `${windowSize.width}px`,
       height: `${windowSize.height}px`,
       borderRadius: "32px",
       backgroundColor: "#ffffff",
-      boxShadow: "0 25px 60px rgba(0, 0, 0, 0.35)",
+      boxShadow: "0 35px 80px rgba(0, 0, 0, 0.25)", // Subtle shadow increase during expansion
       transition: {
         type: "spring",
-        stiffness: 280,
-        damping: 20, // Slight overshoot for premium feel
+        stiffness: 260, // Slight tension decrease for lighter overshoot
+        damping: 18, // Lower damping allows slight overshoot at end of expansion
         duration: 0.5
       }
     }
@@ -110,12 +131,21 @@ export default function MenuDemoPage() {
     closed: {
       opacity: 1,
       x: 0,
+      scale: 1,
       filter: "blur(0px)",
       transition: { duration: 0.25, ease: "easeOut" }
+    },
+    compress: {
+      opacity: 0.95,
+      x: 0,
+      scale: 0.95,
+      filter: "blur(0px)",
+      transition: { duration: 0.04 }
     },
     open: {
       opacity: 0,
       x: -15,
+      scale: 1,
       filter: "blur(4px)",
       transition: { duration: 0.2, ease: "easeIn" }
     }
@@ -133,6 +163,10 @@ export default function MenuDemoPage() {
         stiffness: 320,
         damping: 30
       }
+    },
+    compress: {
+      scale: 0.95,
+      transition: { duration: 0.04 }
     },
     open: {
       top: "24px",
@@ -155,6 +189,10 @@ export default function MenuDemoPage() {
       filter: "blur(2px)",
       transition: { duration: 0.2, ease: "easeIn" }
     },
+    compress: {
+      opacity: 0,
+      transition: { duration: 0.04 }
+    },
     open: {
       opacity: 0.5,
       x: 0,
@@ -165,16 +203,19 @@ export default function MenuDemoPage() {
 
   const xLine1Variants = {
     closed: { rotate: 0, scale: 0, opacity: 0 },
+    compress: { rotate: 0, scale: 0, opacity: 0 },
     open: { rotate: 45, scale: 1, opacity: 1, transition: { delay: 0.2 } }
   };
 
   const xLine2Variants = {
     closed: { rotate: 0, scale: 0, opacity: 0 },
+    compress: { rotate: 0, scale: 0, opacity: 0 },
     open: { rotate: -45, scale: 1, opacity: 1, transition: { delay: 0.2 } }
   };
 
   const menuDotVariants = {
     closed: { scale: 1, opacity: 1 },
+    compress: { scale: 0.95, opacity: 1 },
     open: { scale: 0, opacity: 0, transition: { duration: 0.15 } }
   };
 
@@ -265,8 +306,9 @@ export default function MenuDemoPage() {
       <motion.div
         ref={containerRef}
         initial="closed"
-        animate={isOpen ? "open" : "closed"}
+        animate={animateState}
         variants={containerVariants}
+        style={{ willChange: "transform, opacity, width, height, border-radius" }} // Hardware-accelerate properties for stable 60fps performance
         className="fixed top-6 right-6 z-50 overflow-hidden cursor-default pointer-events-auto"
       >
         {/* Toggle Trigger Area (active only when closed) */}
